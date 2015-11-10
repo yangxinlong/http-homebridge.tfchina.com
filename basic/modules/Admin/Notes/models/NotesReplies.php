@@ -75,12 +75,14 @@ class NotesReplies extends BaseReply
         } else {
             $d['sys_p'] = Score::getSysP('reply', '');
             $Content = $this->addNew($d);
-            $score = new Score();
-            $data['related_id'] = $Content;
-            $data['pri_type_id'] = CatDef::$act['note_reply'];
-            $data['sub_type_id'] = CatDef::$mod['note'];
-            $data['contents'] = $d['contents'];
-            $score->ReplyPoint($data);
+            if (!$this->checkReply($d)) {
+                $score = new Score();
+                $data['related_id'] = $Content;
+                $data['pri_type_id'] = CatDef::$act['note_reply'];
+                $data['sub_type_id'] = CatDef::$mod['note'];
+                $data['contents'] = $d['contents'];
+                $score->ReplyPoint($data);
+            }
             if ($d['receiver_id'] == 0) {
                 $this->pushReplyByNoteid($d['note_id'], $d['contents']);
             } else {
@@ -208,5 +210,23 @@ class NotesReplies extends BaseReply
         }
         $result = ['ErrCode' => $ErrCode, 'Message' => HintConst::$Success, 'Content' => HintConst::$NULLARRAY];
         return json_encode($result);
+    }
+    protected function  checkReply($note_id, $sender_id)
+    {
+        $mc_name = $this->getMcName() . 'checkReply' . $note_id . $sender_id;
+        if ($val = $this->mc->get($mc_name)) {
+            $result = $val;
+        } else {
+            $mo = self::find()
+                ->where(['note_id' => $note_id, 'sender_id' => $sender_id])
+                ->one();
+            if ($mo !== null) {
+                $result = true;
+            } else {
+                $result = false;
+            }
+            $this->mc->add($mc_name, $result);
+        }
+        return $result;
     }
 }
