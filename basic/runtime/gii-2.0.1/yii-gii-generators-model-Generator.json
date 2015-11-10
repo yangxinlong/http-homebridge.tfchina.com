@@ -1,0 +1,10 @@
+{
+    "template": "default",
+    "enableI18N": "0",
+    "messageCategory": "app",
+    "ns": "app\\modules\\Admin\\MyNote\\models",
+    "db": "db",
+    "baseClass": "yii\\db\\ActiveRecord",
+    "generateRelations": "1",
+    "generateLabelsFromComments": "0"
+}
