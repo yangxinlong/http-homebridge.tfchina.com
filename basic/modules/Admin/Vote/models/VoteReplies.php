@@ -66,7 +66,7 @@ class VoteReplies extends BaseReply
         $Content = HintConst::$NULLARRAY;
         $d['m_id'] = isset($_REQUEST['id']) ? $_REQUEST['id'] : '';
         $d['contents'] = isset($_REQUEST['contents']) ? $_REQUEST['contents'] : '';
-        $d['sender_id'] = isset($_REQUEST['sender_id']) ? $_REQUEST['sender_id'] : Yii::$app->session['custominfo']->custom->id;
+        $d['sender_id'] = isset($_REQUEST['sender_id']) ? $_REQUEST['sender_id'] : $this->getCustomId();
         $d['receiver_id'] = isset($_REQUEST['receiver_id']) ? $_REQUEST['receiver_id'] : 0;
         $d['link_id'] = isset($_REQUEST['link_id']) ? $_REQUEST['link_id'] : 0;
         if (empty($d['m_id']) || !is_numeric($d['m_id'])) {
@@ -74,12 +74,18 @@ class VoteReplies extends BaseReply
         } elseif (empty($d['contents'])) {
             $ErrCode = HintConst::$NoContents;
         } else {
+            $flag = $this->checkReply($d['m_id'], $d['sender_id']);
+            if ($flag) {
+                $ErrCode = HintConst::$Not_addscore;
+            }
             $Content = $this->addNew($d);
-            $score = new Score();
-            $data['related_id'] = $Content;
-            $data['sub_type_id'] = (new Vote())->getType($d['m_id'])['pri_type_id'];
-            $data['contents'] = $d['contents'];
-            $score->ReplyCoin($data);
+            if (!$flag) {
+                $score = new Score();
+                $data['related_id'] = $Content;
+                $data['sub_type_id'] = (new Vote())->getType($d['m_id'])['pri_type_id'];
+                $data['contents'] = $d['contents'];
+                $score->ReplyCoin($data);
+            }
             if ($d['receiver_id'] == 0) {
                 $this->pushReplyByVoteid($d['m_id'], $Content, $d['contents']);
             } else {
@@ -245,5 +251,17 @@ class VoteReplies extends BaseReply
         }
         $result = ['ErrCode' => $ErrCode, 'Message' => HintConst::$Success, 'Content' => HintConst::$NULLARRAY];
         return json_encode($result);
+    }
+    protected function  checkReply($m_id, $sender_id)
+    {
+        $mo = self::find()
+            ->where(['m_id' => $m_id, 'sender_id' => $sender_id])
+            ->one();
+        if ($mo !== null) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
     }
 }

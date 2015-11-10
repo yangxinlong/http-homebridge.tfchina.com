@@ -127,16 +127,22 @@ class ArticleReplies extends BaseReply
             $ErrCode = HintConst::$NoContents;
             $Message = '缺少Content';
         } elseif ($d['article_id'] && $d['contents']) {
+            $flag = $this->checkReply($d['article_id']);
+            if ($flag) {
+                $ErrCode = HintConst::$Not_addscore;
+            }
             $d['sys_p'] = Score::getSysP('reply', '');
             $newid = self::addNew($d);
             $Message = $newid;
             $Content = $d['contents'];
-            $score = new Score();
-            $data['related_id'] = $d['article_id'];
-            $data['pri_type_id'] = CatDef::$act['reply'];
-            $data['sub_type_id'] = (new Articles())->getTypeAndTitle($d['article_id'])['article_type_id'];
-            $data['contents'] = $d['contents'];
-            $score->ReplyPoint($data);
+            if (!$flag) {
+                $score = new Score();
+                $data['related_id'] = $d['article_id'];
+                $data['pri_type_id'] = CatDef::$act['reply'];
+                $data['sub_type_id'] = (new Articles())->getTypeAndTitle($d['article_id'])['article_type_id'];
+                $data['contents'] = $d['contents'];
+                $score->ReplyPoint($data);
+            }
             $m = (new Articles())->getFeild('id', $d['article_id']);
             $receiver = (new ArticleSendRevieve())->getFeild('article_id', $d['article_id']);
             if ($m !== null) {
@@ -227,5 +233,17 @@ class ArticleReplies extends BaseReply
             $result = ['ErrCode' => 1, 'Message' => '文章不属于该用户下', 'Content' => []];
             return json_encode($result);
         }
+    }
+    protected function  checkReply($article_id)
+    {
+        $mo = self::find()
+            ->where(['article_id' => $article_id, 'repliers_id' => $this->getCustomId()])
+            ->one();
+        if ($mo !== null) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
     }
 }

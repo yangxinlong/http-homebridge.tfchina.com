@@ -65,7 +65,7 @@ class NotesReplies extends BaseReply
         $Content = HintConst::$NULLARRAY;
         $d['note_id'] = isset($_REQUEST['note_id']) ? $_REQUEST['note_id'] : '';
         $d['contents'] = isset($_REQUEST['contents']) ? $_REQUEST['contents'] : '';
-        $d['sender_id'] = isset($_REQUEST['sender_id']) ? $_REQUEST['sender_id'] : Yii::$app->session['custominfo']->custom->id;
+        $d['sender_id'] = isset($_REQUEST['sender_id']) ? $_REQUEST['sender_id'] : $this->getCustomId();
         $d['receiver_id'] = isset($_REQUEST['receiver_id']) ? $_REQUEST['receiver_id'] : 0;
         $d['link_id'] = isset($_REQUEST['link_id']) ? $_REQUEST['link_id'] : 0;
         if (empty($d['note_id']) || !is_numeric($d['note_id'])) {
@@ -73,9 +73,13 @@ class NotesReplies extends BaseReply
         } elseif (empty($d['contents'])) {
             $ErrCode = HintConst::$NoContents;
         } else {
+            $flag = $this->checkReply($d['note_id'], $d['sender_id']);
+            if ($flag) {
+                $ErrCode = HintConst::$Not_addscore;
+            }
             $d['sys_p'] = Score::getSysP('reply', '');
             $Content = $this->addNew($d);
-            if (!$this->checkReply($d)) {
+            if (!$flag) {
                 $score = new Score();
                 $data['related_id'] = $Content;
                 $data['pri_type_id'] = CatDef::$act['note_reply'];
@@ -213,19 +217,13 @@ class NotesReplies extends BaseReply
     }
     protected function  checkReply($note_id, $sender_id)
     {
-        $mc_name = $this->getMcName() . 'checkReply' . $note_id . $sender_id;
-        if ($val = $this->mc->get($mc_name)) {
-            $result = $val;
+        $mo = self::find()
+            ->where(['note_id' => $note_id, 'sender_id' => $sender_id])
+            ->one();
+        if ($mo !== null) {
+            $result = true;
         } else {
-            $mo = self::find()
-                ->where(['note_id' => $note_id, 'sender_id' => $sender_id])
-                ->one();
-            if ($mo !== null) {
-                $result = true;
-            } else {
-                $result = false;
-            }
-            $this->mc->add($mc_name, $result);
+            $result = false;
         }
         return $result;
     }
