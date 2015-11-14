@@ -42,7 +42,7 @@ class XgPush extends XingeApp
     }
     public static function myPushTagIos($content, $tag, $pos)
     {
-        $ret = parent::PushTagIos(self::$access_Id[$pos], self::$secret_Key[$pos], (string)$content, $tag, self::IOSENV_PROD);
+        $ret = parent::PushTagIos(self::$access_Id[$pos], self::$secret_Key[$pos], (string)$content, $tag, self::IOSENV_DEV);
         return $ret;
     }
     public static function myPushTokenAndroidMsg($content, $token, $pos)
@@ -53,7 +53,7 @@ class XgPush extends XingeApp
     public static function myPushTokenIos($content, $token, $pos)
     {
         $pos += 3;
-        $ret = parent::PushTokenIos(self::$access_Id[$pos], self::$secret_Key[$pos], $content, $token, self::IOSENV_PROD);
+        $ret = parent::PushTokenIos(self::$access_Id[$pos], self::$secret_Key[$pos], $content, $token, self::IOSENV_DEV);
 //        $ba = new BaseAnalyze();
 //        $ba->writeToAnal('PushByTokenIos: ' . $pos . '-' . json_encode($ret));
         return $ret;
