@@ -118,7 +118,7 @@ class BaseController extends Controller implements BaseInterface
             if (count($_POST) > 0) {
                 $content .= '|params:' . json_encode($_POST);
             }
-            if ($totaltime > 2) {
+            if ($totaltime > 5) {
                 $ba->writeToWasteTime('++waste time: ' . $content);
             } elseif ($totaltime > 10) {
                 mail('1031534918@qq.com', 'longwastertime', $content,'from jyq365');
