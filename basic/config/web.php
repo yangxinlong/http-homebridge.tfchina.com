@@ -100,6 +100,18 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.qq.com',
+                'username' => '3186254096@qq.com',
+                'password' => '*******',
+                'port' => '25',
+                'encryption' => 'tls',
+            ],
+            'messageConfig' => [
+                'charset' => 'UTF-8',
+                'from' => ['3186254096@qq.com' => 'admin']
+            ],
             'useFileTransport' => true,
         ],
         'log' => [
