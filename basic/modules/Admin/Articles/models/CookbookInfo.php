@@ -34,9 +34,7 @@ class CookbookInfo extends BaseAR
             [['school_id', 'date'], 'required'],
             [['school_id'], 'integer'],
             [['date'], 'safe'],
-            [['breakfast', 'addone'], 'string', 'max' => 33],
-            [['lunch'], 'string', 'max' => 44],
-            [['addtwo', 'dinner'], 'string', 'max' => 22]
+            [['breakfast', 'addone', 'lunch', 'addtwo', 'dinner'], 'string', 'max' => 500]
         ];
     }
     /**
