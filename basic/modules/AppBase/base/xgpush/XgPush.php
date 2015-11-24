@@ -131,7 +131,10 @@ class XgPush extends XingeApp
         $headtoken = (new Customs())->getHeadmastToken();
         foreach ($headtoken as $kk) {
             foreach ($kk as $cusinfo) {
-                self::EditPushContent($cusinfo, $data['type'], $data['con']);
+                if ($cusinfo['id'] == $headtoken[0][0]['id']) {
+                } else {
+                    self::EditPushContent($cusinfo, $data['type'], $data['con']);
+                }
             }
         }
     }
