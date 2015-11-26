@@ -84,7 +84,6 @@ class Catalogue extends BaseAR
             $catalogue->parent_id = $path;
             $catalogue->path = $path . '-';
             $catalogue->ispassed = HintConst::$YesOrNo_YES;
-            $catalogue->isdeleted = HintConst::$YesOrNo_NO;
             $catalogue->school_id = Yii::$app->session['custominfo']->custom->school_id;
             $catalogue->createtime = CommonFun::getCurrentDateTime();
             $catalogue->updatetime = CommonFun::getCurrentDateTime();
@@ -103,13 +102,12 @@ class Catalogue extends BaseAR
         if ($school_id == 0) {
             $school_id = Yii::$app->session['custominfo']->custom->school_id;
         }
-        $isdeleted = HintConst::$YesOrNo_NO;
         $mc_name = $this->getMcName() . 'getCatalogueList' . $path . $school_id;
         if ($val = $this->mc->get($mc_name)) {
             $list = $val;
         } else {
             $query =
-                "select id,name_zh from " . BaseConst::$catalogue_T . " where isdeleted=$isdeleted and school_id=$school_id  AND path REGEXP '^$path-'";
+                "select id,name_zh from " . BaseConst::$catalogue_T . " where school_id=$school_id  AND path REGEXP '^$path-'";
             $list = Catalogue::findBySql($query)->all();
             $this->mc->add($mc_name, $list);
         }
@@ -120,13 +118,12 @@ class Catalogue extends BaseAR
         if ($school_id == 0) {
             $school_id = $this->getCustomSchool_id();
         }
-        $isdeleted = HintConst::$YesOrNo_NO;
         $mc_name = json_encode(func_get_args()) . 'getCatalogueListAll' . $this->getMcName();
         if ($val = $this->mc->get($mc_name)) {
             $list = $val;
         } else {
             $query =
-                "select * from " . BaseConst::$catalogue_T . " where isdeleted=$isdeleted and school_id=$school_id  AND path REGEXP '^$path-'";
+                "select * from " . BaseConst::$catalogue_T . " where school_id=$school_id  AND path REGEXP '^$path-'";
             $list = self::findBySql($query)->all();
             $this->mc->add($mc_name, $list);
         }

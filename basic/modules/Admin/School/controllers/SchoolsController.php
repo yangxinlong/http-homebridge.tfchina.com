@@ -244,7 +244,7 @@ class SchoolsController extends BaseController
                 $school_id = $school->attributes['id'];
                 $custom->UpdateF($school->headmaster_id, HintConst::$Field_school_id, $school_id);
                 $custom->UpdateF($school->headmaster_id, HintConst::$Field_ispassed, HintConst::$YesOrNo_YES);
-                (new Catalogue())->initCatlogue($school_id);
+                $this->initSchoolLabe($school_id);
                 echo "1";
             }
         }
@@ -297,11 +297,19 @@ class SchoolsController extends BaseController
                 $school_id = $school->attributes['id'];
                 $custom->UpdateF($school->headmaster_id, HintConst::$Field_school_id, $school_id);
                 $custom->UpdateF($school->headmaster_id, HintConst::$Field_ispassed, HintConst::$YesOrNo_YES);
-                (new Catalogue())->initCatlogue($school_id);
+                $this->initSchoolLabe($school_id);
             }
         }
         $result = ['ErrCode' => $ErrCode, 'Message' => $Message, 'Content' => $Content];
         return json_encode($result);
+    }
+    private function initSchoolLabe($school_id)
+    {
+        $catlogue = new Catalogue();
+        $CatalogueList = $catlogue->getCatalogueListAll(83, $school_id);
+        if (count($CatalogueList) == 0) {
+            $catlogue->initCatlogue($school_id);
+        }
     }
 //    public function actionPush()
 //    {
