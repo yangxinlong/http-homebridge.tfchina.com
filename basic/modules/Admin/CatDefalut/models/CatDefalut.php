@@ -80,7 +80,7 @@ class CatDefalut extends BaseAR
     public function getCatDefaultList($path)//从cat_default中获取
     {
         $isdeleted = HintConst::$YesOrNo_NO;
-        $mc_name = $this->getMcName() . 'getCatDefaultList' . $path;
+        $mc_name = $path.$this->getMcName() . 'getCatDefaultList';
         if ($val = $this->mc->get($mc_name)) {
             $list = $val;
         } else {
@@ -94,7 +94,7 @@ class CatDefalut extends BaseAR
     public function getCatDefaultListAll($path)//从cat_default中获取all
     {
         $isdeleted = HintConst::$YesOrNo_NO;
-        $mc_name = $this->getMcName() . 'getCatDefaultListAll' . $path;
+        $mc_name = $path . $this->getMcName() . 'getCatDefaultListAll';
         if ($val = $this->mc->get($mc_name)) {
             $list = $val;
         } else {
