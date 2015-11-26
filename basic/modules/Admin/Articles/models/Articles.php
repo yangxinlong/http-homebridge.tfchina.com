@@ -268,7 +268,7 @@ class Articles extends BaseMain
             $summary['cook_book'] = $cook_book->getCookbook($date);
             $summary['att_list'] = array();
             $query = new Query();
-            $att_list = $query->select('aa.id,aa.article_id,aa.cat_default_id,aa.sub_type_id,aa.url,aa.url_thumb,aa.createtime,articles.author_id,articles.contents as img_des,cat_default.name_zh as cat_default_name')
+            $att_list = $query->select('aa.id,aa.article_id,aa.cat_default_id,aa.sub_type_id,aa.url,aa.url_thumb,aa.createtime,aa.sys_p,aa.cus_p,articles.author_id,articles.contents as img_des,cat_default.name_zh as cat_default_name')
                 ->from('article_attachment as aa')
                 ->distinct()
                 ->leftjoin('articles', 'articles.id = aa.article_id')
