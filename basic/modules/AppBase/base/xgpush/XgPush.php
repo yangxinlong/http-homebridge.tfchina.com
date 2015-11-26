@@ -231,6 +231,7 @@ class XgPush extends XingeApp
                 //test adopted
                 $ba = new BaseAnalyze();
                 $ba->writeToAnal('adopted push token:  ' . $cusinfo['id'] . '-' . $cusinfo['token_type'] . '-' . $cusinfo['token']);
+                $head = '您的回答被采纳!';
                 break;
             default:
                 $head = $type . self::getReceiver($cusinfo);
