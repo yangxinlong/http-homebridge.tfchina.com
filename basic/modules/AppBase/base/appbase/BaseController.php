@@ -300,8 +300,7 @@ class BaseController extends Controller implements BaseInterface
     /*
      * 删除
      */
-    public
-    function  actionDeleteA()
+    public function  actionDeleteA()
     {
         $id = !empty($_REQUEST['id']) ? $_REQUEST['id'] : '';
         $v = !empty($_REQUEST['isdeleted']) ? $_REQUEST['isdeleted'] : '';
@@ -310,8 +309,7 @@ class BaseController extends Controller implements BaseInterface
     /*
      * 修改name
      */
-    public
-    function  actionUpdatenameA()
+    public function  actionUpdatenameA()
     {
         $id = !empty($_REQUEST['id']) ? $_REQUEST['id'] : '';
         $v = !empty($_REQUEST['name']) ? $_REQUEST['name'] : '';

@@ -138,4 +138,15 @@ class CatalogueController extends BaseController
             echo(CommonFun::json($ErrCode, $Message, $Content));
         }
     }
+    public function  actionDeleteA()
+    {
+        $ErrCode = HintConst::$Zero;
+        $id = !empty($_REQUEST['id']) ? $_REQUEST['id'] : '';
+        if (empty($id) || !is_numeric($id)) {
+            $ErrCode = HintConst::$NoId;
+        } else {
+            (new Catalogue())->del($id);
+        }
+        die(json_encode(array("ErrCode" => $ErrCode, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
+    }
 }
