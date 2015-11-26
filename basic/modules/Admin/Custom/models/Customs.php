@@ -703,27 +703,17 @@ class Customs extends BaseMain
     public function UpdatetokenA()
     {
         try {
-            $ErrCode = HintConst::$Zero;
-            $Message = HintConst::$Success;
-            $Content = HintConst::$NULLARRAY;
-            $oa = new OtherAccess();
-            $re = $oa->UpdatetokenA();
-            $info = json_decode($re);
-            if ($info->ErrCode == HintConst::$Zero) {
-                $id = !empty($_REQUEST['id']) ? $_REQUEST['id'] : '';
-                $d['token_type'] = !empty($_REQUEST['token_type']) ? $_REQUEST['token_type'] : 0;
-                $d['token'] = !empty($_REQUEST['token']) ? $_REQUEST['token'] : '';
-                if ($id == 0 || empty($id) || !is_numeric($id)) {
-                    $ErrCode = HintConst::$NoId;
-                } elseif (empty($d['token'])) {
-                    $ErrCode = HintConst::$No_token;
-                } else {
-                    return $this->Update_tokenA($id, $d);
-                }
-                return json_encode(array("ErrCode" => $ErrCode, "Message" => $Message, "Content" => $Content));
+            $id = !empty($_REQUEST['id']) ? $_REQUEST['id'] : '';
+            $d['token_type'] = !empty($_REQUEST['token_type']) ? $_REQUEST['token_type'] : 0;
+            $d['token'] = !empty($_REQUEST['token']) ? $_REQUEST['token'] : '';
+            if ($id == 0 || empty($id) || !is_numeric($id)) {
+                $ErrCode = HintConst::$NoId;
+            } elseif (empty($d['token'])) {
+                $ErrCode = HintConst::$No_token;
             } else {
-                return $re;
+                return $this->Update_tokenA($id, $d);
             }
+            return json_encode(array("ErrCode" => $ErrCode, "Message" => '', "Content" => HintConst::$NULLARRAY));
         } catch (Exception $e) {
             return json_encode(array("ErrCode" => HintConst::$No_success, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY));
         }
@@ -1296,6 +1286,5 @@ class Customs extends BaseMain
             $this->mc->add($mc_name, $mo);
         }
         return $mo;
-
     }
 }
