@@ -241,8 +241,12 @@ class XgPush extends XingeApp
     }
     protected static function  PushSingleToken($content, $cusinfo)
     {
+        $ba = new BaseAnalyze();
         if ($cusinfo['id'] !== self::getCustomId()) {//not to push to self
             if ($cusinfo['token_type'] == 0 || empty($cusinfo['token_type'])) {
+                if ($cusinfo['id'] == 216) {
+                    $ba->writeToAnal('adopted push token:  ' . $cusinfo['id'] . '-' . $cusinfo['token_type'] . '-' . $cusinfo['token'] . json_encode($content));
+                }
                 self::myPushTokenAndroidMsg($content, $cusinfo['token'], self::getPos(intval($cusinfo['cat_default_id'])));
             } else {
                 self::myPushTokenIos($content, $cusinfo['token'], self::getPos(intval($cusinfo['cat_default_id'])));
