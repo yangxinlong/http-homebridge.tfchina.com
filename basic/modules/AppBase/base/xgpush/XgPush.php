@@ -115,7 +115,6 @@ class XgPush extends XingeApp
     protected static function PushToHeadIncondith($flag, $data)//推送给园长
     {
         switch ($flag) {
-            case  CatDef::$mod['msg']:
             case  CatDef::$mod['reply']:
             case  CatDef::$mod['rf']:
             case  CatDef::$mod['gf']:
