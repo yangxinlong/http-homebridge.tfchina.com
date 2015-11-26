@@ -2,7 +2,6 @@
 
 namespace app\modules\Admin\Catalogue\models;
 use app\modules\Admin\CatDefalut\models\CatDefalut;
-use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\BaseAR;
 use app\modules\AppBase\base\BaseConst;
 use app\modules\AppBase\base\CommonFun;
@@ -156,8 +155,6 @@ class Catalogue extends BaseAR
         $CatalogueList = $this->getCatalogueListAll($path, $school_id);
         if (count($CatalogueList) == 0) {
             $CatDefaultList = (new CatDefalut())->getCatDefaultListAll($path);
-            $ba=new BaseAnalyze();
-            $ba->writeToAnal($path.json_encode($CatDefaultList));
             if ($CatDefaultList != HintConst::$NULL) {
                 foreach ($CatDefaultList as $value) {
                     $catalogue = new Catalogue();
