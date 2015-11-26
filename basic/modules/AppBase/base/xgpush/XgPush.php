@@ -7,7 +7,6 @@ namespace app\modules\AppBase\base\xgpush;
 use app\modules\Admin\Articles\models\ArticleSendRevieve;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\admin\Redfl\models\Redfl;
-use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
@@ -227,12 +226,6 @@ class XgPush extends XingeApp
             case self::PENDINGNOTE:
                 $head = '您有新的通知需要审核!';
                 break;
-            case CatDef::$act['adopted']:
-                //test adopted
-                $ba = new BaseAnalyze();
-                $ba->writeToAnal('adopted push token:  ' . $cusinfo['id'] . '-' . $cusinfo['token_type'] . '-' . $cusinfo['token']);
-                $head = '您的回答被采纳!';
-                break;
             default:
                 $head = $type . self::getReceiver($cusinfo);
                 break;
@@ -241,12 +234,8 @@ class XgPush extends XingeApp
     }
     protected static function  PushSingleToken($content, $cusinfo)
     {
-        $ba = new BaseAnalyze();
         if ($cusinfo['id'] !== self::getCustomId()) {//not to push to self
             if ($cusinfo['token_type'] == 0 || empty($cusinfo['token_type'])) {
-                if ($cusinfo['id'] == 216) {
-                    $ba->writeToAnal('adopted push token:  ' . $cusinfo['id'] . '-' . $cusinfo['token_type'] . '-' . $cusinfo['token'] . json_encode($content));
-                }
                 self::myPushTokenAndroidMsg($content, $cusinfo['token'], self::getPos(intval($cusinfo['cat_default_id'])));
             } else {
                 self::myPushTokenIos($content, $cusinfo['token'], self::getPos(intval($cusinfo['cat_default_id'])));
