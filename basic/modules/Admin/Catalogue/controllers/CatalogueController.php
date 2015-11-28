@@ -6,6 +6,7 @@ use app\modules\Admin\Catalogue\models\CatalogueSearch;
 use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
+use Exception;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -148,5 +149,19 @@ class CatalogueController extends BaseController
             (new Catalogue())->del($id);
         }
         die(json_encode(array("ErrCode" => $ErrCode, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
+    }
+    public function  actionInitschool()
+    {//init school
+        echo "starting ...";
+        try {
+//            for ($i = 775; $i <= 777; $i++) {
+//                echo $i;
+//                echo "<br>";
+//                (new Catalogue())->initCatlogue($i);
+//            }
+            die("ok");
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
 }
