@@ -222,7 +222,6 @@ class Schools extends BaseAR
     }
     public function getTeacherGroupInfo()
     {
-        $this->mc->flush();
         $school_id = $this->getCustomSchool_id();
         $class_id = $this->getCustomClass_id();
         $mc_name = $this->getMcName() . $school_id . $class_id;
@@ -262,7 +261,6 @@ class Schools extends BaseAR
     }
     public function getParentGroupInfo()
     {
-        $this->mc->flush();
         $school_id = $this->getCustomSchool_id();
         $class_id = $this->getCustomClass_id();
         $mc_name = $this->getMcName() . 'getParentGroupInfo' . $school_id . $class_id;
@@ -272,15 +270,11 @@ class Schools extends BaseAR
         } else {
             try {
                 $customs = new Customs();
-                $baseAR = new BaseAR();
                 $result['ParentInfo'] = $customs->GetcustominfoAH()['Content'];
                 $result['SchoolInfo'] = $this->getSchoolInfoBySchoolid($school_id);
-                $result['ClassInfo'] = parent::getArray2No_Password(Classes::find()->joinWith('customs')
-                    ->where(['classes.id' => $class_id])->all());
-                $result['HeadmastInfo'] = parent::getArray2No_Password(Customs::find()
-                    ->where(['school_id' => $school_id, 'customs.cat_default_id' => HintConst::$ROLE_HEADMASTER])->all());
-                $result['TeacherInfo'] = parent::getArray2No_Password(Customs::find()
-                    ->where(['class_id' => $class_id, 'customs.cat_default_id' => HintConst::$ROLE_TEACHER])->all());
+                $result['ClassInfo'] = (new Classes())->getClassInfo($class_id);
+                $result['HeadmastInfo'] = $customs->getHeadList(HintConst::$ROLE_HEADMASTER, $school_id);
+                $result['TeacherInfo'] = $customs->getCustomList(HintConst::$ROLE_TEACHER, $school_id, $class_id);
                 $result['HeadList'] = $customs->getHeadList(HintConst::$ROLE_HEADMASTER, $school_id);
                 $result['TeacherList'] = $customs->getCustomList(HintConst::$ROLE_TEACHER, $school_id, $class_id);
                 $result['HighLightList'] = (new CatDefalut())->getCatDefaultListByPath(HintConst::$HIGHLIGHT_PATH_NEW);
