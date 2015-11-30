@@ -135,30 +135,20 @@ class Msgsendrecieve extends BaseMsgSR
         $ErrCode = HintConst::$Zero;
         $Message = HintConst::$Success;
         $reciever_id = $this->getCustomId();
-        $mc_name = $this->getMcName() . 'getMsgrelationcustom' . $reciever_id;
+        $mc_name = 'getMsgrelationcustom' . $reciever_id . $this->getMcName();
         if ($val = $this->mc->get($mc_name)) {
             $Content = $val;
         } else {
             $query = new Query();
             $Content = $query->select(['sr.sender_id', 'customs.name_zh as sender_name', 'customs.cat_default_id', 'count(*) as num'])
                 ->from('msg_send_recieve as sr')
-                ->where(['sr.reciever_id' => $reciever_id, 'sr.isreaded' => HintConst::$YesOrNo_NO])
-                ->andWhere(['customs.ispassed' => HintConst::$YesOrNo_YES, 'customs.isdeleted' => HintConst::$YesOrNo_NO, 'customs.isout' => HintConst::$YesOrNo_NO])
+                ->where(['sr.reciever_id' => $reciever_id])//isreaded没用了,新消息说已经推送过了
+//                ->andWhere(['customs.ispassed' => HintConst::$YesOrNo_YES, 'customs.isdeleted' => HintConst::$YesOrNo_NO, 'customs.isout' => HintConst::$YesOrNo_NO])//这些限制了其不能登陆,就不能发短信
                 ->leftJoin('customs', 'customs.id = sr.sender_id')
                 ->groupBy('customs.id')
                 ->orderBy('sr.createtime desc')
                 ->limit(100)
                 ->all();
-//            $msgListNum = (new Query())->select(['sr.sender_id', 'count(*) as num'])
-//                ->from('msg_send_recieve as sr')
-//                ->where(['sr.reciever_id' => $reciever_id, 'sr.isreaded' => HintConst::$YesOrNo_NO])
-//                ->andWhere(['customs.ispassed' => HintConst::$YesOrNo_YES, 'customs.isdeleted' => HintConst::$YesOrNo_NO, 'customs.isout' => HintConst::$YesOrNo_NO])
-//                ->leftJoin('customs', 'customs.id = sr.sender_id')
-//                ->groupBy('customs.id')
-//                ->orderBy('sr.createtime desc')
-//                ->limit(50)
-//                ->all();
-//            $Content = $this->combinA($msgListNum, $msgList, 'sender_id', 'num');
             $this->mc->add($mc_name, $Content);
         }
         return array("ErrCode" => $ErrCode, "Message" => $Message, "Content" => $Content);
