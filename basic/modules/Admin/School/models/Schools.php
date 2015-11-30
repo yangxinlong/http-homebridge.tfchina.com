@@ -173,11 +173,9 @@ class Schools extends BaseAR
     {
         if (!parent::checkSession()) {
             $ErrCode = HintConst::$NoSession;
-            $Message = HintConst::$Success;
             $Content = HintConst::$NULL;
         } else {
             $ErrCode = HintConst::$Zero;
-            $Message = HintConst::$Success;
             $Content = $this->getSchoolGroupInfo();
         }
         return array("ErrCode" => $ErrCode, "Message" => HintConst::$WEB_USER, "Content" => $Content);
@@ -264,6 +262,7 @@ class Schools extends BaseAR
     }
     public function getParentGroupInfo()
     {
+        $this->mc->flush();
         $school_id = $this->getCustomSchool_id();
         $class_id = $this->getCustomClass_id();
         $mc_name = $this->getMcName() . 'getParentGroupInfo' . $school_id . $class_id;
