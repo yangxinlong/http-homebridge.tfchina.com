@@ -875,7 +875,7 @@ class Customs extends BaseMain
     }
     public function Rank($d)
     {
-        $mc_name = $this->getMcName() . 'Rank' . json_encode($d);
+        $mc_name = 'Rank' . json_encode($d) . $this->getMcName();
         if ($val = $this->mc->get($mc_name)) {
             $r = $val;
         } else {
@@ -1140,7 +1140,7 @@ class Customs extends BaseMain
     }
     public function getCustomList($role, $school_id, $class_id = 0)
     {
-        $mc_name = 'getCustomList' . json_encode(func_get_args()).$this->getMcName() ;
+        $mc_name = 'getCustomList' . json_encode(func_get_args()) . $this->getMcName();
         if ($val = $this->mc->get($mc_name)) {
             $mo = $val;
         } else {
