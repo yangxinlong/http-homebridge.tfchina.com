@@ -118,7 +118,7 @@ class Catalogue extends BaseAR
         if ($school_id == 0) {
             $school_id = $this->getCustomSchool_id();
         }
-        $mc_name = json_encode(func_get_args()) . 'getCatalogueListAll' . $this->getMcName();
+        $mc_name = 'getCatalogueListAll' . json_encode(func_get_args()) . $this->getMcName();
         if ($val = $this->mc->get($mc_name)) {
             $list = $val;
         } else {
