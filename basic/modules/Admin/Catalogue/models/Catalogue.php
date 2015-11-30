@@ -108,7 +108,7 @@ class Catalogue extends BaseAR
         } else {
             $query =
                 "select id,name_zh from " . BaseConst::$catalogue_T . " where school_id=$school_id  AND path REGEXP '^$path-'";
-            $list = Catalogue::findBySql($query)->all();
+            $list = Catalogue::findBySql($query)->asArray()->all();
             $this->mc->add($mc_name, $list);
         }
         return $list;
@@ -132,7 +132,7 @@ class Catalogue extends BaseAR
     //Catalogue去重//封装成array//后台使用--仅返回id和name_zh
     public function getCatalogueListByPath($path)
     {
-        return $this->getArray2Only_IdNamezh($this->getCatalogueList($path));
+        return $this->getCatalogueList($path);
     }
     /*
    *初始化catalogue:现在catalogue中查找,有就直接读取,没有从cat_default中将分类添加过来(注意修改school_id)

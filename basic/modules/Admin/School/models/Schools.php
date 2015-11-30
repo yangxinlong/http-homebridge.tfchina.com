@@ -147,7 +147,7 @@ class Schools extends BaseAR
     }
     public function getSchoolInfoBySchoolid($school_id)//封装成array
     {
-        $mc_name = $this->getMcName() . 'getSchoolInfoBySchoolid' . json_encode(func_get_args());
+        $mc_name = 'getSchoolInfoBySchoolid' . json_encode(func_get_args()) . $this->getMcName();
         if ($val = $this->mc->get($mc_name)) {
             $result = $val;
         } else {
@@ -190,13 +190,9 @@ class Schools extends BaseAR
             $result = $val;
         } else {
             $customs = new Customs();
-            $baseAR = new BaseAR();
             $result['HeadmasterInfo'] = $customs->GetcustominfoAH()['Content'];
             $result['SchoolInfo'] = $this->getSchoolInfoBySchoolid($school_id);
-            $result['ClassesList'] = parent::getArray2No_Password(Classes::find()
-                ->where(['school_id' => $school_id, 'isgraduated' => HintConst::$YesOrNo_NO])
-                ->orderBy("name asc")
-                ->all());
+            $result['ClassesList'] = (new Classes())->getClassList($school_id);
             $result['HeadList'] = $customs->getHeadList(HintConst::$ROLE_HEADMASTER, $school_id);
             $result['TeacherList'] = $customs->getCustomList(HintConst::$ROLE_TEACHER, $school_id);
             $result['ParentList'] = $customs->getCustomList(HintConst::$ROLE_PARENT, $school_id);
@@ -228,6 +224,7 @@ class Schools extends BaseAR
     }
     public function getTeacherGroupInfo()
     {
+        $this->mc->flush();
         $school_id = $this->getCustomSchool_id();
         $class_id = $this->getCustomClass_id();
         $mc_name = $this->getMcName() . $school_id . $class_id;
@@ -235,14 +232,10 @@ class Schools extends BaseAR
             $result = $val;
         } else {
             $customs = new Customs();
-            $baseAR = new BaseAR();
             $result['TeacherInfo'] = $customs->GetcustominfoAH()['Content'];
-            $result['HeadmastInfo'] = parent::getArray2No_Password(Customs::find()
-                ->where(['school_id' => $school_id, 'customs.cat_default_id' => HintConst::$ROLE_HEADMASTER])->all());
+            $result['HeadmastInfo'] = $customs->getHeadList(HintConst::$ROLE_HEADMASTER, $school_id);
             $result['SchoolInfo'] = $this->getSchoolInfoBySchoolid($school_id);
-            $result['ClassInfo'] = parent::getArray2No_Password(Classes::find()->joinWith('customs')
-                ->where(['classes.id' => $class_id])
-                ->all());
+            $result['ClassInfo'] = (new Classes())->getClassInfo($class_id);
             $result['HeadList'] = $customs->getHeadList(HintConst::$ROLE_HEADMASTER, $school_id);
             $result['TeacherList'] = $customs->getCustomList(HintConst::$ROLE_TEACHER, $school_id, $class_id);
             $result['ParentList'] = $customs->getCustomList(HintConst::$ROLE_PARENT, $school_id, $class_id);

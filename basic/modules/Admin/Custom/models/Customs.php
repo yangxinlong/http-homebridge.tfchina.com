@@ -1115,7 +1115,7 @@ class Customs extends BaseMain
     }
     public function getHeadList($role, $school_id, $class_id = 0)
     {
-        $mc_name = $this->getMcName() . 'getCustomList' . json_encode(func_get_args());
+        $mc_name = 'getCustomList' . json_encode(func_get_args()) . $this->getMcName();
         if ($val = $this->mc->get($mc_name)) {
             $mo = $val;
         } else {
@@ -1140,7 +1140,7 @@ class Customs extends BaseMain
     }
     public function getCustomList($role, $school_id, $class_id = 0)
     {
-        $mc_name = $this->getMcName() . 'getCustomList' . json_encode(func_get_args());
+        $mc_name = 'getCustomList' . json_encode(func_get_args()).$this->getMcName() ;
         if ($val = $this->mc->get($mc_name)) {
             $mo = $val;
         } else {
@@ -1162,6 +1162,18 @@ class Customs extends BaseMain
             }
             $mo = $mo->orderBy("cu.name_zh asc")
                 ->all();
+            $this->mc->add($mc_name, $mo);
+        }
+        return $mo;
+    }
+    public function  getHeadmastInfo($school_id)
+    {
+        $mc_name = 'getHeadmastInfo' . $school_id . $this->getMcName();
+        if ($val = $this->mc->get($mc_name)) {
+            $mo = $val;
+        } else {
+            $mo = self::find()->asArray()
+                ->where(['school_id' => $school_id, 'customs.cat_default_id' => HintConst::$ROLE_HEADMASTER])->all();
             $this->mc->add($mc_name, $mo);
         }
         return $mo;

@@ -200,5 +200,31 @@ class Classes extends BaseAR
         }
         return $d;
     }
-
+    public function  getClassInfo($class_id)
+    {
+        $mc_name = 'getClassInfo' . $class_id . $this->getMcName();
+        if ($val = $this->mc->get($mc_name)) {
+            $mo = $val;
+        } else {
+            $mo = [self::find()->asArray()
+                ->where(['classes.id' => $class_id])
+                ->one()];
+            $this->mc->add($mc_name, $mo);
+        }
+        return $mo;
+    }
+    public function  getClassList($school_id)
+    {
+        $mc_name = 'getClassList' . $school_id . $this->getMcName();
+        if ($val = $this->mc->get($mc_name)) {
+            $mo = $val;
+        } else {
+            $mo = Classes::find()->asArray()
+                ->where(['school_id' => $school_id, 'isgraduated' => HintConst::$YesOrNo_NO])
+                ->orderBy("name asc")
+                ->all();
+            $this->mc->add($mc_name, $mo);
+        }
+        return $mo;
+    }
 }
