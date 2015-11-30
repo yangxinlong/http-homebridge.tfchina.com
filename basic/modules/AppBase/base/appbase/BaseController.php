@@ -92,7 +92,7 @@ class BaseController extends Controller implements BaseInterface
         $this->mc_name_common = $this->mc_name;
         $this->mc_name_act = $this->mc_name;
         $ba = new BaseAnalyze();
-        $ba->writeToAnal('--start' . CommonFun::getCurrentDateTime() . ' :  ' . Yii::$app->request->getUrl());
+        $ba->writeToAnal('--start' . CommonFun::getCurrentDateTime() . ' :  ' .$this->getCustomId(). ' :  ' . Yii::$app->request->getUrl());
         if (in_array($action->id, $allow_arr) || isset(Yii::$app->session['admin_user']) || isset(Yii::$app->session['manage_user']) || $this->checkUserSession2()) {
             return true;
         } else {
