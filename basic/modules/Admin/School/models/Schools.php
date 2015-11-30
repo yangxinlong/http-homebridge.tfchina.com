@@ -211,11 +211,9 @@ class Schools extends BaseAR
     {
         if (!parent::checkSession()) {
             $ErrCode = HintConst::$NoSession;
-            $Message = HintConst::$Success;
             $Content = HintConst::$NULL;
         } else {
             $ErrCode = HintConst::$Zero;
-            $Message = HintConst::$Success;
             $Content = $this->getTeacherGroupInfo();
         }
         return array("ErrCode" => $ErrCode, "Message" => HintConst::$WEB_USER, "Content" => $Content);
