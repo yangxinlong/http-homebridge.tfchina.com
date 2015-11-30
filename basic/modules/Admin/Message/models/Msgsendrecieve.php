@@ -93,8 +93,8 @@ class Msgsendrecieve extends BaseMsgSR
                 ->limit($size)
                 ->offset($size * ($page - 1))
                 ->all();
-            $no = HintConst::$YesOrNo_NO;
-            Msgsendrecieve::updateAll(['isreaded' => HintConst::$YesOrNo_YES], "reciever_id = $reciever_id and isreaded=$no");//在取得数据后,直接将状态改为已读
+//            $no = HintConst::$YesOrNo_NO;
+//            Msgsendrecieve::updateAll(['isreaded' => HintConst::$YesOrNo_YES], "reciever_id = $reciever_id and isreaded=$no");//在取得数据后,直接将状态改为已读
             $ErrCode = HintConst::$Zero;
             $Message = HintConst::$Success;
             $Content = parent::getArray2No_Password($msgList);
@@ -104,7 +104,7 @@ class Msgsendrecieve extends BaseMsgSR
     /*
      * 获取未读消息列表
      */
-    public function getMsgSRNoRead()
+    public function getMsgSRNoRead()   //no use
     {
         if (!$this->checkSession()) {
             $ErrCode = HintConst::$NoSession;
@@ -174,8 +174,8 @@ class Msgsendrecieve extends BaseMsgSR
                 ->orderBy("msg_send_recieve.id desc")
                 ->limit(HintConst::$R_50)
                 ->all();
-            $no = HintConst::$YesOrNo_NO;
-            Msgsendrecieve::updateAll(['isreaded' => HintConst::$YesOrNo_YES], "reciever_id = $msg_one_id and isreaded=$no");//在取得数据后,直接将状态改为已读
+//            $no = HintConst::$YesOrNo_NO;
+//            Msgsendrecieve::updateAll(['isreaded' => HintConst::$YesOrNo_YES], "reciever_id = $msg_one_id and isreaded=$no");//在取得数据后,直接将状态改为已读,推送出去了,没有必要设置isread
             $ErrCode = HintConst::$Zero;
             $Message = HintConst::$Success;
             $Content = parent::getArray2No_Password($msgList);
@@ -207,8 +207,8 @@ class Msgsendrecieve extends BaseMsgSR
                     ->orderBy("msg_send_recieve.id desc")
                     ->limit(HintConst::$R_50)
                     ->all();
-                $no = HintConst::$YesOrNo_NO;
-                Msgsendrecieve::updateAll(['isreaded' => HintConst::$YesOrNo_YES], "reciever_id = $id and isreaded=$no");//在取得数据后,直接将状态改为已读
+//                $no = HintConst::$YesOrNo_NO;
+//                Msgsendrecieve::updateAll(['isreaded' => HintConst::$YesOrNo_YES], "reciever_id = $id and isreaded=$no");//在取得数据后,直接将状态改为已读
                 $Content = parent::getArray2No_Password($msgList);
                 $this->mc->add($mc_name, $Content);
             }
