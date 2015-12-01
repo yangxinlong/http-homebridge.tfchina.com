@@ -127,11 +127,12 @@ class ArticleReplies extends BaseReply
             $ErrCode = HintConst::$NoContents;
             $Message = '缺少Content';
         } elseif ($d['article_id'] && $d['contents']) {
+            $d['sys_p'] = Score::getSysP('reply', '');
             $flag = $this->checkReply($d['article_id']);
             if ($flag) {
                 $ErrCode = HintConst::$Not_addscore;
+                $d['sys_p'] = 0;
             }
-            $d['sys_p'] = Score::getSysP('reply', '');
             $newid = self::addNew($d);
             $Message = $newid;
             $Content = $d['contents'];

@@ -73,11 +73,12 @@ class NotesReplies extends BaseReply
         } elseif (empty($d['contents'])) {
             $ErrCode = HintConst::$NoContents;
         } else {
+            $d['sys_p'] = Score::getSysP('reply', '');
             $flag = $this->checkReply($d['note_id'], $d['sender_id']);
             if ($flag) {
                 $ErrCode = HintConst::$Not_addscore;
+                $d['sys_p'] = 0;
             }
-            $d['sys_p'] = Score::getSysP('reply', '');
             $Content = $this->addNew($d);
             if (!$flag) {
                 $score = new Score();
