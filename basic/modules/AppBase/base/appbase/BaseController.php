@@ -25,6 +25,7 @@ class BaseController extends Controller implements BaseInterface
     const LONG = 6;
     private $pagestartime;
     private $pageendtime;
+    private $log;
     public $mc;
     public $mc_name;//id+url//有的用get有的用post
     public $mc_name_common;//url//有的用get有的用post
@@ -91,8 +92,7 @@ class BaseController extends Controller implements BaseInterface
         $this->mc_name = Yii::$app->request->getUrl();
         $this->mc_name_common = $this->mc_name;
         $this->mc_name_act = $this->mc_name;
-        $ba = new BaseAnalyze();
-        $ba->writeToAnal('--start' . CommonFun::getCurrentDateTime() . ' :  ' .$this->getCustomId(). ' :  ' . Yii::$app->request->getUrl());
+        $this->log = '--start' . CommonFun::getCurrentDateTime() . ' :  ' . $this->getCustomId() . ' :  ' . Yii::$app->request->getUrl();
         if (in_array($action->id, $allow_arr) || isset(Yii::$app->session['admin_user']) || isset(Yii::$app->session['manage_user']) || $this->checkUserSession2()) {
             return true;
         } else {
@@ -114,6 +114,7 @@ class BaseController extends Controller implements BaseInterface
             $timecost = sprintf("%s", $totaltime);
             $content .= "\t" . $timecost;
             $content .= " \r\n";
+            $ba->writeToAnal($this->log . "  " . $timecost);
             $content = CommonFun::getCurrentDateTime() . '|' . $this->getCustomSchool_id() . '|' . $this->getCustomId() . '| ' . $content;
             if (count($_POST) > 0) {
                 $content .= '|params:' . json_encode($_POST);

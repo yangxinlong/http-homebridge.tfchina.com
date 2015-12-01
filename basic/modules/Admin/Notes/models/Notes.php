@@ -93,7 +93,7 @@ class Notes extends BaseMain
     /*
    * 添加note
    */
-    public function AddNote($title, $contents, $note_type_id, $a_p_id, $obj_id, $for_someone_type, $for_someone_id, $starttime, $endtime)
+    public function AddNote($d)
     {
         $ErrCode = HintConst::$Zero;
         $Message = HintConst::$Success;
@@ -112,26 +112,17 @@ class Notes extends BaseMain
             $d['school_id'] = $school_id;
             $d['user_tpye_id'] = $user_type_id;
             $d['author_id'] = $author_id;
-            $d['obj_id'] = $obj_id;
-            $d['note_type_id'] = $note_type_id;
-            $d['a_p_id'] = $a_p_id;
-            $d['for_someone_type'] = $for_someone_type;
-            $d['contents'] = $contents;
-            $d['title'] = $title;
             $d['ispassed'] = $this->getIsCanSend();
             $d['issend'] = HintConst::$YesOrNo_YES;
             $d['createtime'] = CommonFun::getCurrentDateTime();
-            $d['starttime'] = $starttime;
-            $d['endtime'] = $endtime;
             $d['sys_p'] = Score::getSysP('create', CatDef::$mod['note']);
             $newid = [];
-            if ($tmp = $this->haschar(',', $for_someone_id)) {
+            if ($tmp = $this->haschar(',', $d['for_someone_id'])) {
                 foreach ($tmp as $v) {
                     $d['for_someone_id'] = $v;
                     $newid = array($notes->addNew($d));
                 }
             } else {
-                $d['for_someone_id'] = $for_someone_id;
                 $newid = array($notes->addNew($d));
             }
             if ($this->getCustomRole() == HintConst::$ROLE_TEACHER && $this->getIsCanSend() == HintConst::$YesOrNo_YES) {

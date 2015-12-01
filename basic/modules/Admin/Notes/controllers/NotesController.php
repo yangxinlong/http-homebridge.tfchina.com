@@ -123,35 +123,35 @@ class NotesController extends BaseController
     public function  actionAddnote()
     {
         $ErrCode = HintConst::$Zero;
-        $note_type_id = !empty($_REQUEST['note_type_id']) ? $_REQUEST['note_type_id'] : '0';
-        $a_p_id = !empty($_REQUEST['a_p_id']) ? $_REQUEST['a_p_id'] : '0';
-        $obj_id = !empty($_REQUEST['obj_id']) ? $_REQUEST['obj_id'] : '0';
-        $for_someone_type = !empty($_REQUEST['for_someone_type']) ? $_REQUEST['for_someone_type'] : '0';
-        $for_someone_id = !empty($_REQUEST['for_someone_id']) ? $_REQUEST['for_someone_id'] : '0';
-        $title = !empty($_REQUEST['title']) ? $_REQUEST['title'] : '';
-        $contents = !empty($_REQUEST['contents']) ? $_REQUEST['contents'] : '';
-        $starttime = !empty($_REQUEST['starttime']) ? $_REQUEST['starttime'] : '';
-        $endtime = !empty($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
-        if ($obj_id == '' || !is_numeric($obj_id)) {
+        $d['note_type_id'] = !empty($_REQUEST['note_type_id']) ? $_REQUEST['note_type_id'] : '0';
+        $d['a_p_id'] = !empty($_REQUEST['a_p_id']) ? $_REQUEST['a_p_id'] : '0';
+        $d['obj_id'] = !empty($_REQUEST['obj_id']) ? $_REQUEST['obj_id'] : '0';
+        $d['for_someone_type'] = !empty($_REQUEST['for_someone_type']) ? $_REQUEST['for_someone_type'] : '0';
+        $d['for_someone_id'] = !empty($_REQUEST['for_someone_id']) ? $_REQUEST['for_someone_id'] : '0';
+        $d['title'] = !empty($_REQUEST['title']) ? $_REQUEST['title'] : '';
+        $d['contents'] = !empty($_REQUEST['contents']) ? $_REQUEST['contents'] : '';
+        $d['starttime'] = !empty($_REQUEST['starttime']) ? $_REQUEST['starttime'] : '';
+        $d['endtime'] = !empty($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
+        if ($d['obj_id'] == '' || !is_numeric($d['obj_id'])) {
             $ErrCode = HintConst::$No_obj_id;
-        } elseif ($for_someone_type == '' || !is_numeric($for_someone_type)) {
+        } elseif ($d['for_someone_type'] == '' || !is_numeric($d['for_someone_type'])) {
             $ErrCode = HintConst::$No_note_type_type;
-        } elseif ($note_type_id == '' || !is_numeric($note_type_id)) {
+        } elseif ($d['note_type_id'] == '' || !is_numeric($d['note_type_id'])) {
             $ErrCode = HintConst::$No_note_type_id;
-        } elseif ($a_p_id == '' || !is_numeric($a_p_id)) {
+        } elseif ($d['a_p_id'] == '' || !is_numeric($d['a_p_id'])) {
             $ErrCode = HintConst::$No_a_p_id;
         } else {
-            if ($for_someone_id == HintConst::$Zero && $a_p_id != 0) {
+            if ($d['for_someone_id'] == HintConst::$Zero && $d['a_p_id'] != 0) {
                 $ErrCode = HintConst::$No_for_someone_id;
-            } elseif ($contents == '') {
+            } elseif ($d['contents'] == '') {
                 $ErrCode = HintConst::$NoContents;
-            } elseif ($starttime == '' || !CommonFun::IsDate($starttime)) {
+            } elseif ($d['starttime'] == '' || !CommonFun::IsDate($d['starttime'])) {
                 $ErrCode = HintConst::$No_starttime;
-            } elseif ($endtime == '' || !CommonFun::IsDate($endtime)) {
+            } elseif ($d['endtime'] == '' || !CommonFun::IsDate($d['endtime'])) {
                 $ErrCode = HintConst::$No_endtime;
             } else {
                 $notes = new Notes();
-                $result = $notes->AddNote($title, $contents, $note_type_id, $a_p_id, $obj_id, $for_someone_type, $for_someone_id, $starttime, $endtime);
+                $result = $notes->AddNote($d);
                 parent::myjsonencode($result);
             }
         }
