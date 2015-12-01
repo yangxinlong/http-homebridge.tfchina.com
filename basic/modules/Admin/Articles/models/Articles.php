@@ -978,6 +978,36 @@ class Articles extends BaseMain
         $result = json_encode(['ErrCode' => $ErrCode, 'Message' => $Message, 'Content' => $Content]);
         return $result;
     }
+    protected function  getSchoolAndClassAndUserForArti(&$school, &$class, &$user, $d)
+    {
+        if ($d['role'] == CatDef::$obj_cat['all']) {
+            //send to scholl
+            if (isset($d['school'])) {
+                $this->getSchoolOrClassArrByString($school, $d['school']);
+            }
+            //send to class
+            if (isset($d['class'])) {
+                $this->getClassArrayByString($class, $d['class']);
+            }
+            //send to headmast/teacher/parent of school
+            if (isset($d['user'])) {
+                $this->getUserArrayByString($user, $d['user']);
+            }
+        } elseif ($d['role'] == CatDef::$obj_cat['headmast'] || $d['role'] == CatDef::$obj_cat['teacher'] || $d['role'] == CatDef::$obj_cat['parent']) {
+            //send to scholl
+            if (isset($d['school'])) {
+                $this->getSchoolOrClassArrByString($school, $d['school']);
+            }
+            //send to class
+            if (isset($d['class'])) {
+                $this->getClassArrayByString($class, $d['class']);
+            }
+            //send to headmast/teacher/parent of school
+            if (isset($d['user'])) {
+                $this->getUserArrayByString($user, $d['user']);
+            }
+        }
+    }
     public function push($role, $school, $class, $user, $type, $id, $title)
     {
         $d['role'] = $role;
@@ -991,6 +1021,61 @@ class Articles extends BaseMain
         $custom = new Customs();
         $token = $custom->getToken($school, $class, $user, $role);
         (new XgEvent)->push_ar($token, $type, $id, $title);
+    }
+    protected function  getSchoolAndClassAndUserForArtiByID(&$school, &$class, &$user, $id)//can use getSchoolAndClassAndUserForArti
+    {
+        $s = [];
+        $c = [];
+        $u = [];
+        $q = new Query();
+        $r = $q->select('role,school_id,class_id,reciever_id')
+            ->from('article_send_revieve')
+            ->where("article_id in ($id)")
+            ->all();
+        foreach ($r as $k) {
+            $d['role'] = $k['role'];
+            if ($d['role'] == CatDef::$obj_cat['all']) {
+                //send to scholl or class
+                if ($k['class_id'] == 0) {
+                    $d['school'] = $k['school_id'];
+                    if (isset($d['school'])) {
+                        $this->getSchoolOrClassArrByString($s, $d['school']);
+                    }
+                } elseif ($k['reciever_id'] == 0) {
+                    $d['class'] = $k['school_id'] . '-' . $k['class_id'];
+                    if (isset($d['class'])) {
+                        $this->getClassArrayByString($c, $d['class']);
+                    }
+                } else {
+                    //send to headmast/teacher/parent of school
+                    $d['user'] = $k['school_id'] . '-' . $k['class_id'] . '-' . $k['reciever_id'];
+                    if (isset($d['user'])) {
+                        $this->getUserArrayByString($u, $d['user']);
+                    }
+                }
+            } elseif ($d['role'] == CatDef::$obj_cat['headmast'] || $d['role'] == CatDef::$obj_cat['teacher'] || $d['role'] == CatDef::$obj_cat['parent']) {
+                //send to scholl or class
+                if ($k['class_id'] == 0) {
+                    $d['school'] = $k['school_id'];
+                    if (isset($d['school'])) {
+                        $this->getSchoolOrClassArrByString($s, $d['school']);
+                    }
+                } elseif ($k['reciever_id'] == 0) {
+                    $d['class'] = $k['school_id'] . '-' . $k['class_id'];
+                    if (isset($d['class'])) {
+                        $this->getClassArrayByString($c, $d['class']);
+                    }
+                } else {//send to headmast/teacher/parent of school
+                    $d['user'] = $k['school_id'] . '-' . $k['class_id'] . '-' . $k['reciever_id'];
+                    if (isset($d['user'])) {
+                        $this->getUserArrayByString($u, $d['user']);
+                    }
+                }
+            }
+        }
+        $school = $s;
+        $class = $c;
+        $user = $u;
     }
     public function pushAuditByArid($id, $title)//used for audit
     {

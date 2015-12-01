@@ -455,6 +455,27 @@ class Vote extends BaseMain
         }
         return $Content;
     }
+    protected function  getSchoolAndClassForVote(&$school, &$class, $d)
+    {
+        if ($d['a_p_id'] == CatDef::$ap_cat['part']) {
+            //send to scholl
+            if (($d['obj_id'] == CatDef::$obj_cat['school'] && $d['for_someone_type'] == CatDef::$obj_cat['all']) || ($d['obj_id'] == CatDef::$obj_cat['all'] && $d['for_someone_type'] == CatDef::$obj_cat['school'])) {
+                $this->getSchoolOrClassArrByString($school, $d['for_someone_id']);
+            }
+            //send to class
+            if (($d['obj_id'] == CatDef::$obj_cat['class'] && $d['for_someone_type'] == CatDef::$obj_cat['all']) || ($d['obj_id'] == CatDef::$obj_cat['all'] && $d['for_someone_type'] == CatDef::$obj_cat['class'])) {
+                $this->getClassArrayByString($class, $d['for_someone_id']);
+            }
+            //send to teacher of school
+            if ($d['obj_id'] == CatDef::$obj_cat['teacher'] && $d['for_someone_type'] == CatDef::$obj_cat['school']) {
+                $this->getSchoolOrClassArrByString($school, $d['for_someone_id']);
+            }
+            //send to parent of school
+            if ($d['obj_id'] == CatDef::$obj_cat['parent'] && $d['for_someone_type'] == CatDef::$obj_cat['school']) {
+                $this->getSchoolOrClassArrByString($school, $d['for_someone_id']);
+            }
+        }
+    }
     public function push($d, $id, $title)
     {
         $school = [];
