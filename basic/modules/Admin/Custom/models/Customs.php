@@ -1178,9 +1178,9 @@ class Customs extends BaseMain
         }
         return $mo;
     }
-    public function mydel()
+    public function mydel($myid=0)
     {
-        $id = isset($_REQUEST['id']) ? trim($_REQUEST['id']) : '';
+        $id = isset($_REQUEST['id']) ? trim($_REQUEST['id']) : $myid;
         if (empty($id) || !is_numeric($id)) {
             $ErrCode = HintConst::$NoId;
         } else {

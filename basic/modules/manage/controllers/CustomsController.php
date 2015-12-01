@@ -164,8 +164,7 @@ class CustomsController extends BaseController
                     return (json_encode($result));
                     break;
                 case 'isdeleted':
-                    $custom->isdeleted = $val;
-                    $custom->save();
+                    $custom->delete();
                     $result = ['error' => 0, 'message' => '更新成功', 'content' => $val];
                     return (json_encode($result));
                     break;

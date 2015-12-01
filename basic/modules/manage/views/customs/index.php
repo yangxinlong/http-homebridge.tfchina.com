@@ -52,7 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <th>管理班级</th>
         <th>是否有效</th>
         <th>是否直发</th>
-        <th>是否删除</th>
         <th>创建时间</th>
         <th>操作</th>
     </tr>
@@ -67,7 +66,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><?= $vv['class_name'] ?></td>
             <td><?= Html::img('@web/images/' . $vv['ispassed'] . '.png', ['onclick' => "listTable.toggle(this, 'ispassed'," . $vv['id'] . ")"]) ?></td>
             <td><?= Html::img('@web/images/' . $vv['iscansend'] . '.png', ['onclick' => "listTable.toggle(this, 'iscansend'," . $vv['id'] . ")"]) ?></td>
-            <td><?= Html::img('@web/images/' . $vv['isdeleted'] . '.png', ['onclick' => "listTable.toggle(this, 'isdeleted'," . $vv['id'] . ")"]) ?></td>
             <td><?= $vv['createtime'] ?></td>
             <td>
                 <a href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id'] ?>';}">删除</a>
