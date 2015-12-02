@@ -2,9 +2,9 @@
 
 namespace app\modules\Club\controllers;
 use app\modules\Admin\Articles\models\ArticlesFav;
-use app\modules\Admin\Vote\models\Vote;
-use app\modules\Admin\Vote\models\VoteReplies;
-use app\modules\Admin\Vote\models\VoteView;
+use app\modules\Admin\Vote\models\Club;
+use app\modules\Admin\Vote\models\ClubReplies;
+use app\modules\Admin\Vote\models\ClubView;
 use app\modules\AppBase\base\appbase\base\BaseAtt;
 use app\modules\AppBase\base\appbase\ClubBC;
 use app\modules\AppBase\base\cat_def\CatDef;
@@ -13,16 +13,12 @@ class ClubController extends ClubBC
 {
     public function actionAddclub()
     {
-        $vote = new Vote();
         $pri_type_id = isset($_REQUEST['pri_type_id']) ? trim($_REQUEST['pri_type_id']) : CatDef::$mod['club_arti'];
-        $result = $vote->Addvote($pri_type_id);
-        return ($result);
+        return (new Club())->Addvote($pri_type_id);
     }
     public function actionUploadforclubarti()
     {
-        $vote = new Vote();
-        $result = $vote->FileUpload('club_arti');
-        return ($result);
+        return (new Club())->FileUpload('club_arti');
     }
     public function actionUploadforclubreply()
     {
@@ -32,31 +28,23 @@ class ClubController extends ClubBC
     }
     public function actionClubfilt()
     {
-        $vote = new Vote();
-        $result = $vote->Clublist();
-        return ($result);
+        return (new Club())->Clublist();
     }
     public function  actionReply()
     {
-        return json_encode((new VoteReplies())->Reply());
+        return json_encode((new ClubReplies())->Reply());
     }
     public function  actionGetreply()
     {
-        $votereply = new VoteReplies();
-        $result = $votereply->Getreply();
-        parent::myjsonencode($result);
+        parent::myjsonencode((new ClubReplies())->Getreply());
     }
     public function actionDetailforclub()
     {
-        $vote = new Vote();
-        $result = $vote->Getdetail();
-        return ($result);
+        return (new Club())->Getdetail();
     }
     public function actionPraise()
     {
-        $vote = new Vote();
-        $result = $vote->Praise();
-        return ($result);
+        return (new Club())->Praise();
     }
     public function actionAddFav()
     {
@@ -85,32 +73,26 @@ class ClubController extends ClubBC
     }
     public function actionViewuser()
     {
-        $viewuser = new VoteView();
-        $result = $viewuser->getViewUser();
-        return ($result);
+        return ((new ClubView())->getViewUser());
     }
     public function actionAdopt()
     {
-        $reply = new VoteReplies();
-        $result = $reply->Adopt();
-        return ($result);
+        return ((new ClubReplies())->Adopt());
     }
     public function actionShare()
     {
-        $vote = new Vote();
-        $result = $vote->Share();
-        return ($result);
+        return (new Club())->Share();
     }
     public function actionDel()
     {
-        return (new Vote())->mydel();
+        return (new Club())->mydel();
     }
     public function actionDelreply()
     {
-        return (new VoteReplies())->Delreply();
+        return (new ClubReplies())->Delreply();
     }
     public function actionDelrr()
     {
-        return (new VoteReplies())->Delrr();
+        return (new ClubReplies())->Delrr();
     }
 }

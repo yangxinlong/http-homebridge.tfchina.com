@@ -6,12 +6,13 @@
  * Time: 17:01
  */
 namespace app\modules\AppBase\base\appbase;
-use Yii;
 use MemCache;
+use Yii;
 class BaseMem
 {
     private $mcname;
     private $mc;
+    private $flag = 1;
     const TIME_SORT = 0;//10*60//no set to permanent
     const TIME_MID = 3600;
     const TIME_LONG = 360000;
@@ -19,7 +20,7 @@ class BaseMem
     function __construct()
     {
         // TODO: Implement __construct() method.
-         $this->conn();
+        $this->conn();
     }
     function conn()
     {
@@ -30,23 +31,22 @@ class BaseMem
     {
 //        $ba = new BaseAnalyze();
 //        $ba->writeToAnal("close before : " . $flag . ' ' . $this->getDefineKey() . ':' . $this->getNSKey() . ' ' . Yii::$app->request->getUrl());
-         if ($flag == 1) {
-             $this->setDefineKeyPer($this->getDefineKey(), time());
-         } else if ($flag == 2) {
-
-         }
-         $this->mc->close();
+        if ($flag == 1) {
+            $this->setDefineKeyPer($this->getDefineKey(), time());
+        } else if ($flag == 2) {
+        }
+        $this->mc->close();
     }
     function flush()
     {
-         $this->mc->flush();
+        $this->mc->flush();
     }
     function name($name)
     {
-         $this->mcname = $this->getMyId() . $name;
+        $this->mcname = $this->getMyId() . $name;
 //         $ba = new BaseAnalyze();
 //         $ba->writeToAnal("name:  " . $this->mcname);
-         return $this->mcname;
+        return $this->mcname;
     }
     function  dealWithName($name)
     {
@@ -77,37 +77,56 @@ class BaseMem
     }
     public function getMyId()
     {
-         if (isset(Yii::$app->session['admin_user'])) {
-             $content = $this->getNSKey() . Yii::$app->session['admin_user']['id'];
-         } elseif (isset(Yii::$app->session['custominfo']->custom)) {
-             $content = $this->getNSKey() . '_' . Yii::$app->session['custominfo']->custom->school_id;//former :  is id;now :is school_id
-         } elseif (isset(Yii::$app->session['manage_user'])) {
-             $content = $this->getNSKey() . '_' . Yii::$app->session['manage_user']['id'];
-         } else {
-             $content = $this->getNSKey();
-         }
-         return $content;
+        if (isset(Yii::$app->session['admin_user'])) {
+            $content = $this->getNSKey() . Yii::$app->session['admin_user']['id'];
+        } elseif (isset(Yii::$app->session['custominfo']->custom)) {
+            if ($this->flag == 1) {
+                $content = $this->getNSKey() . '_' . Yii::$app->session['custominfo']->custom->school_id;//former :  is id;now :is school_id
+            } else {
+                (new BaseAnalyze())->writeToAnal("mc getMyId flag:".$this->flag);
+                $content = $this->getNSKey();
+            }
+        } elseif (isset(Yii::$app->session['manage_user'])) {
+            $content = $this->getNSKey() . '_' . Yii::$app->session['manage_user']['id'];
+        } else {
+            $content = $this->getNSKey();
+        }
+        return $content;
     }
     public function getNSKey()
     {
-         $k = $this->getDefineKey();
-         $mc_key = $this->mc->get($k);
-         if ($mc_key === false) {
-             $this->setDefineKeyPer($k, time());
-         }
-         return $this->mc->get($k);
+        $k = $this->getDefineKey();
+        $mc_key = $this->mc->get($k);
+        if ($mc_key === false) {
+            $this->setDefineKeyPer($k, time());
+        }
+        return $this->mc->get($k);
     }
     public function getDefineKey()
     {
-         if (isset(Yii::$app->session['admin_user'])) {
-             $k = 'a';
-         } elseif (isset(Yii::$app->session['custominfo']->custom)) {
-             $k = "c" . Yii::$app->session['custominfo']->custom->school_id;
-         } elseif (isset(Yii::$app->session['manage_user'])) {
-             $k = "c" . Yii::$app->session['manage_user']['school_id'];
-         } else {
-             $k = 'o';
-         }
-         return $k;
+        if (isset(Yii::$app->session['admin_user'])) {
+            $k = 'a';
+        } elseif (isset(Yii::$app->session['custominfo']->custom)) {
+            $k = "c" . Yii::$app->session['custominfo']->custom->school_id;
+        } elseif (isset(Yii::$app->session['manage_user'])) {
+            $k = "c" . Yii::$app->session['manage_user']['school_id'];
+        } else {
+            $k = 'o';
+        }
+        return $k;
+    }
+    /**
+     * @return int
+     */
+    public function getFlag()
+    {
+        return $this->flag;
+    }
+    /**
+     * @param int $flag
+     */
+    public function setFlag($flag)
+    {
+        $this->flag = $flag;
     }
 }
