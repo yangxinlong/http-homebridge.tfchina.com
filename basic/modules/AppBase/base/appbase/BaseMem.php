@@ -83,7 +83,6 @@ class BaseMem
             if ($this->flag == 1) {
                 $content = $this->getNSKey() . '_' . Yii::$app->session['custominfo']->custom->school_id;//former :  is id;now :is school_id
             } else {
-                (new BaseAnalyze())->writeToAnal("mc getMyId flag:".$this->flag);
                 $content = $this->getNSKey();
             }
         } elseif (isset(Yii::$app->session['manage_user'])) {
