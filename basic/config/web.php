@@ -112,7 +112,7 @@ $config = [
                 'charset' => 'UTF-8',
                 'from' => ['3186254096@qq.com' => 'admin']
             ],
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
