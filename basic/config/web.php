@@ -103,14 +103,14 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.qq.com',
-                'username' => '3186254096@qq.com',
-                'password' => '*******',
+                'username' => '1031534918@qq.com',
+                'password' => 'csenejfahoeqbbcg',
                 'port' => '25',
                 'encryption' => 'tls',
             ],
             'messageConfig' => [
                 'charset' => 'UTF-8',
-                'from' => ['3186254096@qq.com' => 'admin']
+                'from' => ['1031534918@qq.com' => 'admin']
             ],
             'useFileTransport' => false,
         ],
