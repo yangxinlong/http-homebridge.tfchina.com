@@ -194,7 +194,7 @@ class Vote extends BaseMain
     }
     public function Club_list($d)
     {
-        $mc_name = $this->getMcName() . 'Club_list' . json_encode($d);
+        $mc_name = 'Club_list' . json_encode($d) . $this->getMcName();
         if ($val = $this->mc->get($mc_name)) {
             $r = $val;
         } else {
