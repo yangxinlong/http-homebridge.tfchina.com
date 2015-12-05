@@ -5,11 +5,11 @@ use app\modules\Admin\Articles\models\Articles;
 use app\modules\Admin\Articles\models\ArticlesFav;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\base\BaseMain;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
-use app\modules\AppBase\base\xgpush\XgEvent;
 use Yii;
 use yii\db\Query;
 /**
@@ -161,7 +161,7 @@ class Vote extends BaseMain
                     $data['related_id'] = $Content;
                     $data['contents'] = $d['title'];
                     $score->ClubArtiCreate($data);
-                    (new XgEvent)->push_club($d['pri_type_id'] . '-' . $Content, $d['title']);
+                    (new MultThread())->push_club($d['pri_type_id'] . '-' . $Content, $d['title']);
                 }
             } else {
                 $ErrCode = HintConst::$No_more_point;
@@ -483,7 +483,7 @@ class Vote extends BaseMain
         $this->getSchoolAndClassForVote($school, $class, $d);
         $custom = new Customs();
         $token = $custom->getToken($school, $class, [], $d['obj_id']);
-        (new XgEvent())->push_vote($token, $id, $title);
+        (new MultThread())->push_vote($token, $id, $title);
     }
     public function getNum($school_id, $startdate, $enddate)
     {

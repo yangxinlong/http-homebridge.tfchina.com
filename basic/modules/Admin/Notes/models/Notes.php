@@ -3,12 +3,12 @@
 namespace app\modules\Admin\Notes\models;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\base\BaseMain;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
-use app\modules\AppBase\base\xgpush\XgEvent;
 use Yii;
 use yii\db\Query;
 /**
@@ -369,7 +369,7 @@ class Notes extends BaseMain
         $this->getSchoolAndClassForNote($school, $class, $d);
         $custom = new Customs();
         $token = $custom->getToken($school, $class, [], $d['obj_id']);
-        (new XgEvent())->push_note($token, $id, $title);
+        (new MultThread())->push_note($token, $id, $title);
     }
     public function getNum($school_id, $startdate, $enddate)
     {
@@ -428,7 +428,7 @@ class Notes extends BaseMain
         $this->getSchoolAndClassForNote($school, $class, $d);
         $custom = new Customs();
         $token = $custom->getToken($school, $class, $user);
-        (new XgEvent())->push_note($token, $id, $title);
+        (new MultThread())->push_note($token, $id, $title);
     }
     protected function getSR(&$d, $id)
     {
@@ -444,6 +444,6 @@ class Notes extends BaseMain
         (new Customs())->increaseF($user[0], 'points', $reward);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_pass($token, $type, $id, $reward, $con);
+        (new MultThread())->push_pass($token, $type, $id, $reward, $con);
     }
 }

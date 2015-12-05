@@ -5,9 +5,9 @@ use app\modules\Admin\Custom\models\Customs;
 use app\modules\Admin\Message\models\Messages;
 use app\modules\Admin\Message\models\MessagesSearch;
 use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
-use app\modules\AppBase\base\xgpush\XgEvent;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -135,7 +135,7 @@ class MessagesController extends BaseController
         } else {
             $messages = new Messages();
             $result = $messages->Sendmsg($contents, $reciever_id);
-            $this->push($reciever_id,$contents);
+            $this->push($reciever_id, $contents);
             parent::myjsonencode($result);
         }
         if ($ErrCode != HintConst::$Zero) {
@@ -144,11 +144,11 @@ class MessagesController extends BaseController
             echo(CommonFun::json($ErrCode, $Message, $Content));
         }
     }
-    public function push($user_id,$con)
+    public function push($user_id, $con)
     {
         $user = explode('-', $user_id);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_msg($token,$con);
+        (new MultThread())->push_msg($token, $con);
     }
 }

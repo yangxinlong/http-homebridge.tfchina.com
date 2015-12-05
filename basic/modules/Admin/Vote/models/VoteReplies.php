@@ -4,12 +4,12 @@ namespace app\modules\Admin\Vote\models;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\base\BaseEdit;
 use app\modules\AppBase\base\appbase\base\BaseReply;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
-use app\modules\AppBase\base\xgpush\XgEvent;
 use Yii;
 use yii\db\Query;
 /**
@@ -181,7 +181,7 @@ class VoteReplies extends BaseReply
         $type = $vote->getType($id);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_reply($token, $type['pri_type_id'], $reply_id, $con);
+        (new MultThread())->push_reply($token, $type['pri_type_id'], $reply_id, $con);
     }
     public function pushReplyByVoteRecieverid($id, $reciever_id, $reply_id, $con)
     {
@@ -189,7 +189,7 @@ class VoteReplies extends BaseReply
         $user[] = $reciever_id;
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_reply($token, $type['pri_type_id'], $reply_id, $con);
+        (new MultThread())->push_reply($token, $type['pri_type_id'], $reply_id, $con);
     }
     public function Adopt()
     {
@@ -224,7 +224,7 @@ class VoteReplies extends BaseReply
         $user = explode('-', $user_id);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_adopt($token, CatDef::$mod['club_help'], $id, $reward);
+        (new MultThread())->push_adopt($token, CatDef::$mod['club_help'], $id, $reward);
     }
     public function Delreply()
     {

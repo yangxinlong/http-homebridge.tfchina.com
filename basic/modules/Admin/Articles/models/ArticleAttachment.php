@@ -3,15 +3,13 @@
 namespace app\modules\Admin\Articles\models;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\base\BaseEdit;
-use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\BaseAR;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\BaseConst;
 use app\modules\AppBase\base\cat_def\CatDef;
-use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
-use app\modules\AppBase\base\xgpush\XgEvent;
 use Yii;
 use yii\db\Query;
 use yii\web\UploadedFile;
@@ -45,7 +43,7 @@ class ArticleAttachment extends BaseAR
     public function rules()
     {
         return [
-            [['article_id', 'cat_default_id', 'sub_type_id', 'ispassed', 'isdelete', 'isview','cus_p','sys_p'], 'integer'],
+            [['article_id', 'cat_default_id', 'sub_type_id', 'ispassed', 'isdelete', 'isview', 'cus_p', 'sys_p'], 'integer'],
             [['createtime', 'updatetime'], 'safe'],
             [['url', 'url_thumb'], 'string', 'max' => 255]
         ];
@@ -120,7 +118,7 @@ class ArticleAttachment extends BaseAR
             $query = new Query();
             $Content = $query->select('id,url,url_thumb,cat_default_id,sub_type_id')
                 ->from('article_attachment')
-                ->where(['article_id' => $article_id,'ispassed' => HintConst::$YesOrNo_YES])
+                ->where(['article_id' => $article_id, 'ispassed' => HintConst::$YesOrNo_YES])
                 ->orderby(['id' => SORT_DESC])
                 ->all();
             $this->mc->add($mc_name, $Content);
@@ -224,7 +222,7 @@ class ArticleAttachment extends BaseAR
                 $ar_id = $article_a->article_id;
                 $article = new Articles();
                 $article = $article->findOne($ar_id);
-                $article->ispassed=HintConst::$YesOrNo_YES;
+                $article->ispassed = HintConst::$YesOrNo_YES;
                 $author_id = $article->author_id;
                 $type = $article->article_type_id;
                 $article->save(false);
@@ -232,13 +230,13 @@ class ArticleAttachment extends BaseAR
                 $data['contents'] = $article->title;
                 $data['related_id'] = $value;
                 $score->ImgCreate($data);
-                self::push_pass($author_id, $type, $value, $reward,'审核通过');
+                self::push_pass($author_id, $type, $value, $reward, '审核通过');
             }
         } else {
             $result = ['ErrCode' => '1', 'Message' => '缺少参数', 'Content' => ''];
             return (json_encode($result));
         }
-        (new Articles())->pushAuditByArid($ar_id,$data['contents']);
+        (new Articles())->pushAuditByArid($ar_id, $data['contents']);
         $result = ['ErrCode' => '0', 'Message' => '审核成功', 'Content' => ''];
         return (json_encode($result));
     }
@@ -265,12 +263,12 @@ class ArticleAttachment extends BaseAR
         }
         return json_encode(['ErrCode' => $ErrCode, 'Message' => HintConst::$WEB_JYQ, 'Content' => $Content]);
     }
-    public function push_pass($user_id, $type, $id, $reward,$title)
+    public function push_pass($user_id, $type, $id, $reward, $title)
     {
         $user = explode('-', $user_id);
         (new Customs())->increaseF($user[0], 'points', $reward);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_pass($token, $type, $id, $reward,$title);
+        (new MultThread())->push_pass($token, $type, $id, $reward, $title);
     }
 }

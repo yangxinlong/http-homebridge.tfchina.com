@@ -15,7 +15,6 @@ use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
-use app\modules\AppBase\base\xgpush\XgEvent;
 use Exception;
 use Yii;
 use yii\db\Query;
@@ -1021,7 +1020,7 @@ class Articles extends BaseMain
         $this->getSchoolAndClassAndUserForArti($school, $class, $user, $d);
         $custom = new Customs();
         $token = $custom->getToken($school, $class, $user, $role);
-        (new XgEvent)->push_ar($token, $type, $id, $title);
+        (new MultThread())->push_ar($token, $type, $id, $title);
     }
     protected function  getSchoolAndClassAndUserForArtiByID(&$school, &$class, &$user, $id)//can use getSchoolAndClassAndUserForArti
     {
@@ -1097,7 +1096,7 @@ class Articles extends BaseMain
         $ar_type = $ar->getTypeAndTitle($id);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_reply($token, $ar_type['article_type_id'], $reply_id, $con);
+        (new MultThread())->push_reply($token, $ar_type['article_type_id'], $reply_id, $con);
     }
     public function pushReplyReplyByArid($article_id, $reply_id, $reciever_id, $con)//used for audit and reply
     {
@@ -1105,7 +1104,7 @@ class Articles extends BaseMain
         $ar_type = $ar->getTypeAndTitle($article_id);
         $custom = new Customs();
         $token = $custom->getToken([], [], [$reciever_id]);
-        (new XgEvent())->push_reply($token, $ar_type['article_type_id'], $reply_id, $con);
+        (new MultThread())->push_reply($token, $ar_type['article_type_id'], $reply_id, $con);
     }
     public function pushReplyForEva($id, $reply_id, $con)//used for audit and reply
     {
@@ -1118,7 +1117,7 @@ class Articles extends BaseMain
         }
         $user = array_unique($user);
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_reply($token, $ar_type['article_type_id'], $id, $con);
+        (new MultThread())->push_reply($token, $ar_type['article_type_id'], $id, $con);
     }
     public function pushReplyByRecieverid($id, $reciever_id, $reply_id, $con)//used for audit and reply
     {
@@ -1127,7 +1126,7 @@ class Articles extends BaseMain
         $user[] = $reciever_id;
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_reply($token, $ar_type['article_type_id'], $reply_id, $con);
+        (new MultThread())->push_reply($token, $ar_type['article_type_id'], $reply_id, $con);
     }
     public function getTypeAndTitle($id)
     {
@@ -1214,6 +1213,6 @@ class Articles extends BaseMain
         (new Customs())->increaseF($user[0], 'points', $reward);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_pass($token, $type, $id, $reward, $title);
+        (new MultThread())->push_pass($token, $type, $id, $reward, $title);
     }
 }

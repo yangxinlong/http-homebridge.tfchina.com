@@ -4,9 +4,7 @@
  *  2015/5/22 11:06
  */
 namespace app\modules\AppBase\base\xgpush;
-use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\cat_def\CatDef;
-use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\base\Component;
@@ -33,50 +31,50 @@ class XgEvent extends Component
         $this->trigger($event_str);
         $this->off($event_str);
     }
-    public function push_msg($token,$con='')
+    public function push_msg($token, $con = '')
     {
         $role = Yii::$app->session['custominfo']->custom->cat_default_id;
         $user_id = Yii::$app->session['custominfo']->custom->id;
         $type = HintConst::$MSGPATH . '-' . $role . '-' . $user_id;
-        $this->push_e(self::PUSHMSG, ['token' => $token, 'type' => $type,'con'=>$con]);
+        $this->push_e(self::PUSHMSG, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
-    public function push_reply($token, $type, $id,$con='')
+    public function push_reply($token, $type, $id, $con = '')
     {
         $type = HintConst::$REPLYPATH . '-' . $type . '-' . $id;
-        $this->push_e(self::PUSHREPLY, ['token' => $token, 'type' => $type,'con'=>$con]);
+        $this->push_e(self::PUSHREPLY, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
-    public function push_adopt($token, $type, $id, $reward,$con='')
+    public function push_adopt($token, $type, $id, $reward, $con = '')
     {
         $type = CatDef::$act['adopted'] . '-' . $type . '-' . $id . '-' . $reward;
-        $this->push_e(self::PUSHADOPT, ['token' => $token, 'type' => $type,'con'=>$con]);
+        $this->push_e(self::PUSHADOPT, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
-    public function push_pass($token, $type, $id, $reward,$con='')
+    public function push_pass($token, $type, $id, $reward, $con = '')
     {
         $type = CatDef::$act['passed'] . '-' . $type . '-' . $id . '-' . $reward;
-        $this->push_e(self::PUSHPASS, ['token' => $token, 'type' => $type,'con'=>$con]);
+        $this->push_e(self::PUSHPASS, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
-    public function push_rf($token, $type, $id,$con='')
+    public function push_rf($token, $type, $id, $con = '')
     {
         $type = $type . '-' . $id;
-        $this->push_e(self::PUSHRF, ['token' => $token, 'type' => $type,'con'=>$con]);
+        $this->push_e(self::PUSHRF, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
-    public function push_ar($token, $type, $id,$con='')
+    public function push_ar($token, $type, $id, $con = '')
     {
         $type = $type . '-' . $id;
-        $this->push_e(self::PUSHAR, ['token' => $token, 'type' => $type,'con'=>$con]);
+        $this->push_e(self::PUSHAR, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
-    public function push_vote($token, $id,$con='')
+    public function push_vote($token, $id, $con = '')
     {
         $type = HintConst::$VOTE_PATH . '-' . $id;
-        $this->push_e(self::PUSHVOTE, ['token' => $token, 'type' => $type,'con'=>$con]);
+        $this->push_e(self::PUSHVOTE, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
-    public function push_note($token, $id,$con='')
+    public function push_note($token, $id, $con = '')
     {
         $type = HintConst::$NOTE_PATH . '-' . $id;
-        $this->push_e(self::PUSHNOTE, ['token' => $token, 'type' => $type,'con'=>$con]);
+        $this->push_e(self::PUSHNOTE, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
-    public function push_club($id,$con='')
+    public function push_club($id, $con = '')
     {
-        $this->push_club_e(self::PUSHCLUB, ['id' => $id,'con'=>$con]);
+        $this->push_club_e(self::PUSHCLUB, ['id' => $id, 'con' => $con]);
     }
 }

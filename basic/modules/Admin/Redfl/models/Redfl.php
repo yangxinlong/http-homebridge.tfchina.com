@@ -3,11 +3,11 @@
 namespace app\modules\admin\Redfl\models;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\BaseAR;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
-use app\modules\AppBase\base\xgpush\XgEvent;
 use Yii;
 use yii\db\Query;
 /**
@@ -219,7 +219,7 @@ class Redfl extends BaseAR
         $user[] = $user_id;
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_rf($token, $type, $id);
+        (new MultThread())->push_rf($token, $type, $id);
     }
     public function getEvaReceiver($id)
     {

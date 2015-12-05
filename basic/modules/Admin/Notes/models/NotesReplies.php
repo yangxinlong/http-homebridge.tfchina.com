@@ -3,12 +3,12 @@
 namespace app\modules\Admin\Notes\models;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\base\BaseReply;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
-use app\modules\AppBase\base\xgpush\XgEvent;
 use Yii;
 use yii\db\Query;
 /**
@@ -183,14 +183,14 @@ class NotesReplies extends BaseReply
         $user = $note->getAuthor($id);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_reply($token, HintConst::$NOTE_PATH, $id, $con);
+        (new MultThread())->push_reply($token, HintConst::$NOTE_PATH, $id, $con);
     }
     public function pushReplyByRecieverid($id, $reciever_id, $con)
     {
         $user[] = $reciever_id;
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);
-        (new XgEvent())->push_reply($token, HintConst::$NOTE_PATH, $id, $con);
+        (new MultThread())->push_reply($token, HintConst::$NOTE_PATH, $id, $con);
     }
     public function Delreply()
     {
