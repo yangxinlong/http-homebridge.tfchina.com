@@ -4,7 +4,9 @@
  *  2015/5/22 11:06
  */
 namespace app\modules\AppBase\base\xgpush;
+use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\cat_def\CatDef;
+use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\base\Component;

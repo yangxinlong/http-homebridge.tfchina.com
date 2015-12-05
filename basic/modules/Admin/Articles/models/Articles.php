@@ -8,6 +8,7 @@ use app\modules\Admin\Vote\models\VoteAtt;
 use app\modules\Admin\Vote\models\VoteReplies;
 use app\modules\AppBase\base\appbase\base\BaseMain;
 use app\modules\AppBase\base\appbase\BaseAnalyze;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\BaseConst;
 use app\modules\AppBase\base\cat_def\CatDef;
@@ -1087,7 +1088,7 @@ class Articles extends BaseMain
         $token = $custom->getToken($school, $class, $user);
         $ar = new Articles();
         $ar_type = $ar->getTypeAndTitle($id);
-        (new XgEvent)->push_ar($token, $ar_type['article_type_id'], $id, $title);
+        (new MultThread())->push_ar($token, $ar_type['article_type_id'], $id, $title);
     }
     public function pushReplyByArid($id, $reply_id, $con)//used for audit and reply
     {

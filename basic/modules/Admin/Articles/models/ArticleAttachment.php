@@ -3,10 +3,12 @@
 namespace app\modules\Admin\Articles\models;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\base\BaseEdit;
+use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\BaseAR;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\BaseConst;
 use app\modules\AppBase\base\cat_def\CatDef;
+use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
 use app\modules\AppBase\base\xgpush\XgEvent;
@@ -217,7 +219,7 @@ class ArticleAttachment extends BaseAR
                 $article_a = $model->findOne($value);
                 $article_a->ispassed = HintConst::$YesOrNo_YES;
                 $reward = $article_a->sys_p;
-                $article_a->save();
+                $article_a->save(false);
                 //同时更新文章 为通过状态
                 $ar_id = $article_a->article_id;
                 $article = new Articles();
@@ -225,7 +227,7 @@ class ArticleAttachment extends BaseAR
                 $article->ispassed=HintConst::$YesOrNo_YES;
                 $author_id = $article->author_id;
                 $type = $article->article_type_id;
-                $article->save();
+                $article->save(false);
                 $score = new Score();
                 $data['contents'] = $article->title;
                 $data['related_id'] = $value;
@@ -236,8 +238,7 @@ class ArticleAttachment extends BaseAR
             $result = ['ErrCode' => '1', 'Message' => '缺少参数', 'Content' => ''];
             return (json_encode($result));
         }
-        $ar = new Articles();
-        $ar->pushAuditByArid($ar_id,$data['contents']);
+        (new Articles())->pushAuditByArid($ar_id,$data['contents']);
         $result = ['ErrCode' => '0', 'Message' => '审核成功', 'Content' => ''];
         return (json_encode($result));
     }
