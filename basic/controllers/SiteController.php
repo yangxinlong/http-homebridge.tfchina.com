@@ -102,4 +102,8 @@ class SiteController extends SiteBC
     {
         return $this->render('about');
     }
+    public function actionPhpinfo()
+    {
+        phpinfo();
+    }
 }
