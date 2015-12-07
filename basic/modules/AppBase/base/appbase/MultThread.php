@@ -6,9 +6,10 @@
  * Time: 11:04
  */
 namespace app\modules\AppBase\base\appbase;
+use app\modules\Admin\Catalogue\models\Catalogue;
+use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\xgpush\XgEvent;
-use Thread;
-class MultThread extends Thread
+class MultThread
 {
     public function push_ar($token, $ar_type, $id, $title)
     {
@@ -45,5 +46,12 @@ class MultThread extends Thread
     public function push_club($pri_type_id, $dtitle)
     {
         (new XgEvent)->push_club($pri_type_id, $dtitle);
+    }
+    public function initCatlogue($chool_id)
+    {
+//        $time["11"] = CommonFun::getCurrentDateTime();
+        (new Catalogue())->initCatlogue($chool_id);
+//        $time["22"] = CommonFun::getCurrentDateTime();
+//        (new BaseAnalyze())->writeToAnal(json_encode($time));
     }
 }
