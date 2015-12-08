@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\Admin\Articles\models;
+use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\base\BaseEdit;
 use app\modules\AppBase\base\appbase\BaseAR;
