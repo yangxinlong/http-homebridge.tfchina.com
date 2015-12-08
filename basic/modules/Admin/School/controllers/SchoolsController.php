@@ -8,6 +8,7 @@ use app\modules\Admin\Location\models\Districts;
 use app\modules\Admin\Location\models\Provinces;
 use app\modules\Admin\School\models\Schools;
 use app\modules\Admin\School\models\SchoolsSearch;
+use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
@@ -99,7 +100,7 @@ class SchoolsController extends BaseController
             if ($model->load(Yii::$app->request->post())) {
                 if ($model->ispassed == HintConst::$YesOrNo_YES) {
                     (new Customs())->UpdateF($model->headmaster_id, HintConst::$Field_ispassed, HintConst::$YesOrNo_YES);
-                    (new Catalogue())->initCatlogue($id);
+                    (new Asyn())->InitSchool($id);
                 }
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -242,10 +243,12 @@ class SchoolsController extends BaseController
                 $school->createtime = CommonFun::getCurrentDateTime();
                 $school->save(false);
                 $school_id = $school->attributes['id'];
-                $custom->UpdateF($school->headmaster_id, HintConst::$Field_school_id, $school_id);
-                $custom->UpdateF($school->headmaster_id, HintConst::$Field_ispassed, HintConst::$YesOrNo_YES);
-                $this->initSchoolLabe($school_id);
+                $custom_mo = $custom->findId($school->headmaster_id);
+                $custom_mo->school_id = $school_id;
+                $custom_mo->ispassed = HintConst::$YesOrNo_YES;
+                $custom_mo->save(false);
                 echo "1";
+                $this->initSchoolLabe($school_id);
             }
         }
     }
@@ -295,8 +298,10 @@ class SchoolsController extends BaseController
                 $school->createtime = CommonFun::getCurrentDateTime();
                 $school->save(false);
                 $school_id = $school->attributes['id'];
-                $custom->UpdateF($school->headmaster_id, HintConst::$Field_school_id, $school_id);
-                $custom->UpdateF($school->headmaster_id, HintConst::$Field_ispassed, HintConst::$YesOrNo_YES);
+                $custom_mo = $custom->findId($school->headmaster_id);
+                $custom_mo->school_id = $school_id;
+                $custom_mo->ispassed = HintConst::$YesOrNo_YES;
+                $custom_mo->save(false);
                 $this->initSchoolLabe($school_id);
             }
         }
@@ -308,8 +313,12 @@ class SchoolsController extends BaseController
         $catlogue = new Catalogue();
         $CatalogueList = $catlogue->getCatalogueListAll(83, $school_id);
         if (count($CatalogueList) == 0) {
-            $catlogue->initCatlogue($school_id);
+            (new Asyn())->InitSchool($school_id);
         }
+    }
+    public function  actionTest()
+    {
+        (new Asyn())->InitSchool('11');
     }
 //    public function actionPush()
 //    {
