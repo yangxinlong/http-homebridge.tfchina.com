@@ -2,12 +2,14 @@
 
 namespace app\modules\Admin\Articles\controllers;
 use app\modules\Admin\Custom\models\Customs;
+use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\appbase\MultThread;
 class AratController extends BaseController
 {
     public function actionPushpass()
     {
+        (new BaseAnalyze())->writeToAnal("actionPushpass");
         $user_id = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : 0;
         $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 0;
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;

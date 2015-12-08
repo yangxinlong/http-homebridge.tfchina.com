@@ -11,6 +11,7 @@ use app\modules\Admin\Articles\models\ClassesDaily;
 use app\modules\Admin\Articles\models\CookbookInfo;
 use app\modules\Admin\Articles\models\CustomsDaily;
 use app\modules\Admin\Custom\models\Customs;
+use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\HintConst;
@@ -1496,6 +1497,7 @@ class ArticlesController extends BaseController
     }
     public function actionPushauditbyarid()
     {
+        (new BaseAnalyze())->writeToAnal("actionPushauditbyarid");
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
         $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
         $school = [];

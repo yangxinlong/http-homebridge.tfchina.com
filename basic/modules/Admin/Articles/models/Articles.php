@@ -1023,7 +1023,7 @@ class Articles extends BaseMain
         $token = $custom->getToken($school, $class, $user, $role);
         (new MultThread())->push_ar($token, $type, $id, $title);
     }
-    protected function  getSchoolAndClassAndUserForArtiByID(&$school, &$class, &$user, $id)//can use getSchoolAndClassAndUserForArti
+    public function  getSchoolAndClassAndUserForArtiByID(&$school, &$class, &$user, $id)//can use getSchoolAndClassAndUserForArti
     {
         $s = [];
         $c = [];

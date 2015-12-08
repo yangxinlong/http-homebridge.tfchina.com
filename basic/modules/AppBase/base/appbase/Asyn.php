@@ -15,10 +15,12 @@ class Asyn
     }
     public function  arat_push_pass($user_id, $type, $id, $reward, $title)
     {
+        (new BaseAnalyze())->writeToAnal("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
         $this->fs("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
     }
     public function  pushAuditByArid($id, $title)
     {
+        (new BaseAnalyze())->writeToAnal("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
         $this->fs("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
     }
     function fs2($path, $data)
