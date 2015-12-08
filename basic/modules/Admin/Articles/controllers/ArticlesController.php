@@ -12,6 +12,7 @@ use app\modules\Admin\Articles\models\CookbookInfo;
 use app\modules\Admin\Articles\models\CustomsDaily;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\db\Query;
@@ -1492,5 +1493,19 @@ class ArticlesController extends BaseController
     public function actionDelpic()
     {
         return (new ArticleAttachment())->Delpic();
+    }
+    public function actionPushauditbyarid()
+    {
+        $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
+        $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
+        $school = [];
+        $class = [];
+        $user = [];
+        $ar = new Articles();
+        $ar->getSchoolAndClassAndUserForArtiByID($school, $class, $user, $id);
+        $custom = new Customs();
+        $token = $custom->getToken($school, $class, $user);
+        $ar_type = $ar->getTypeAndTitle($id);
+        (new MultThread())->push_ar($token, $ar_type['article_type_id'], $id, $title);
     }
 }

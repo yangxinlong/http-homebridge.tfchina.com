@@ -6,6 +6,7 @@ use app\modules\Admin\Notes\models\NotesReplies;
 use app\modules\Admin\Vote\models\Vote;
 use app\modules\Admin\Vote\models\VoteAtt;
 use app\modules\Admin\Vote\models\VoteReplies;
+use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\base\BaseMain;
 use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\MultThread;
@@ -1079,15 +1080,7 @@ class Articles extends BaseMain
     }
     public function pushAuditByArid($id, $title)//used for audit
     {
-        $school = [];
-        $class = [];
-        $user = [];
-        $this->getSchoolAndClassAndUserForArtiByID($school, $class, $user, $id);
-        $custom = new Customs();
-        $token = $custom->getToken($school, $class, $user);
-        $ar = new Articles();
-        $ar_type = $ar->getTypeAndTitle($id);
-        (new MultThread())->push_ar($token, $ar_type['article_type_id'], $id, $title);
+        (new Asyn())->pushAuditByArid($id, $title);
     }
     public function pushReplyByArid($id, $reply_id, $con)//used for audit and reply
     {

@@ -1,10 +1,9 @@
 <?php
 
 namespace app\modules\Admin\Articles\models;
-use app\modules\Admin\Custom\models\Customs;
+use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\base\BaseEdit;
 use app\modules\AppBase\base\appbase\BaseAR;
-use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\BaseConst;
 use app\modules\AppBase\base\cat_def\CatDef;
@@ -265,10 +264,6 @@ class ArticleAttachment extends BaseAR
     }
     public function push_pass($user_id, $type, $id, $reward, $title)
     {
-        $user = explode('-', $user_id);
-        (new Customs())->increaseF($user[0], 'points', $reward);
-        $custom = new Customs();
-        $token = $custom->getToken([], [], $user);
-        (new MultThread())->push_pass($token, $type, $id, $reward, $title);
+        (new Asyn())->arat_push_pass($user_id, $type, $id, $reward, $title);
     }
 }

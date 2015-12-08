@@ -13,6 +13,14 @@ class Asyn
     {
         $this->fs("index.php?r=Catalogue/catalogue/initschool&id=$id");
     }
+    public function  arat_push_pass($user_id, $type, $id, $reward, $title)
+    {
+        $this->fs("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
+    }
+    public function  pushAuditByArid($id, $title)
+    {
+        $this->fs("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
+    }
     function fs2($path, $data)
     {
         $path = '';
