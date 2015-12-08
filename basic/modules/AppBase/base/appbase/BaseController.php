@@ -88,7 +88,9 @@ class BaseController extends Controller implements BaseInterface
         $this->pagestartime = microtime();
         $allow_arr = ['index', 'dl_xyh', 'dl_bbname', 'dl_ma',//phone
             'getconf', 'login', 'apkinfo', 'checkcode-a', 'login-a-h', 'user-share', 'addparent',
-            'provinceslist', 'citieslist', 'districtslist', 'apply', 'apply-a', 'audit', 'daily', 'updatelogo-a', 'uploadlog', 'initschool'];
+            'provinceslist', 'citieslist', 'districtslist', 'apply', 'apply-a', 'audit', 'daily', 'updatelogo-a', 'uploadlog', 'initschool',
+            'pushpass', 'pushauditbyarid'
+        ];
         $this->mc_name = Yii::$app->request->getUrl();
         $this->mc_name_common = $this->mc_name;
         $this->mc_name_act = $this->mc_name;
