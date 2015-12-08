@@ -132,7 +132,7 @@ class Notes extends BaseMain
                 $data['contents'] = $d['title'];
                 $score->NoteCreate($data);
             }
-            $this->push($d, $newid[0], $d['title']);
+            $this->push($d, $newid[0]);
             $ErrCode = HintConst::$Zero;
             $Message = HintConst::$Success;
             $Content = $newid[0];
@@ -363,9 +363,9 @@ class Notes extends BaseMain
             }
         }
     }
-    public function push($d, $id, $title)
+    public function push($d, $id)
     {
-        $d['id']=$id;
+        $d['id'] = $id;
         $asyn = new Asyn();
         $asyn->setSchoolId($this->getCustomSchool_id());
         $asyn->pushaddnote($d);
