@@ -1,11 +1,13 @@
 <?php
 
 namespace app\modules\Admin\Notes\controllers;
+use app\modules\Admin\Custom\models\Customs;
 use app\modules\Admin\Notes\models\Notes;
 use app\modules\Admin\Notes\models\NotesReplies;
 use app\modules\Admin\Notes\models\NotesSearch;
 use app\modules\admin\Notes\models\NotesView;
 use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
 use Yii;
@@ -176,7 +178,8 @@ class NotesController extends BaseController
     public function actionDel()
     {
         return (new Notes())->mydel();
-    } public function actionNotedetail()
+    }
+    public function actionNotedetail()
     {
         return json_encode((new Notes())->NoteDetail());
     }
@@ -199,5 +202,14 @@ class NotesController extends BaseController
     public function actionGetuserforview()
     {
         return (new NotesView())->Getuserforview();
+    }
+    public function actionPushaddnote()
+    {
+        $school = [];
+        $class = [];
+        (new Notes())->getSchoolAndClassForNote($school, $class, $_POST);
+        $custom = new Customs();
+        $token = $custom->getToken($school, $class, [], $_POST['obj_id']);
+        (new MultThread())->push_note($token, $_POST['id'], $_POST['title']);
     }
 }

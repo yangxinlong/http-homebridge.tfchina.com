@@ -2,6 +2,7 @@
 
 namespace app\modules\Admin\Notes\models;
 use app\modules\Admin\Custom\models\Customs;
+use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\base\BaseMain;
 use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
@@ -341,7 +342,7 @@ class Notes extends BaseMain
         $note->save(false);
         return $note->attributes['id'];
     }
-    protected function  getSchoolAndClassForNote(&$school, &$class, $d)
+    public function  getSchoolAndClassForNote(&$school, &$class, $d)
     {
         if ($d['a_p_id'] == CatDef::$ap_cat['part']) {
             //send to scholl
@@ -364,12 +365,10 @@ class Notes extends BaseMain
     }
     public function push($d, $id, $title)
     {
-        $school = [];
-        $class = [];
-        $this->getSchoolAndClassForNote($school, $class, $d);
-        $custom = new Customs();
-        $token = $custom->getToken($school, $class, [], $d['obj_id']);
-        (new MultThread())->push_note($token, $id, $title);
+        $d['id']=$id;
+        $asyn = new Asyn();
+        $asyn->setSchoolId($this->getCustomSchool_id());
+        $asyn->pushaddnote($d);
     }
     public function getNum($school_id, $startdate, $enddate)
     {
