@@ -6,28 +6,63 @@
  * Time: 16:59
  */
 namespace app\modules\AppBase\base\appbase;
+use Yii;
 class Asyn
 {
-    const host="localhost/index.php?r=";
     public function  InitSchool($id)
     {
-        $this->fs(self::host.'Catalogue/catalogue/initschool&id='.$id);
+        $this->fs("index.php?r=Catalogue/catalogue/initschool&id=$id");
     }
-    protected function  fs($hoststr)
+    function fs2($path, $data)
     {
-        $fp = fsockopen($hoststr, 80, $errno, $errstr, 1800);
+        $path = '';
+        $data = '';
+        $host = 'home.local.com';
+        $post = $data ? http_build_query($data) : '';
+        $header = "POST / HTTP/1.1" . "\n";
+        $header .= "User-Agent: Mozilla/4.0+(compatible;+MSIE+6.0;+Windows+NT+5.1;+SV1)" . "\n";
+        $header .= "Host: $host" . "\n";
+        $header .= "Accept: */*" . "\n";
+        $header .= "Referer: http://$host/" . "\n";
+        $header .= "Content-Length: " . strlen($post) . "\n";
+        $header .= "Content-Type: application/x-www-form-urlencoded" . "\n";
+        $header .= "\r\n";
+        $ddd = $header . $post;
+        $fp = stream_socket_client("tcp://$host:80", $errno, $errstr, 30, STREAM_CLIENT_ASYNC_CONNECT | STREAM_CLIENT_CONNECT);
+        $response = '';
         if (!$fp) {
             echo "$errstr ($errno)<br />\n";
-            (new BaseAnalyze())->writeToAnal($errstr ($errno));
         } else {
-            $out = "GET /backend.php  / HTTP/1.1\r\n";
-            $out .= "Host: www.example.com\r\n";
-            $out .= "Connection: Close\r\n\r\n";
-            fwrite($fp, $out);
-            /*忽略执行结果
-            while (!feof($fp)) {
-                echo fgets($fp, 128);
-            }*/
+            $content = fwrite($fp, $ddd, strlen($post));
+            echo '|';
+            echo $content;
+            echo '|';
+            var_dump($fp);
+            while (!feof($fp)) {  //while die
+                $r = fgets($fp, 1024);
+                $response .= $r;
+            }
+        }
+        fclose($fp);
+        echo '|';
+        var_dump($response);
+        exit;
+        return $response;
+    }
+    public function  fs($path)
+    {
+        $host = Yii::$app->request->getHostInfo();
+        $host = substr($host, 7, strlen($host));
+//        $path = "index.php?r=site/sqhz";
+        $fp = stream_socket_client("tcp://$host:80", $errno, $errstr, 30);
+        stream_set_blocking($fp, 0);
+        if (!$fp) {
+            echo "$errstr ($errno)<br />\n";
+        } else {
+            fwrite($fp, "GET /$path HTTP/1.0\r\nHost: $host\r\nAccept: */*\r\n\r\n");
+//            while (!feof($fp)) {
+//                echo fgets($fp, 1024);
+//            }
             fclose($fp);
         }
     }
