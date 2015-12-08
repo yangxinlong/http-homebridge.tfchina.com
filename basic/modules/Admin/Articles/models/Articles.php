@@ -1080,7 +1080,16 @@ class Articles extends BaseMain
     }
     public function pushAuditByArid($id, $title)//used for audit
     {
-        (new Asyn())->pushAuditByArid($id, $title);
+//        (new Asyn())->pushAuditByArid($id, $title);
+        $school = [];
+        $class = [];
+        $user = [];
+        $ar = new Articles();
+        $ar->getSchoolAndClassAndUserForArtiByID($school, $class, $user, $id);
+        $custom = new Customs();
+        $token = $custom->getToken($school, $class, $user);
+        $ar_type = $ar->getTypeAndTitle($id);
+        (new MultThread())->push_ar($token, $ar_type['article_type_id'], $id, $title);
     }
     public function pushReplyByArid($id, $reply_id, $con)//used for audit and reply
     {

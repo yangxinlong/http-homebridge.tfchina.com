@@ -16,12 +16,12 @@ class Asyn
     public function  arat_push_pass($user_id, $type, $id, $reward, $title)
     {
         (new BaseAnalyze())->writeToAnal("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
-        $this->fs("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
+        $this->fs3("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
     }
     public function  pushAuditByArid($id, $title)
     {
         (new BaseAnalyze())->writeToAnal("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
-        $this->fs("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
+        $this->fs3("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
     }
     function fs2($path, $data)
     {
@@ -73,6 +73,23 @@ class Asyn
 //            while (!feof($fp)) {
 //                echo fgets($fp, 1024);
 //            }
+            fclose($fp);
+        }
+    }
+    public function  fs3($path)
+    {
+        $host = Yii::$app->request->getHostInfo();
+        $host = substr($host, 7, strlen($host));
+//        $path = "index.php?r=site/sqhz";
+        $fp = stream_socket_client("tcp://$host:80", $errno, $errstr, 30);
+        stream_set_blocking($fp, 0);
+        if (!$fp) {
+            echo "$errstr ($errno)<br />\n";
+        } else {
+            fwrite($fp, "GET /$path HTTP/1.0\r\nHost: $host\r\nAccept: */*\r\n\r\n");
+            while (!feof($fp)) {
+                echo fgets($fp, 1024);
+            }
             fclose($fp);
         }
     }
