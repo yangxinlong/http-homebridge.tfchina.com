@@ -9,19 +9,26 @@ namespace app\modules\AppBase\base\appbase;
 use Yii;
 class Asyn
 {
+    private  $school_id=0;
+    /**
+     * @param int $school_id
+     */
+    public function setSchoolId($school_id)
+    {
+        $this->school_id = $school_id;
+    }
+
     public function  InitSchool($id)
     {
         $this->fs("index.php?r=Catalogue/catalogue/initschool&id=$id");
     }
     public function  arat_push_pass($user_id, $type, $id, $reward, $title)
     {
-        (new BaseAnalyze())->writeToAnal("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
-        $this->fs3("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
+        $this->fs("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
     }
     public function  pushAuditByArid($id, $title)
     {
-        (new BaseAnalyze())->writeToAnal("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
-        $this->fs3("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
+        $this->fs("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
     }
     function fs2($path, $data)
     {
@@ -61,6 +68,7 @@ class Asyn
     }
     public function  fs($path)
     {
+        $path.="&school_id=$this->school_id";
         $host = Yii::$app->request->getHostInfo();
         $host = substr($host, 7, strlen($host));
 //        $path = "index.php?r=site/sqhz";

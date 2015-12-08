@@ -593,7 +593,7 @@ class BaseAR extends ActiveRecord implements BaseInterface
         if (isset(Yii::$app->session['custominfo'])) {
             return Yii::$app->session['custominfo']->custom->school_id;
         }
-        return 0;
+        return isset($_REQUEST['school_id']) ? $_REQUEST['school_id'] : 0;
     }
     public function getCustomClass_id()
     {
