@@ -150,7 +150,7 @@ class CatalogueController extends BaseController
         }
         die(json_encode(array("ErrCode" => $ErrCode, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
     }
-    public function  actionInitschool()
+    public function  actionInitschoolmanual()//
     {//init school
         echo "starting ...";
         try {
@@ -160,6 +160,17 @@ class CatalogueController extends BaseController
 //                (new Catalogue())->initCatlogue($i);
 //            }
             die("ok");
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    public function  actionInitschool()
+    {
+        $id = !empty($_REQUEST['id']) ? $_REQUEST['id'] : '';
+        try {
+            if (is_numeric($id) && $id != 0) {
+                (new Catalogue())->initCatlogue($id);
+            }
         } catch (Exception $e) {
             die($e->getMessage());
         }

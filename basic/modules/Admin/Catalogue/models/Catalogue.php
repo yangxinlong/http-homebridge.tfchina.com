@@ -2,6 +2,7 @@
 
 namespace app\modules\Admin\Catalogue\models;
 use app\modules\Admin\CatDefalut\models\CatDefalut;
+use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\BaseAR;
 use app\modules\AppBase\base\BaseConst;
 use app\modules\AppBase\base\CommonFun;
