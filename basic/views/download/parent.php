@@ -267,7 +267,7 @@
     <div class="footerdiv1 clearfix">
         <div class="button">
             <a href="<?php if($if_wx){?>javascript:display_tips();<?php }else{ ?>/download/hbj.apk<?php }?>"><img class="test" src="images/img/btn_part_a.png"></a>
-            <a href="https://itunes.apple.com/us/app/jia-yuan-qiao-jia-zhang-ban/id1054312332?l=zh&ls=1&mt=8"><img class="test" src="images/img/btn_part_i.png"></a>
+            <a href="<?php if($if_wx){?>javascript:display_tips();<?php }else{ ?>https://itunes.apple.com/us/app/jia-yuan-qiao-jia-zhang-ban/id1054312332?l=zh&ls=1&mt=8<?php }?>"><img class="test" src="images/img/btn_part_i.png"></a>
         </div>
     </div>
 </footer>

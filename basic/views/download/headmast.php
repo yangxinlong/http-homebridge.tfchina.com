@@ -250,7 +250,7 @@
                 </div>
             </div>
         </div>
-        <div class="btg_jz">
+        <div class="btg_yz">
             <div id="intros1" class="intros">
                 <img src="images/img/bbmyz.jpg">
 

@@ -136,7 +136,6 @@
         }
 
         .btg_js {
-            margin-top: 4px;
             background-color: #ff99b3;
             width: 100%;
             height: auto;
@@ -248,7 +247,7 @@
                 </div>
             </div>
         </div>
-        <div class="btg_jz">
+        <div class="btg_js">
             <div id="intros1" class="intros">
                 <img src="images/img/bbmjs.jpg">
 
@@ -265,8 +264,8 @@
 <footer>
     <div class="footerdiv1 clearfix">
         <div class="butten">
-            <a href="http://www.jyq365.com/download/hbt.apk"><img class="test" src="images/img/btn_tech_a.png"></a>
-            <a href="https://itunes.apple.com/us/app/jia-yuan-qiao-jiao-shi-duan/id1054757371?l=zh&ls=1&mt=8"><img class="test" src="images/img/btn_tech_i.png"></a>
+            <a href="<?php if($if_wx){?>javascript:display_tips()<?php }else{ ?>/download/hbt.apk<?php }?>"><img class="test" src="images/img/btn_tech_a.png"></a>
+            <a href="<?php if($if_wx){?>javascript:display_tips()<?php }else{ ?>https://itunes.apple.com/us/app/jia-yuan-qiao-jiao-shi-duan/id1054757371?l=zh&ls=1&mt=8<?php }?>"><img class="test" src="images/img/btn_tech_i.png"></a>
         </div>
     </div>
 </footer>
