@@ -29,6 +29,10 @@ class Asyn
     {
         $this->fs_get("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
     }
+    public function  pushaddclub($pri_type_id, $title)
+    {
+        $this->fs_get("index.php?r=Club/club/pushaddclub&pri_type_id=$pri_type_id&title=$title");
+    }
     public function  pushaddnote($d)
     {
         $this->fs_post("index.php?r=Notes/notes/pushaddnote", $d);

@@ -7,6 +7,7 @@ use app\modules\Admin\Vote\models\ClubReplies;
 use app\modules\Admin\Vote\models\ClubView;
 use app\modules\AppBase\base\appbase\base\BaseAtt;
 use app\modules\AppBase\base\appbase\ClubBC;
+use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\HintConst;
 class ClubController extends ClubBC
@@ -94,5 +95,9 @@ class ClubController extends ClubBC
     public function actionDelrr()
     {
         return (new ClubReplies())->Delrr();
+    }
+    public function actionPushaddclub($pri_type_id = 0, $title = '')
+    {
+        (new MultThread())->push_club($pri_type_id, $title);
     }
 }

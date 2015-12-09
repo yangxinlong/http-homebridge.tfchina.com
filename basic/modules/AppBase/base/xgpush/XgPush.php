@@ -62,13 +62,19 @@ class XgPush extends XingeApp
     public static function push_club($e)
     {
         $type = $e->data['id'] . self::getSender();
+        (new BaseAnalyze())->writeToAnal("xgpush push_club:".$type);
         self::myPushTagAndroid($type, 'head', self::HEAD);
         self::myPushTagIos($type, 'head', self::HEAD);
     }
     protected static function getSender()
     {
-        $cus = Yii::$app->session['custominfo']->custom;
-        return '-' . $cus->school_id . '-' . $cus->class_id . '-' . $cus->id;
+        if (isset(Yii::$app->session['custominfo'])) {
+            $cus = Yii::$app->session['custominfo']->custom;
+            return '-' . $cus->school_id . '-' . $cus->class_id . '-' . $cus->id;
+        } else {
+            $headtoken = (new Customs())->getHeadmastToken();
+            return '-' . $headtoken[0][0]['school_id'] . '-0-' . $headtoken[0][0]['id'];
+        }
     }
     protected static function getReceiver($cusinfo)
     {

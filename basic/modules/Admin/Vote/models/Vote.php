@@ -4,6 +4,7 @@ namespace app\modules\Admin\Vote\models;
 use app\modules\Admin\Articles\models\Articles;
 use app\modules\Admin\Articles\models\ArticlesFav;
 use app\modules\Admin\Custom\models\Customs;
+use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\base\BaseMain;
 use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
@@ -161,7 +162,7 @@ class Vote extends BaseMain
                     $data['related_id'] = $Content;
                     $data['contents'] = $d['title'];
                     $score->ClubArtiCreate($data);
-                    (new MultThread())->push_club($d['pri_type_id'] . '-' . $Content, $d['title']);
+                    $this->pushaddclub($d['pri_type_id'] . '-' . $Content, $d['title']);
                 }
             } else {
                 $ErrCode = HintConst::$No_more_point;
@@ -560,5 +561,11 @@ class Vote extends BaseMain
             $this->mc->add($mc_name, $d);
         }
         return $d;
+    }
+    public function  pushaddclub($pri_type_id, $title)
+    {
+        $asyn = new Asyn();
+        $asyn->setSchoolId($this->getCustomSchool_id());
+        $asyn->pushaddclub($pri_type_id, $title);
     }
 }

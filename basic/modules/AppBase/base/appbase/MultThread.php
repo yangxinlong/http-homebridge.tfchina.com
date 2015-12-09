@@ -41,8 +41,8 @@ class MultThread
     {
         (new XgEvent())->push_note($token, $id, $title);
     }
-    public function push_club($pri_type_id, $dtitle)
+    public function push_club($pri_type_id, $title)
     {
-        (new XgEvent)->push_club($pri_type_id, $dtitle);
+        (new XgEvent)->push_club($pri_type_id, $title);
     }
 }
