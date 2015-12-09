@@ -33,12 +33,15 @@ class Asyn
     {
         $this->fs_post("index.php?r=Notes/notes/pushaddnote", $d);
     }
+    public function  pushaddahe($d)
+    {
+        $this->fs_post("index.php?r=Articles/articles/pushaddahe", $d);
+    }
     public function  fs_get($path)
     {
         $path .= "&school_id=$this->school_id";
         $host = Yii::$app->request->getHostInfo();
         $host = substr($host, 7, strlen($host));
-//        $path = "index.php?r=site/sqhz";
         $fp = stream_socket_client("tcp://$host:80", $errno, $errstr, 30);
         stream_set_blocking($fp, 0);
         if (!$fp) {
@@ -77,7 +80,7 @@ class Asyn
         }
         fclose($fp);
     }
-    function fs_post2($path, $data)
+    function fs_post2($path, $data)  // demo for test
     {
         $data['school_id'] = $this->school_id;
         (new BaseAnalyze())->writeToAnal(json_encode($data));

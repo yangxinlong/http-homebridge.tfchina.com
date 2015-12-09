@@ -1508,4 +1508,14 @@ class ArticlesController extends BaseController
         $ar_type = $ar->getTypeAndTitle($id);
         (new MultThread())->push_ar($token, $ar_type['article_type_id'], $id, $title);
     }
+    public function actionPushaddahe()
+    {
+        $school = [];
+        $class = [];
+        $user = [];
+        (new Articles())->getSchoolAndClassAndUserForArti($school, $class, $user, $_POST);
+        $custom = new Customs();
+        $token = $custom->getToken($school, $class, $user, $_POST['role']);
+        (new MultThread())->push_ar($token, $_POST['type'], $_POST['id'], $_POST['title']);
+    }
 }

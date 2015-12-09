@@ -867,7 +867,7 @@ class Articles extends BaseMain
         $d['ispassed'] = $this->getIsCanSend();
         $d['isdelete'] = HintConst::$YesOrNo_NO;
         $d['isview'] = HintConst::$YesOrNo_NO;
-        $file_name = $this->create_img($d['school_id'], $d['class_id'], 'images');  //上传图片 并记录文件名
+        $file_name = $this->create_img($d['school_id'], $d['class_id'], "images");  //上传图片 并记录文件名
         $d['thumb'] = $file_name <> '' ? $file_name . '.thumb.jpg' : '';
         $id = $ar->addNew($d);
         $newid = 0;
@@ -979,7 +979,7 @@ class Articles extends BaseMain
         $result = json_encode(['ErrCode' => $ErrCode, 'Message' => $Message, 'Content' => $Content]);
         return $result;
     }
-    protected function  getSchoolAndClassAndUserForArti(&$school, &$class, &$user, $d)
+    public function  getSchoolAndClassAndUserForArti(&$school, &$class, &$user, $d)
     {
         if ($d['role'] == CatDef::$obj_cat['all']) {
             //send to scholl
@@ -1015,13 +1015,12 @@ class Articles extends BaseMain
         $d['school'] = $school;
         $d['class'] = $class;
         $d['user'] = $user;
-        $school = [];
-        $class = [];
-        $user = [];
-        $this->getSchoolAndClassAndUserForArti($school, $class, $user, $d);
-        $custom = new Customs();
-        $token = $custom->getToken($school, $class, $user, $role);
-        (new MultThread())->push_ar($token, $type, $id, $title);
+        $d['id'] = $id;
+        $d['type'] = $type;
+        $d['title'] = $title;
+        $asyn = new Asyn();
+        $asyn->setSchoolId($this->getCustomSchool_id());
+        $asyn->pushaddahe($d);
     }
     public function  getSchoolAndClassAndUserForArtiByID(&$school, &$class, &$user, $id)//can use getSchoolAndClassAndUserForArti
     {

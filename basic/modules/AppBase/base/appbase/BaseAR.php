@@ -452,22 +452,6 @@ class BaseAR extends ActiveRecord implements BaseInterface
     }
     public function create_img($school_id, $class_id, $images_lable)
     {
-//        var_dump($_POST);
-//        try {
-//            $oa = new OtherAccess();
-//            $_POST['school_id'] = $school_id;
-//            $_POST['class_id'] = $class_id;
-//            $_POST['images_lable'] = $images_lable;
-//            $_POST['school_name'] = 'guojianchao';
-//
-//            $re = $oa->Upload();
-//            $info = json_decode($re);
-//            $ba->writeToAnal("upload:" . json_encode($info));
-//            return $info;
-//        } catch (Exception $e) {
-//            $ba->writeToAnal('create_img1' . $e->getMessage());
-//            die(json_encode(['ErrCode' => HintConst::$No_success, 'Message' => $e->getMessage(), 'Content' => '']));
-//        }
         try {
             if (!$images_lable) {
 //            $result = ['ErrCode' => HintConst::$No_image, 'Message' => '缺少参数', 'Content' => []];
@@ -487,7 +471,7 @@ class BaseAR extends ActiveRecord implements BaseInterface
                     if (BaseFileHelper::createDirectory($img_path)) {
                     } else {
                         $result = ['ErrCode' => '7474', 'Message' => '权限不足，无法上传图片', 'Content' => []];
-                        return (json_encode($result));
+                        die (json_encode($result));
                     }
                 }
                 $base_filename = rand(1000, 9999) . time();
