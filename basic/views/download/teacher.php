@@ -102,13 +102,13 @@
             text-align: center;
             width: 60%;
             height: auto;
-        }
+        }*/
 
         img.test {
             width: 80%;
             height: auto;
             margin: auto auto 5% auto;
-        }*/
+        }
 
         .intros {
             width: 100%;
@@ -230,8 +230,8 @@
         如果没有跳转到下载页面，您可能使用了新版本的微信.<p>
         点击右上角的跳转按钮，选择在浏览器中打开，然后即可下载
     </div>
-    <div class="" style="float:right;"><img src="img/zhishi_xiazai.png"/></div>
-    <div class="" style="float:right;"><img src="img/open_in_web.png"/></div>
+    <div class="" style="float:right;"><img src="images/img/zhishi_xiazai.png"/></div>
+    <div class="" style="float:right;"><img src="images/img/open_in_web.png"/></div>
 </Div>
 <Div class="alpha_bg" id="download_tips2"
      onClick="this.style.display='none';document.getElementById('download_tips').style.display= 'none';document.getElementById('download_tips').style.display= 'none';"></Div>
