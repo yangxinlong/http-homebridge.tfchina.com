@@ -137,7 +137,6 @@
         }
 
         .btg_js {
-            margin-top: 4px;
             background-color: #ff99b3;
             width: 100%;
             height: auto;
@@ -226,7 +225,7 @@
     </style>
 </head>
 <body>
-<Div class="download_tips" id="download_tips" style="z-index:1000;position:fixed; top:50px;">
+<Div class="download_tips" id="download_tips" style="z-index:1000;">
     <div class="" style="float:left;width:70%;padding:1em 0 0 1em;">
         如果没有跳转到下载页面，您可能使用了新版本的微信.<p>
         点击右上角的跳转按钮，选择在浏览器中打开，然后即可下载
@@ -248,7 +247,7 @@
                     <a href="http://homebridge.tfchina.com/"> <img src="images/img/icon.png"></a>
                 </div>
             </div>
-        </div>
+        </div><!-- head结束 -->
         <div class="btg_jz">
             <div id="intros1" class="intros">
                 <img src="images/img/bbmjz.jpg">
@@ -257,10 +256,10 @@
                     <a href="javascript:void(0);"
                         onclick="javascript:document.getElementsByTagName('BODY')[0].scrollTop=document.getElementsByTagName('BODY')[0].scrollHeight;"><img src="images/img/butten01.png"></a>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </div><!-- intros结束 -->
+        </div><!-- btg_jz结束 -->
+    </div><!-- top结束 -->
+</div><!-- main结束 -->
 
 <!--footer-->
 <footer>
