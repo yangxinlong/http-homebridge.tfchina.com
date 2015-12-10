@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $item;
 </div>
 <div class="container" style="padding-right:3em;">
     <div class="row">
-        <div class="col-md-1"><?= $item; ?></div>
+        <div class="col-md-1">学校名称</div>
         <div class="col-md-3">
             <?php
             if ($pathinfo['school_id']) { ?>
