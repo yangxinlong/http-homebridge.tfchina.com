@@ -10,6 +10,7 @@ use app\modules\AppBase\base\appbase\ClubBC;
 use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\HintConst;
+use Yii;
 class ClubController extends ClubBC
 {
     public function actionAddclub()

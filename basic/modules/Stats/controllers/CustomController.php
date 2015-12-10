@@ -19,9 +19,11 @@ class CustomController extends StatsBC
         }
         $school_id = isset($_REQUEST['school_id']) ? $_REQUEST['school_id'] : 0;
         $name = isset($_REQUEST['name']) ? $_REQUEST['name'] : '';
+        $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 0;
         $custom = new Customs();
         $status = $custom->getCustomStatus($school_id);
-        return $this->render('index', ['status' => $status, 's' => $dt, 'e' => $enddate, 'school_id' => $school_id, 'name' => $name]);
+        $pathinfo=['s' => $dt, 'e' => $enddate, 'school_id' => $school_id, 'name' => $name, 'type' => $type];
+        return $this->render('index', ['status' => $status,  'pathinfo' => $pathinfo]);
     }
     public function  actionRegcustom()
     {

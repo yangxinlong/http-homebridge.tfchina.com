@@ -7,7 +7,7 @@ use yii\widgets\LinkPager;
 /* @var $searchModel app\models\ArticlesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '评价列表';
+$this->title = '通知列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <script language="javascript">

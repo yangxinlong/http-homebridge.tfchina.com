@@ -4,8 +4,8 @@
  *  2015/6/15 10:41
  */
 use yii\widgets\LinkPager;
-
-$this->params['breadcrumbs'][] = '注册省市';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '统计'), 'url' =>Yii::$app->urlManager->createUrl(['Stats/school'])];
+$this->params['breadcrumbs'][] = "注册省市";
 ?>
 
 <div class="container" style="padding-right:3em;">
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = '注册省市';
             $.each(data, function (j, n) {
                 $("#" + provines_name + "").append('<option value=' + n.id + '>' + n.name + '</option>');
             });
-            var p = "<?=$p;?>"
+            var p = "<?=$pathinfo['p'];?>"
             $("#" + provines_name).val(p);
         });
         $("#" + provines_name + "").change(function () {

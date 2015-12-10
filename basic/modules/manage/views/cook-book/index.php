@@ -1,8 +1,8 @@
 <?php
- 
+
 use yii\helpers\Html;
- 
- 
+
+
 
 $this->title = '食谱管理';
 $this->params['breadcrumbs'][] = $this->title;
@@ -25,7 +25,7 @@ var edit_url = 'index.php?r=manage/cook-book/edit-cook';
     <th>中餐</th>
     <th>加餐</th>
     <th>晚餐</th>
- 
+
   </tr>
   <tr>
     <th>星期一</th>
@@ -34,7 +34,7 @@ var edit_url = 'index.php?r=manage/cook-book/edit-cook';
     <td><span onclick="listTable.edit(this, 'name', 98)"><?= $cook_info['98']?> <span class="glyphicon glyphicon-pencil"></span></span></td>
     <td><span onclick="listTable.edit(this, 'name', 99)"><?= $cook_info['99']?> <span class="glyphicon glyphicon-pencil"></span></span></td>
     <td><span onclick="listTable.edit(this, 'name', 100)"><?= $cook_info['100']?> <span class="glyphicon glyphicon-pencil"></span></span></td>
-  </tr>  
+  </tr>
   <tr>
     <th>星期二</th>
     <td><span onclick="listTable.edit(this, 'name', 116)"><?= $cook_info['116']?> <span class="glyphicon glyphicon-pencil"></span></span></td>

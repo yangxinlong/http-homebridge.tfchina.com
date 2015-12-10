@@ -7,13 +7,14 @@ use app\modules\AppBase\base\cat_def\CatDef;
 use janisto\timepicker\TimePicker;
 
 $item = '使用情况';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '统计'), 'url' =>Yii::$app->urlManager->createUrl(['Stats/school', 's' => $pathinfo['s'], 'e' => $pathinfo['e']])];
 $this->params['breadcrumbs'][] = $item;
 ?>
 <div class="container" style="padding-top:1em;padding-bottom:1em;">
     <div class="row">
         <div class="col-md-3"><?= TimePicker::widget([
                 'language' => 'zh-CN',
-                'id' => 's2',
+                'id' => 's',
                 'name' => 'startdate',
                 'value' => '开始时间',
                 'mode' => 'datetime',
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'][] = $item;
             ?></div>
         <div class="col-md-3"><?= TimePicker::widget([
                 'language' => 'zh-CN',
-                'id' => 'e2',
+                'id' => 'e',
                 'name' => 'enddate',
                 'value' => '结束时间',
                 'mode' => 'datetime',
@@ -47,10 +48,10 @@ $this->params['breadcrumbs'][] = $item;
         <div class="col-md-1"><?= $item; ?></div>
         <div class="col-md-3">
             <?php
-            if ($school_id) { ?>
-                <a href="index.php?r=Stats/info/man&school_id=<?= $school_id ?>"> <?= $name ?></a>
+            if ($pathinfo['school_id']) { ?>
+                <a href="index.php?r=Stats/info/man&school_id=<?= $pathinfo['school_id'] ?>"> <?= $pathinfo['name'] ?></a>
             <?php } else {
-                echo $name;
+                echo $pathinfo['name'];
             } ?>
         </div>
     </div>
@@ -63,8 +64,8 @@ $this->params['breadcrumbs'][] = $item;
             <td>用户</td>
             <td>
                 <?php
-                if (!$school_id) { ?>
-                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['custom'] ?>&s2=<?= $s2 ?>&e2=<?= $e2 ?>"> <?= $status['custom']['num'] ?></a>
+                if (!$pathinfo['school_id']) { ?>
+                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['custom'] ?>&s=<?= $pathinfo['s'] ?>&e=<?= $pathinfo['e'] ?>"> <?= $status['custom']['num'] ?></a>
                 <?php } else {
                     echo $status['custom']['num'];
                 } ?>
@@ -74,8 +75,8 @@ $this->params['breadcrumbs'][] = $item;
             <td>图片</td>
             <td>
                 <?php
-                if (!$school_id) { ?>
-                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['pic'] ?>&s2=<?= $s2 ?>&e2=<?= $e2 ?>"> <?= $status['pic']['num'] ?></a>
+                if (!$pathinfo['school_id']) { ?>
+                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['pic'] ?>&s=<?= $pathinfo['s'] ?>&e=<?= $pathinfo['e'] ?>"> <?= $status['pic']['num'] ?></a>
                 <?php } else {
                     echo $status['pic']['num'];
                 } ?>
@@ -85,8 +86,8 @@ $this->params['breadcrumbs'][] = $item;
             <td>文章</td>
             <td>
                 <?php
-                if (!$school_id) { ?>
-                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['article'] ?>&s2=<?= $s2 ?>&e2=<?= $e2 ?>"> <?= $status['article']['num'] ?></a>
+                if (!$pathinfo['school_id']) { ?>
+                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['article'] ?>&s=<?= $pathinfo['s'] ?>&e=<?= $pathinfo['e'] ?>"> <?= $status['article']['num'] ?></a>
                 <?php } else {
                     echo $status['article']['num'];
                 } ?>
@@ -96,8 +97,8 @@ $this->params['breadcrumbs'][] = $item;
             <td>月评价</td>
             <td>
                 <?php
-                if (!$school_id) { ?>
-                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['moneva'] ?>&s2=<?= $s2 ?>&e2=<?= $e2 ?>"> <?= $status['moneva']['num'] ?></a>
+                if (!$pathinfo['school_id']) { ?>
+                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['moneva'] ?>&s=<?= $pathinfo['s'] ?>&e=<?= $pathinfo['e'] ?>"> <?= $status['moneva']['num'] ?></a>
                 <?php } else {
                     echo $status['moneva']['num'];
                 } ?>
@@ -107,8 +108,8 @@ $this->params['breadcrumbs'][] = $item;
             <td>年评价</td>
             <td>
                 <?php
-                if (!$school_id) { ?>
-                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['termeva'] ?>&s2=<?= $s2 ?>&e2=<?= $e2 ?>"> <?= $status['termeva']['num'] ?></a>
+                if (!$pathinfo['school_id']) { ?>
+                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['termeva'] ?>&s=<?= $pathinfo['s'] ?>&e=<?= $pathinfo['e'] ?>"> <?= $status['termeva']['num'] ?></a>
                 <?php } else {
                     echo $status['termeva']['num'];
                 } ?>
@@ -118,8 +119,8 @@ $this->params['breadcrumbs'][] = $item;
             <td>消息</td>
             <td>
                 <?php
-                if (!$school_id) { ?>
-                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['msg'] ?>&s2=<?= $s2 ?>&e2=<?= $e2 ?>"> <?= $status['msg']['num'] ?></a>
+                if (!$pathinfo['school_id']) { ?>
+                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['msg'] ?>&s=<?= $pathinfo['s'] ?>&e=<?= $pathinfo['e'] ?>"> <?= $status['msg']['num'] ?></a>
                 <?php } else {
                     echo $status['msg']['num'];
                 } ?>
@@ -128,8 +129,8 @@ $this->params['breadcrumbs'][] = $item;
             <td>通知</td>
             <td>
                 <?php
-                if (!$school_id) { ?>
-                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['note'] ?>&s2=<?= $s2 ?>&e2=<?= $e2 ?>"> <?= $status['note']['num'] ?></a>
+                if (!$pathinfo['school_id']) { ?>
+                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['note'] ?>&s=<?= $pathinfo['s'] ?>&e=<?= $pathinfo['e'] ?>"> <?= $status['note']['num'] ?></a>
                 <?php } else {
                     echo $status['note']['num'];
                 } ?>
@@ -139,8 +140,8 @@ $this->params['breadcrumbs'][] = $item;
             <td>调查</td>
             <td>
                 <?php
-                if (!$school_id) { ?>
-                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['vote'] ?>&s2=<?= $s2 ?>&e2=<?= $e2 ?>"> <?= $status['vote']['num'] ?></a>
+                if (!$pathinfo['school_id']) { ?>
+                    <a href="index.php?r=Stats/usedsch/index&type=<?= CatDef::$mod['vote'] ?>&s=<?= $pathinfo['s'] ?>&e=<?= $pathinfo['e'] ?>"> <?= $status['vote']['num'] ?></a>
                 <?php } else {
                     echo $status['vote']['num'];
                 } ?>
@@ -148,18 +149,17 @@ $this->params['breadcrumbs'][] = $item;
     </table>
 </div>
 <script language="javascript">
-    var s2 = "<?=$s2;?>"
-    var e2 = "<?=$e2;?>"
-    if (s2 == '') s2 = '开始日期';
-    if (e2 == '') e2 = '结束日期';
-    $("#s2").val(s2);
-    $("#e2").val(e2);
-    $("#ss2").val(s2);
-    $("#ee2").val(e2);
+    var s = "<?=$pathinfo['s'];?>"
+    var e = "<?=$pathinfo['e'];?>"
+    if (s == '') s = '开始日期';
+    if (e == '') e = '结束日期';
+    $("#s").val(s);
+    $("#e").val(e);
+
     $("#status").click(function () {
-        var s2 = $("#s2").val();
-        var e2 = $("#e2").val();
-        window.location.href = 'index.php?r=Stats/info/index&school_id=<?=$school_id;?>&name=<?= $name; ?>&s2=' + s2 + '&e2=' + e2;
+        var s = $("#s").val();
+        var e = $("#e").val();
+        window.location.href = 'index.php?r=Stats/info/index&school_id=<?=$pathinfo['school_id'];?>&name=<?= $pathinfo['name']; ?>&s=' + s + '&e=' + e;
     });
 </script>
 

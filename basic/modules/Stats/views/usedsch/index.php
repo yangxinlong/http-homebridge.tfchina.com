@@ -3,34 +3,39 @@
  * User: gjc
  *  2015/6/15 10:41
  */
-use dosamigos\datepicker\DatePicker;
+use app\modules\AppBase\base\cat_def\CatDef;
+use janisto\timepicker\TimePicker;
 use yii\widgets\LinkPager;
 
-$this->params['breadcrumbs'][] = '使用的学校';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '统计'), 'url' =>Yii::$app->urlManager->createUrl(['Stats/school', 's' => $pathinfo['s'], 'e' => $pathinfo['e']])];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '使用情况'), 'url' =>Yii::$app->urlManager->createUrl(['Stats/info','school_id'=>0, 's' => $pathinfo['s'], 'e' => $pathinfo['e']])];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', CatDef::getName($pathinfo['type'])), 'url' => ['index', 'type' => $pathinfo['type'], 's' => $pathinfo['s'], 'e' => $pathinfo['e']]];
 ?>
 <div class="container" style="padding-top:1em;padding-bottom:1em;">
     <div class="row">
-        <div class="col-md-3"><?= DatePicker::widget([
+        <div class="col-md-3"><?= TimePicker::widget([
+                'language' => 'zh-CN',
                 'id' => 's',
                 'name' => 'startdate',
                 'value' => '开始时间',
-                'attribute' => 'date',
-                'template' => '{addon}{input}',
+                'mode' => 'datetime',
                 'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd'
+                    'dateFormat' => 'yy-mm-dd',
+                    'timeFormat' => 'HH:mm:ss',
+                    'showSecond' => true,
                 ]
             ]);
             ?></div>
-        <div class="col-md-3"><?= DatePicker::widget([
+        <div class="col-md-3"><?= TimePicker::widget([
+                'language' => 'zh-CN',
                 'id' => 'e',
                 'name' => 'enddate',
                 'value' => '结束时间',
-                'attribute' => 'date',
-                'template' => '{addon}{input}',
+                'mode' => 'datetime',
                 'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd'
+                    'dateFormat' => 'yy-mm-dd',
+                    'timeFormat' => 'HH:mm:ss',
+                    'showSecond' => true,
                 ]
             ]);
             ?></div>
@@ -60,11 +65,11 @@ $this->params['breadcrumbs'][] = '使用的学校';
                 <td><?= $v['district'] ?></td>
                 <td><?= $v['createtime'] ?></td>
                 <td>
-                    <a href="index.php?r=Stats/class/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $s; ?>&e=<?= $e; ?>&school_id=<?= $v['id'] ?>"><span
+                    <a href="index.php?r=Stats/class/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&type=<?= $pathinfo['type'] ?>&s=<?= $pathinfo['s']; ?>&e=<?= $pathinfo['e']; ?>&school_id=<?= $v['id'] ?>"><span
                             class="glyphicon glyphicon-eye-open"></span> 查看班级</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="index.php?r=Stats/custom/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $s; ?>&e=<?= $e; ?>&school_id=<?= $v['id'] ?>"><span
+                    <a href="index.php?r=Stats/custom/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&type=<?= $pathinfo['type'] ?>&s=<?= $pathinfo['s']; ?>&e=<?= $pathinfo['e']; ?>&school_id=<?= $v['id'] ?>"><span
                             class="glyphicon glyphicon-eye-open"></span> 查看用户</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="index.php?r=Stats/info/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $s; ?>&e=<?= $e; ?>"><span
+                    <a href="index.php?r=Stats/schinfo/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&type=<?= $pathinfo['type'] ?>&s=<?= $pathinfo['s']; ?>&e=<?= $pathinfo['e']; ?>"><span
                             class="glyphicon glyphicon-eye-open"></span> 使用情况</a>
                 </td>
             </tr>
@@ -76,9 +81,9 @@ $this->params['breadcrumbs'][] = '使用的学校';
     ?>
 </div>
 <script language="javascript">
-    var type = "<?=$type;?>"
-    var s = "<?=$s;?>"
-    var e = "<?=$e;?>"
+    var type = "<?=$pathinfo['type'];?>"
+    var s = "<?=$pathinfo['s'];?>"
+    var e = "<?=$pathinfo['e'];?>"
     if (s == '') s = '开始日期';
     if (e == '') e = '结束日期';
     $("#ty").val(type);
@@ -90,7 +95,7 @@ $this->params['breadcrumbs'][] = '使用的学校';
         var s = $("#s").val();
         var e = $("#e").val();
         var type = $("#ty").val();
-        window.location.href = 'index.php?r=Stats/usedsch/index&type='+type+'&s=' + s + '&e=' + e;
+        window.location.href = 'index.php?r=Stats/usedsch/index&type=' + type + '&s=' + s + '&e=' + e;
     });
 </script>
 

@@ -87,4 +87,33 @@ class CatDef
                 break;
         }
     }
+    public static function getName($type)
+    {
+        switch ($type) {
+            case CatDef::$mod['club_topic']:
+                return "话题";
+                break;
+            case CatDef::$mod['club_help']:
+                return "求助";
+                break;
+            case CatDef::$mod['club_teacher']:
+                return "教师学习";
+                break;
+            case CatDef::$mod['club_parent']:
+                return "家长学习";
+                break;
+            case CatDef::$mod['club_se']:
+                return "招生安全";
+                break;
+            case CatDef::$mod['club_po']:
+                return "政策趋势";
+                break;
+            case CatDef::$mod['pic']:
+                return "图片";
+                break;
+            case CatDef::$mod['custom']:
+                return "登陆用户";
+                break;
+        }
+    }
 }

@@ -6,7 +6,7 @@ use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\Admin\Classes\models\ClassesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
- 
+
 $this->params['breadcrumbs'][] = '班级管理';
 
 ?>
@@ -16,7 +16,7 @@ var edit_url = 'index.php?r=manage/class/edit-class';
 
 <?= Html::cssFile('@web/css/token-input.css') ?>
 <?= Html::cssFile('@web/css/js_tree/default/style.min.css') ?>
- 
+
 
 <?= Html::jsFile('@web/js/jquery.js') ?>
 <?= Html::jsFile('@web/js/jquery.tokeninput.js') ?>
@@ -53,7 +53,7 @@ var edit_url = 'index.php?r=manage/class/edit-class';
 												  'data' : function (node) {
 														return { 'wwid' : node.id };
 												  }
-											  } 
+											  }
 										   },
 										   'plugins' : ['unique','wholerow']
 								 })
@@ -73,7 +73,7 @@ var edit_url = 'index.php?r=manage/class/edit-class';
 								})
 							  }
 							};
-	   
+
   $("#teacher_id").tokenInput('index.php?r=manage/class/search-teacher',{hintText:default_texting,noResultsText: "没有搜索结果",searchingText: "搜索中",tokenLimit: 1});
 </script>
 
@@ -82,7 +82,7 @@ var edit_url = 'index.php?r=manage/class/edit-class';
 
 </div>
 
-     
+
 <table class="table table-striped table-hover">
 <tr>
 <th>班级名称</th>

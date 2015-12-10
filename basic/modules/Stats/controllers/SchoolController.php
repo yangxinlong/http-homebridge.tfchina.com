@@ -12,8 +12,8 @@ class SchoolController extends StatsBC
 {
     public function  actionIndex()
     {
-        $dt = isset($_REQUEST['s']) ? $_REQUEST['s'] : CommonFun::getCurrentDate();
-        $enddate = isset($_REQUEST['e']) ? $_REQUEST['e'] : CommonFun::getCurrentDate();
+        $dt = isset($_REQUEST['s']) ? $_REQUEST['s'] : CommonFun::getCurrentDateTime();
+        $enddate = isset($_REQUEST['e']) ? $_REQUEST['e'] : CommonFun::getCurrentDateTime();
         $sch_name = isset($_REQUEST['sch_name']) ? $_REQUEST['sch_name'] : '';
         if ($dt >= $enddate) {
             $enddate = CommonFun::getDateRight($dt);
@@ -24,7 +24,8 @@ class SchoolController extends StatsBC
         } else {
             $status = $sch->getSchByName($sch_name);
         }
-        return $this->render('index', ['status' => $status, 's' => $dt, 'e' => $enddate, 'sch_name' => $sch_name]);
+        $pathinfo=[ 's' => $dt, 'e' => $enddate, 'sch_name' => $sch_name];
+        return $this->render('index', ['status' => $status,'pathinfo' => $pathinfo]);
     }
     public function actionEdit()
     {

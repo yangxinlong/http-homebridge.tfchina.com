@@ -13,8 +13,8 @@ class InfoController extends StatsBC
 {
     public function  actionIndex()
     {
-        $dt = isset($_REQUEST['s2']) ? $_REQUEST['s2'] : CommonFun::getCurrentDate();
-        $enddate = isset($_REQUEST['e2']) ? $_REQUEST['e2'] : CommonFun::getCurrentDate();
+        $dt = isset($_REQUEST['s']) ? $_REQUEST['s'] : CommonFun::getCurrentDateTime();
+        $enddate = isset($_REQUEST['e']) ? $_REQUEST['e'] : CommonFun::getCurrentDateTime();
         if ($dt >= $enddate) {
             $enddate = CommonFun::getDateRight($dt);
         }
@@ -25,7 +25,8 @@ class InfoController extends StatsBC
         if (!$school_id) {
             $name = '全部';
         }
-        return $this->render('index', ['status' => $status, 's2' => $dt, 'e2' => $enddate, 'school_id' => $school_id, 'name' => $name]);
+        $pathinfo=[ 's' => $dt, 'e' => $enddate, 'school_id' => $school_id, 'name' => $name];
+        return $this->render('index', ['status' => $status,'pathinfo' => $pathinfo]);
     }
     public function actionMan()
     {

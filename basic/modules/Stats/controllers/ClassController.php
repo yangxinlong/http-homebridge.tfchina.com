@@ -17,9 +17,11 @@ class ClassController extends StatsBC
             $enddate = CommonFun::getDateRight($dt);
         }
         $school_id = isset($_REQUEST['school_id']) ? $_REQUEST['school_id'] : 0;
+        $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 0;
         $name = isset($_REQUEST['name']) ? $_REQUEST['name'] : '';
         $class = new Classes();
         $status = $class->getClassStatus($school_id);
-        return $this->render('index', ['status' => $status, 's' => $dt, 'e' => $enddate, 'school_id' => $school_id, 'name' => $name]);
+        $pathinfo=['s' => $dt, 'e' => $enddate, 'school_id' => $school_id, 'name' => $name, 'type' => $type];
+        return $this->render('index', ['status' => $status, 'pathinfo' => $pathinfo]);
     }
 }

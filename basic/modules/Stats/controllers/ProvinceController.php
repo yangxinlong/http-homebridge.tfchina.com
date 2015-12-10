@@ -13,6 +13,7 @@ class ProvinceController extends StatsBC
         $p = isset($_REQUEST['p']) ? $_REQUEST['p'] : 1;
         $sch = new Schools();
         $status = $sch->getSchByProvince($p);
-        return $this->render('index', ['status' => $status, 'p' => $p]);
+        $pathinfo=['p' => $p];
+        return $this->render('index', ['status' => $status, 'pathinfo' => $pathinfo]);
     }
 }

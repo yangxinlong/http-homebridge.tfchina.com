@@ -15,7 +15,9 @@ use yii\widgets\Breadcrumbs;
     <?= Html::jsFile('@web/js/utils.js') ?>
 </head>
 <body>
-<div><a href="index.php?r=Stats/info/index">Home</a> </div>
+<?php if (isset(Yii::$app->session['admin_user'])) { ?>
+    <div><a href="index.php?r=Stats/info/index">管理员</a></div>
+<?php } ?>
 <div class="container" style="padding-top:1em;padding-bottom:1em;">
     <div class="row">
         <div class="col-md-4"><a href="index.php?r=manage"><img src=""/></a></div>
@@ -29,7 +31,7 @@ use yii\widgets\Breadcrumbs;
         <li role="presentation"  <?php if ($this->context->id == 'school' || $this->context->id == 'customs' || $this->context->id == 'class' || $this->context->id == 'cook-book' || $this->context->id == 'tag') echo 'class="active"'; ?> >
             <a id="school" href="#school" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span>
                 院所管理</a></li>
-        <li role="presentation"  <?php if ($this->context->id == 'article' || $this->context->id == 'pic' || $this->context->id == 'pingjia') echo 'class="active"'; ?> >
+        <li role="presentation"  <?php if ($this->context->id == 'article' || $this->context->id == 'pic' || $this->context->id == 'pingjia' || $this->context->id == 'note' || $this->context->id == 'vote') echo 'class="active"'; ?> >
             <a id="article" href="#article" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list"></span>
                 内容审核</a></li>
 
@@ -62,7 +64,7 @@ use yii\widgets\Breadcrumbs;
             </div>
         </div>
         <div role="tabpanel"
-             class="tab-pane<?php if ($this->context->id == 'article' || $this->context->id == 'pic' || $this->context->id == 'pingjia'|| $this->context->id == 'note'|| $this->context->id == 'vote') echo ' active'; ?>"
+             class="tab-pane<?php if ($this->context->id == 'article' || $this->context->id == 'pic' || $this->context->id == 'pingjia' || $this->context->id == 'note' || $this->context->id == 'vote') echo ' active'; ?>"
              id="article">
             <div class="container">
                 <div class="row">

@@ -8,6 +8,7 @@ use app\modules\Admin\School\models\Schools;
 use app\modules\AppBase\base\appbase\StatsBC;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
+use Yii;
 class UsedschController extends StatsBC
 {
     public function  actionIndex()
@@ -21,6 +22,7 @@ class UsedschController extends StatsBC
         }
         $sch = new Schools();
         $status = $sch->getSchByType($dt, $enddate, $type);
-        return $this->render('index', ['status' => $status,'type'=>$type, 's' => $dt, 'e' => $enddate]);
+        $pathinfo=[ 'type'=>$type, 's' => $dt, 'e' => $enddate];
+        return $this->render('index', ['status' => $status,'pathinfo'=>$pathinfo]);
     }
 }

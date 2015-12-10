@@ -4,9 +4,11 @@
  *  2015/6/15 10:41
  */
 use dosamigos\datepicker\DatePicker;
+use janisto\timepicker\TimePicker;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
-$this->params['breadcrumbs'][] = '注册学校';
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '统计'), 'url' =>Yii::$app->urlManager->createUrl(['Stats/school', 's' => $pathinfo['s'], 'e' => $pathinfo['e']])];
+$this->params['breadcrumbs'][] = "注册学校";
 ?>
 <script language="javascript">
     var edit_url = 'index.php?r=Stats/school/edit';
@@ -14,27 +16,29 @@ $this->params['breadcrumbs'][] = '注册学校';
 <?= Html::jsFile('@web/js/listtable.js') ?>
 <div class="container" style="padding-top:1em;padding-bottom:1em;">
     <div class="row">
-        <div class="col-md-3"><?= DatePicker::widget([
+        <div class="col-md-3"><?= TimePicker::widget([
+                'language' => 'zh-CN',
                 'id' => 's',
                 'name' => 'startdate',
                 'value' => '开始时间',
-                'attribute' => 'date',
-                'template' => '{addon}{input}',
+                'mode' => 'datetime',
                 'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd'
+                    'dateFormat' => 'yy-mm-dd',
+                    'timeFormat' => 'HH:mm:ss',
+                    'showSecond' => true,
                 ]
             ]);
             ?></div>
-        <div class="col-md-3"><?= DatePicker::widget([
+        <div class="col-md-3"><?= TimePicker::widget([
+                'language' => 'zh-CN',
                 'id' => 'e',
                 'name' => 'enddate',
                 'value' => '结束时间',
-                'attribute' => 'date',
-                'template' => '{addon}{input}',
+                'mode' => 'datetime',
                 'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd'
+                    'dateFormat' => 'yy-mm-dd',
+                    'timeFormat' => 'HH:mm:ss',
+                    'showSecond' => true,
                 ]
             ]);
             ?></div>
@@ -69,11 +73,11 @@ $this->params['breadcrumbs'][] = '注册学校';
                 <td><?= $v['createtime'] ?></td>
                 <td><?= Html::img('@web/images/'.$v['ispassed'].'.png',['onclick'=>"listTable.toggle(this, 'ispassed',".$v['id'].")"])?></td>
                 <td>
-                    <a href="index.php?r=Stats/class/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $s; ?>&e=<?= $e; ?>&school_id=<?= $v['id'] ?>"><span
+                    <a href="index.php?r=Stats/class/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $pathinfo['s']; ?>&e=<?= $pathinfo['e']; ?>&school_id=<?= $v['id'] ?>"><span
                             class="glyphicon glyphicon-eye-open"></span> 查看班级</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="index.php?r=Stats/custom/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $s; ?>&e=<?= $e; ?>&school_id=<?= $v['id'] ?>"><span
+                    <a href="index.php?r=Stats/custom/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $pathinfo['s']; ?>&e=<?= $pathinfo['e']; ?>&school_id=<?= $v['id'] ?>"><span
                             class="glyphicon glyphicon-eye-open"></span> 查看用户</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="index.php?r=Stats/info/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $s; ?>&e=<?= $e; ?>"><span
+                    <a href="index.php?r=Stats/info/index&school_id=<?= $v['id'] ?>&name=<?= $v['name'] ?>&s=<?= $pathinfo['s']; ?>&e=<?= $pathinfo['e']; ?>"><span
                             class="glyphicon glyphicon-eye-open"></span> 使用情况</a>
                 </td>
             </tr>
@@ -85,9 +89,9 @@ $this->params['breadcrumbs'][] = '注册学校';
     ?>
 </div>
 <script language="javascript">
-    var s = "<?=$s;?>"
-    var e = "<?=$e;?>"
-    var sch_name = "<?=$sch_name;?>"
+    var s = "<?=$pathinfo['s'];?>"
+    var e = "<?=$pathinfo['e'];?>"
+    var sch_name = "<?=$pathinfo['sch_name'];?>"
     if (s == '') s = '开始日期';
     if (e == '') e = '结束日期';
     $("#s").val(s);

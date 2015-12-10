@@ -12,6 +12,7 @@ use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\score\Score;
 use Yii;
+use yii\data\Pagination;
 use yii\db\Query;
 /**
  * This is the model class for table "vote".
@@ -223,6 +224,32 @@ class Vote extends BaseMain
             $this->mc->add($mc_name, $r);
         }
         return $r;
+    }
+    public function Club_list_for_audit($d)
+    {
+        $mc_name = 'Club_list_for_audit' . json_encode($d) . $this->getMcName();
+        if ($val = $this->mc->get($mc_name)) {
+            $d = $val;
+        } else {
+            $query = new Query();
+            $data = $query->select($this->sel_club)
+                ->distinct()
+                ->from('vote as v')
+                ->leftJoin('customs as c', 'v.author_id=c.id')
+                ->leftJoin('vote_con as vcon', 'vcon.m_id=v.id')
+                ->where(['v.pri_type_id' => $d['pri_type_id'], 'v.isdeleted' => HintConst::$YesOrNo_NO])
+                ->all();
+            $countQuery = clone $query;
+            $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 20, 'pageSizeLimit' => 1]);
+            $d['pages'] = $pages;
+            $data = $query->offset($pages->offset)
+                ->orderby(['id' => SORT_DESC])
+                ->limit($pages->limit)
+                ->all();
+            $d['data'] = $data;
+            $this->mc->add($mc_name, $d);
+        }
+        return $d;
     }
     public function getSum($d)
     {

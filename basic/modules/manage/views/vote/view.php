@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\Articles\models\Articles */
 
 $this->title = $model['title'];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Notes'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '评价列表'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
