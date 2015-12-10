@@ -1031,7 +1031,7 @@ class ArticlesController extends BaseController
             $result = ['ErrCode' => '1', 'Message' => '非法字段', 'Content' => ''];
             return (json_encode($result));
         }
-        if ($type && $content && strlen($content) < 100) {
+        if ($type && $content) {
             CookbookInfo::updateAll([$type => $content], 'school_id=' . Yii::$app->session['custominfo']->custom->school_id . ' and date ="' . $date . '"');
             $result = ['ErrCode' => '0', 'Message' => '修改成功', 'Content' => ''];
             return (json_encode($result));
