@@ -39,6 +39,10 @@ class Asyn
     {
         $this->fs_post("index.php?r=Articles/arat/pushpass", $d);
     }
+    public function  ar_push_pass($d)
+    {
+        $this->fs_post("index.php?r=Articles/articles/pushpass", $d);
+    }
     public function  pushAuditByArid($d)
     {
         $this->fs_post("index.php?r=Articles/articles/pushauditbyarid", $d);

@@ -1079,7 +1079,7 @@ class Articles extends BaseMain
     public function pushAuditByArid($id, $title)//used for audit
     {
         $asyn = new Asyn();
-        $asyn->pushAuditByArid(['id'=> $id, 'title'=> $title]);
+        $asyn->pushAuditByArid(['id' => $id, 'title' => $title]);
     }
     public function pushReplyByArid($id, $reply_id, $con)//used for audit and reply
     {
@@ -1201,10 +1201,7 @@ class Articles extends BaseMain
     }
     public function push_pass($user_id, $type, $id, $reward, $title)
     {
-        $user = explode('-', $user_id);
-        (new Customs())->increaseF($user[0], 'points', $reward);
-        $custom = new Customs();
-        $token = $custom->getToken([], [], $user);
-        (new MultThread())->push_pass($token, $type, $id, $reward, $title);
+        $asyn = new Asyn();
+        $asyn->ar_push_pass(['user_id' => $user_id, 'type' => $type, 'id' => $id, 'reward' => $reward, 'title' => $title]);
     }
 }
