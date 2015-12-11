@@ -4,6 +4,7 @@ namespace app\modules\Admin\Message\controllers;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\Admin\Message\models\Messages;
 use app\modules\Admin\Message\models\MessagesSearch;
+use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\CommonFun;
@@ -146,6 +147,13 @@ class MessagesController extends BaseController
     }
     public function push($user_id, $con)
     {
+        $asyn = new Asyn();
+        $asyn->pushsendmsg(['user_id' => $user_id, 'con' => $con]);
+    }
+    public function actionPushsendmsg()
+    {
+        $user_id = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : 0;
+        $con = isset($_REQUEST['con']) ? $_REQUEST['con'] : '';
         $user = explode('-', $user_id);
         $custom = new Customs();
         $token = $custom->getToken([], [], $user);

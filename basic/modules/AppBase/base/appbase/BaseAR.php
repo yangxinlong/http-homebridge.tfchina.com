@@ -556,7 +556,7 @@ class BaseAR extends ActiveRecord implements BaseInterface
         if (isset(Yii::$app->session['custominfo'])) {
             return Yii::$app->session['custominfo']->custom->id;
         }
-        return 0;
+        return isset($_REQUEST['my_id']) ? $_REQUEST['my_id'] : 0;
     }
     public function getCustomNamezh()
     {
@@ -570,7 +570,7 @@ class BaseAR extends ActiveRecord implements BaseInterface
         if (isset(Yii::$app->session['custominfo'])) {
             return Yii::$app->session['custominfo']->custom->cat_default_id;
         }
-        return 0;
+        return isset($_REQUEST['cat_default_id']) ? $_REQUEST['cat_default_id'] : 0;
     }
     public function getCustomSchool_id()
     {

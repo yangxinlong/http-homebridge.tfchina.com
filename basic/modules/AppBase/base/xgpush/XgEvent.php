@@ -4,6 +4,7 @@
  *  2015/5/22 11:06
  */
 namespace app\modules\AppBase\base\xgpush;
+use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\HintConst;
 use Yii;
@@ -33,8 +34,9 @@ class XgEvent extends Component
     }
     public function push_msg($token, $con = '')
     {
-        $role = Yii::$app->session['custominfo']->custom->cat_default_id;
-        $user_id = Yii::$app->session['custominfo']->custom->id;
+        $c=new Customs();
+        $role =$c->getCustomRole();
+        $user_id = $c->getCustomId();
         $type = HintConst::$MSGPATH . '-' . $role . '-' . $user_id;
         $this->push_e(self::PUSHMSG, ['token' => $token, 'type' => $type, 'con' => $con]);
     }
