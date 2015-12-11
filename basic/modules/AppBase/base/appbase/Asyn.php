@@ -9,29 +9,43 @@ namespace app\modules\AppBase\base\appbase;
 use Yii;
 class Asyn
 {
-    private $school_id = 0;
+    private $info = [];
     /**
-     * @param int $school_id
+     * @param int $info
      */
-    public function setSchoolId($school_id)
+    protected function setPostInfo(&$data)
     {
-        $this->school_id = $school_id;
+        $data['school_id'] = Yii::$app->session['custominfo']->custom->school_id;
+        $data['iscansend'] = Yii::$app->session['custominfo']->custom->iscansend;
+        $data['my_id'] = Yii::$app->session['custominfo']->custom->id;
+        $data['name_zh'] = Yii::$app->session['custominfo']->custom->name_zh;
+        $data['cat_default_id'] = Yii::$app->session['custominfo']->custom->cat_default_id;
     }
-    public function  InitSchool($id)
+    protected function setGetInfo(&$path)
     {
-        $this->fs_get("index.php?r=Catalogue/catalogue/initschool&id=$id");
+        //too more;but use post
+        $info['school_id'] = Yii::$app->session['custominfo']->custom->school_id;
+        $info['iscansend'] = Yii::$app->session['custominfo']->custom->iscansend;
+        $info['my_id'] = Yii::$app->session['custominfo']->custom->id;
+        $info['name_zh'] = Yii::$app->session['custominfo']->custom->name_zh;
+        $info['cat_default_id'] = Yii::$app->session['custominfo']->custom->cat_default_id;
+        $path .= "&school_id=" . $this->info['school_id'] . "&iscansend=" . $this->info['iscansend'] . "&my_id=" . $this->info['my_id'] . "&name_zh=" . $this->info['name_zh'] . "&cat_default_id=" . $this->info['cat_default_id'];
     }
-    public function  arat_push_pass($user_id, $type, $id, $reward, $title)
+    public function  InitSchool($d)
     {
-        $this->fs_get("index.php?r=Articles/arat/pushpass&user_id=$user_id&type=$type&id=$id&reward=$reward&title=$title");
+        $this->fs_post("index.php?r=Catalogue/catalogue/initschool", $d);
     }
-    public function  pushAuditByArid($id, $title)
+    public function  arat_push_pass($d)
     {
-        $this->fs_get("index.php?r=Articles/articles/pushauditbyarid&id=$id&title=$title");
+        $this->fs_post("index.php?r=Articles/arat/pushpass", $d);
     }
-    public function  pushaddclub($pri_type_id, $title)
+    public function  pushAuditByArid($d)
     {
-        $this->fs_get("index.php?r=Club/club/pushaddclub&pri_type_id=$pri_type_id&title=$title");
+        $this->fs_post("index.php?r=Articles/articles/pushauditbyarid", $d);
+    }
+    public function  pushaddclub($d)
+    {
+        $this->fs_post("index.php?r=Club/club/pushaddclub", $d);
     }
     public function  pushaddnote($d)
     {
@@ -43,7 +57,7 @@ class Asyn
     }
     public function  fs_get($path)
     {
-        $path .= "&school_id=$this->school_id";
+        $this->setGetInfo($path);
         $host = Yii::$app->request->getHostInfo();
         $host = substr($host, 7, strlen($host));
         $fp = stream_socket_client("tcp://$host:80", $errno, $errstr, 30);
@@ -60,7 +74,7 @@ class Asyn
     }
     function fs_post($path, $data)
     {
-        $data['school_id'] = $this->school_id;
+        $this->setPostInfo($data);
         $host = Yii::$app->request->getHostInfo();
         $host = substr($host, 7, strlen($host));
         $post = $data ? http_build_query($data) : '';
@@ -86,7 +100,7 @@ class Asyn
     }
     function fs_post2($path, $data)  // demo for test
     {
-        $data['school_id'] = $this->school_id;
+        $data['school_id'] = $this->info;
         (new BaseAnalyze())->writeToAnal(json_encode($data));
         $host = Yii::$app->request->getHostInfo();
         $host = substr($host, 7, strlen($host));

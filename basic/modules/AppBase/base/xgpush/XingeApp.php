@@ -74,8 +74,8 @@ class XingeApp
     {
         $push = new XingeApp($accessId, $secretKey);
         $mess = new MessageIOS();
-        $mess->setAlert($content['head'].$content['body']);
-        $mess->setCustom(['type'=>$content['type']]);
+        $mess->setAlert($content['head'] . $content['body']);
+        $mess->setCustom(['type' => $content['type']]);
         $mess->setSound('default');
         $ret = $push->PushSingleDevice($token, $mess, $environment);
         return $ret;
@@ -175,7 +175,9 @@ class XingeApp
     {
         $push = new XingeApp($accessId, $secretKey);
         $mess = new MessageIOS();
-        $mess->setAlert($content);
+        $mess->setAlert($content['head'] . $content['body']);
+        $mess->setCustom(['type' => $content['type']]);
+        $mess->setSound('default');
         $ret = $push->PushTags(0, array(0 => $tag), 'OR', $mess, $environment);
         return $ret;
     }

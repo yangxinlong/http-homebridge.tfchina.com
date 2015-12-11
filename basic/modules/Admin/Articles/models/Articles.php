@@ -1019,7 +1019,6 @@ class Articles extends BaseMain
         $d['type'] = $type;
         $d['title'] = $title;
         $asyn = new Asyn();
-        $asyn->setSchoolId($this->getCustomSchool_id());
         $asyn->pushaddahe($d);
     }
     public function  getSchoolAndClassAndUserForArtiByID(&$school, &$class, &$user, $id)//can use getSchoolAndClassAndUserForArti
@@ -1080,8 +1079,7 @@ class Articles extends BaseMain
     public function pushAuditByArid($id, $title)//used for audit
     {
         $asyn = new Asyn();
-        $asyn->setSchoolId($this->getCustomSchool_id());
-        $asyn->pushAuditByArid($id, $title);
+        $asyn->pushAuditByArid(['id'=> $id, 'title'=> $title]);
     }
     public function pushReplyByArid($id, $reply_id, $con)//used for audit and reply
     {

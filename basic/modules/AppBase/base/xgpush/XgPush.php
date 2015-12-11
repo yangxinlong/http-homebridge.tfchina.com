@@ -43,7 +43,7 @@ class XgPush extends XingeApp
     }
     public static function myPushTagIos($content, $tag, $pos)
     {
-        $ret = parent::PushTagIos(self::$access_Id[$pos], self::$secret_Key[$pos], (string)$content, $tag, self::IOSENV_DEV);
+        $ret = parent::PushTagIos(self::$access_Id[$pos], self::$secret_Key[$pos], $content, $tag, self::IOSENV_DEV);
         return $ret;
     }
     public static function myPushTokenAndroidMsg($content, $token, $pos)
@@ -62,9 +62,42 @@ class XgPush extends XingeApp
     public static function push_club($e)
     {
         $type = $e->data['id'] . self::getSender();
-        (new BaseAnalyze())->writeToAnal("xgpush push_club:".$type);
+        (new BaseAnalyze())->writeToAnal("xgpush push_club:" . $type);
         self::myPushTagAndroid($type, 'head', self::HEAD);
-        self::myPushTagIos($type, 'head', self::HEAD);
+        self::myPushTagIos(self::getContentForIosTag($e), 'head', self::HEAD);
+    }
+    protected static function getContentForIosTag($e)
+    {
+        $content['type'] = $e->data['id'] . self::getSender();
+        $content['head'] = self::getHeadForIosTag($e->data['id']);
+        $content['body'] = mb_substr($e->data['con'], 0, self::MAXSIZE_PUSHTILTE, 'utf-8');
+        return $content;
+    }
+    protected static function getHeadForIosTag($type)
+    {
+        $head = '';
+        $cat = CommonFun::explodeString('-', $type);
+        switch ($cat[0]) {
+            case CatDef::$mod['club_topic']:
+                $head = "有一篇新话题";
+                break;
+            case CatDef::$mod['club_help']:
+                $head = "有一篇新求助";
+                break;
+            case CatDef::$mod['club_teacher']:
+                $head = "有一篇新教师学习";
+                break;
+            case CatDef::$mod['club_parent']:
+                $head = "有一篇新家长学习";
+                break;
+            case CatDef::$mod['club_se']:
+                $head = "有一篇新招生安全";
+                break;
+            case CatDef::$mod['club_po']:
+                $head = "有一篇新政策法规";
+                break;
+        }
+        return $head;
     }
     protected static function getSender()
     {
@@ -271,27 +304,27 @@ class XgPush extends XingeApp
         if (isset(Yii::$app->session['custominfo'])) {
             return Yii::$app->session['custominfo']->custom->iscansend;
         }
-        return 0;
+        return isset($_REQUEST['iscansend']) ? $_REQUEST['iscansend'] : 0;
     }
     public static function getCustomId()
     {
         if (isset(Yii::$app->session['custominfo'])) {
             return Yii::$app->session['custominfo']->custom->id;
         }
-        return 0;
+        return isset($_REQUEST['my_id']) ? $_REQUEST['my_id'] : 0;
     }
     public static function getCustomNamezh()
     {
         if (isset(Yii::$app->session['custominfo'])) {
             return Yii::$app->session['custominfo']->custom->name_zh;
         }
-        return 0;
+        return isset($_REQUEST['name_zh']) ? $_REQUEST['name_zh'] : 0;
     }
     public static function getCustomRole()
     {
         if (isset(Yii::$app->session['custominfo'])) {
             return Yii::$app->session['custominfo']->custom->cat_default_id;
         }
-        return 0;
+        return isset($_REQUEST['cat_default_id']) ? $_REQUEST['cat_default_id'] : 0;
     }
 }

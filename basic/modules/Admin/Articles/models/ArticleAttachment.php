@@ -265,7 +265,6 @@ class ArticleAttachment extends BaseAR
     public function push_pass($user_id, $type, $id, $reward, $title)
     {
         $asyn = new Asyn();
-        $asyn->setSchoolId($this->getCustomSchool_id());
-        $asyn->arat_push_pass($user_id, $type, $id, $reward, $title);
+        $asyn->arat_push_pass(['user_id' => $user_id, 'type' => $type, 'id' => $id, 'reward' => $reward, 'title' => $title]);
     }
 }

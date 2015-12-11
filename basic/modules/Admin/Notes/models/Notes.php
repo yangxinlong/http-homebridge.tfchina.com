@@ -367,7 +367,6 @@ class Notes extends BaseMain
     {
         $d['id'] = $id;
         $asyn = new Asyn();
-        $asyn->setSchoolId($this->getCustomSchool_id());
         $asyn->pushaddnote($d);
     }
     public function getNum($school_id, $startdate, $enddate)

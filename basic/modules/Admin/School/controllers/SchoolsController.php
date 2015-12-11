@@ -100,7 +100,7 @@ class SchoolsController extends BaseController
             if ($model->load(Yii::$app->request->post())) {
                 if ($model->ispassed == HintConst::$YesOrNo_YES) {
                     (new Customs())->UpdateF($model->headmaster_id, HintConst::$Field_ispassed, HintConst::$YesOrNo_YES);
-                    (new Asyn())->InitSchool($id);
+                    (new Asyn())->InitSchool(['id' => $id]);
                 }
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -313,13 +313,10 @@ class SchoolsController extends BaseController
         $catlogue = new Catalogue();
         $CatalogueList = $catlogue->getCatalogueListAll(83, $school_id);
         if (count($CatalogueList) == 0) {
-            (new Asyn())->InitSchool($school_id);
+            (new Asyn())->InitSchool(['id' => $school_id]);
         }
     }
-    public function  actionTest()
-    {
-        (new Asyn())->InitSchool('11');
-    }
+
 //    public function actionPush()
 //    {
 //        $Message = HintConst::$Success;

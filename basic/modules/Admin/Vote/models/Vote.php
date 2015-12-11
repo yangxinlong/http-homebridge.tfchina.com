@@ -592,7 +592,6 @@ class Vote extends BaseMain
     public function  pushaddclub($pri_type_id, $title)
     {
         $asyn = new Asyn();
-        $asyn->setSchoolId($this->getCustomSchool_id());
-        $asyn->pushaddclub($pri_type_id, $title);
+        $asyn->pushaddclub(['pri_type_id' => $pri_type_id, 'title' => $title]);
     }
 }
