@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><?php echo htmlspecialchars($model['contents']); ?></td>
         </tr>
         <tr>
-            <th>图片</th>
+            <th>配图</th>
             <td>
                 <?php foreach ($model['att'] as $v) { ?>
                     <img width="20%" src="http://www.jyq365.com/<?= $v['url_thumb'] ?>">
