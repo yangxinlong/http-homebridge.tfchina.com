@@ -227,7 +227,7 @@
     </style>
 </head>
 <body>
-<Div class="download_tips" id="download_tips" style="z-index:1000;position:fixed; top:0;">
+<Div class="download_tips" id="download_tips" style="z-index:1000;position:fixed;">
     <div class="" style="float:left;width:70%;padding:1em 0 0 1em;">
         如果没有跳转到下载页面，您可能使用了新版本的微信.<p>
         点击右上角的跳转按钮，选择在浏览器中打开，然后即可下载

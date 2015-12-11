@@ -163,7 +163,7 @@ class Score extends Component
             $num = 0;
             if ($d['sub_type_id'] == CatDef::$mod['club_topic']) {
                 $num = self::CLUB_TOPIC_CREATE_N;
-            } elseif ($d['sub_type_id'] == CatDef::$mod['club_teacher'] || $d['sub_type_id'] == CatDef::$mod['club_se'] || $d['sub_type_id'] == CatDef::$mod['club_po']) {
+            } elseif ($d['sub_type_id'] == CatDef::$mod['club_teacher'] ||$d['sub_type_id'] == CatDef::$mod['club_parent'] || $d['sub_type_id'] == CatDef::$mod['club_se'] || $d['sub_type_id'] == CatDef::$mod['club_po']) {
                 $num = self::CLUB_ARTI_CREATE_N;
             }
             $d['coin'] = $num;
