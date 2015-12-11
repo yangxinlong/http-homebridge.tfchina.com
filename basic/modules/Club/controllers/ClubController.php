@@ -97,8 +97,10 @@ class ClubController extends ClubBC
     {
         return (new ClubReplies())->Delrr();
     }
-    public function actionPushaddclub($pri_type_id = 0, $title = '')
+    public function actionPushaddclub()
     {
+        $pri_type_id = isset($_REQUEST['pri_type_id']) ? $_REQUEST['pri_type_id'] : 0;
+        $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : 0;
         (new MultThread())->push_club($pri_type_id, $title);
     }
 }
