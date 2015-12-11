@@ -59,6 +59,10 @@ class Asyn
     {
         $this->fs_post("index.php?r=Articles/articles/pushaddahe", $d);
     }
+    public function  pushrf($d)
+    {
+        $this->fs_post("index.php?r=Redfl/redfl/pushaddrf", $d);
+    }
     public function  fs_get($path)
     {
         $this->setGetInfo($path);

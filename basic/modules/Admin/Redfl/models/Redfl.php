@@ -2,8 +2,8 @@
 
 namespace app\modules\admin\Redfl\models;
 use app\modules\Admin\Custom\models\Customs;
+use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\BaseAR;
-use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
@@ -216,10 +216,8 @@ class Redfl extends BaseAR
     }
     public function push($user_id, $type, $id)
     {
-        $user[] = $user_id;
-        $custom = new Customs();
-        $token = $custom->getToken([], [], $user);
-        (new MultThread())->push_rf($token, $type, $id);
+        $asyn = new Asyn();
+        $asyn->pushrf(['user_id' => $user_id, 'type' => $type, 'id' => $id]);
     }
     public function getEvaReceiver($id)
     {

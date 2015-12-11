@@ -89,7 +89,7 @@ class BaseController extends Controller implements BaseInterface
         $allow_arr = ['index', 'dl_xyh', 'dl_bbname', 'dl_ma',//phone
             'getconf', 'login', 'apkinfo', 'checkcode-a', 'login-a-h', 'user-share', 'addparent',
             'provinceslist', 'citieslist', 'districtslist', 'apply', 'apply-a', 'audit', 'daily', 'updatelogo-a', 'uploadlog', 'initschool',
-            'pushpass', 'pushauditbyarid', 'pushaddnote', 'pushaddahe', 'pushaddclub'
+            'pushpass', 'pushauditbyarid', 'pushaddnote', 'pushaddahe', 'pushaddclub', 'pushaddrf'
         ];
         $this->mc_name = Yii::$app->request->getUrl();
         $this->mc_name_common = $this->mc_name;

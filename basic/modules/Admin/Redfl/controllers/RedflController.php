@@ -5,6 +5,7 @@ use app\modules\Admin\Custom\models\Customs;
 use app\modules\Admin\Redfl\models\Redfl;
 use app\modules\Admin\Redfl\models\RedflSearch;
 use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\MultThread;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -136,5 +137,15 @@ class RedflController extends BaseController
     public function actionGetuserfl()
     {
         return (new Customs())->getFl();
+    }
+    public function actionPushaddrf()
+    {
+        $user_id = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : 0;
+        $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 0;
+        $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
+        $user[] = $user_id;
+        $custom = new Customs();
+        $token = $custom->getToken([], [], $user);
+        (new MultThread())->push_rf($token, $type, $id);
     }
 }
