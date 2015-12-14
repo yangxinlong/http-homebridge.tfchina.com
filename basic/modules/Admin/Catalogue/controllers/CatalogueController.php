@@ -170,7 +170,7 @@ class CatalogueController extends BaseController
         $id = !empty($_REQUEST['id']) ? $_REQUEST['id'] : '';
         try {
             if (is_numeric($id) && $id != 0) {
-//                (new BaseAnalyze())->writeToAnal("school_id :" . $id);
+                (new BaseAnalyze())->writeToAnal("school_id :" . $id);
                 (new Catalogue())->initCatlogue($id);
             }
         } catch (Exception $e) {
