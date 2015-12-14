@@ -31,9 +31,9 @@ class Asyn
         $info['cat_default_id'] = Yii::$app->session['custominfo']->custom->cat_default_id;
         $path .= "&school_id=" . $this->info['school_id'] . "&iscansend=" . $this->info['iscansend'] . "&my_id=" . $this->info['my_id'] . "&name_zh=" . $this->info['name_zh'] . "&cat_default_id=" . $this->info['cat_default_id'];
     }
-    public function  InitSchool($d)
+    public function  InitSchool($id)//  when apply,no session
     {
-        $this->fs_post("index.php?r=Catalogue/catalogue/initschool", $d);
+        $this->fs_get("index.php?r=Catalogue/catalogue/initschool&id=$id");
     }
     public function  arat_push_pass($d)
     {
@@ -69,7 +69,6 @@ class Asyn
     }
     public function  fs_get($path)
     {
-        $this->setGetInfo($path);
         $host = Yii::$app->request->getHostInfo();
         $host = substr($host, 7, strlen($host));
         $fp = stream_socket_client("tcp://$host:80", $errno, $errstr, 30);
