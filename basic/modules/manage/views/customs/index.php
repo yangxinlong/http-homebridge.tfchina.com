@@ -53,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <th>是否有效</th>
         <th>是否直发</th>
         <th>创建时间</th>
+        <th>积分</th>
         <th>操作</th>
     </tr>
     <?php foreach ($models as $kk => $vv) { ?>
@@ -67,6 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><?= Html::img('@web/images/' . $vv['ispassed'] . '.png', ['onclick' => "listTable.toggle(this, 'ispassed'," . $vv['id'] . ")"]) ?></td>
             <td><?= Html::img('@web/images/' . $vv['iscansend'] . '.png', ['onclick' => "listTable.toggle(this, 'iscansend'," . $vv['id'] . ")"]) ?></td>
             <td><?= $vv['createtime'] ?></td>
+            <td><?= $vv['points'] ?></td>
             <td>
                 <a href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id'] ?>';}">删除</a>
             </td>
