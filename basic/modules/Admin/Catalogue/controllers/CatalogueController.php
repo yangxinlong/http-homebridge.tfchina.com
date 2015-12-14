@@ -3,6 +3,7 @@
 namespace app\modules\Admin\Catalogue\controllers;
 use app\modules\Admin\Catalogue\models\Catalogue;
 use app\modules\Admin\Catalogue\models\CatalogueSearch;
+use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\CommonFun;
 use app\modules\AppBase\base\HintConst;
@@ -169,6 +170,7 @@ class CatalogueController extends BaseController
         $id = !empty($_REQUEST['id']) ? $_REQUEST['id'] : '';
         try {
             if (is_numeric($id) && $id != 0) {
+                (new BaseAnalyze())->writeToAnal("school_id :" . $id);
                 (new Catalogue())->initCatlogue($id);
             }
         } catch (Exception $e) {
