@@ -23,7 +23,7 @@ class Asyn
     }
     protected function setGetInfo(&$path)
     {
-        //too more;but use post
+        //too more;but use post;now no use
         $info['school_id'] = Yii::$app->session['custominfo']->custom->school_id;
         $info['iscansend'] = Yii::$app->session['custominfo']->custom->iscansend;
         $info['my_id'] = Yii::$app->session['custominfo']->custom->id;
@@ -31,7 +31,7 @@ class Asyn
         $info['cat_default_id'] = Yii::$app->session['custominfo']->custom->cat_default_id;
         $path .= "&school_id=" . $this->info['school_id'] . "&iscansend=" . $this->info['iscansend'] . "&my_id=" . $this->info['my_id'] . "&name_zh=" . $this->info['name_zh'] . "&cat_default_id=" . $this->info['cat_default_id'];
     }
-    public function  InitSchool($id)//  when apply,no session
+    public function  InitSchool($id)//  when apply,no session,so not use fs_post ,otherwise error
     {
         $this->fs_get("index.php?r=Catalogue/catalogue/initschool&id=$id");
     }

@@ -152,14 +152,14 @@ class CatalogueController extends BaseController
         die(json_encode(array("ErrCode" => $ErrCode, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
     }
     public function  actionInitschoolmanual()//
-    {//init school
+    {//init school by manual
         echo "starting ...";
         try {
-//            for ($i = 775; $i <= 777; $i++) {
-//                echo $i;
-//                echo "<br>";
-//                (new Catalogue())->initCatlogue($i);
-//            }
+            for ($i = 1031; $i <= 1052; $i++) {
+                echo $i;
+                echo "<br>";
+                (new Catalogue())->initCatlogue($i);
+            }
             die("ok");
         } catch (Exception $e) {
             die($e->getMessage());
