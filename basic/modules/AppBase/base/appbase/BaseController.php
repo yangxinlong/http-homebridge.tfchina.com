@@ -24,6 +24,20 @@ class BaseController extends Controller implements BaseInterface
 {
     const LONG = 6;
     private $pagestartime;
+    /**
+     * @return mixed
+     */
+    public function getPagestartime()
+    {
+        return $this->pagestartime;
+    }
+    /**
+     * @param mixed $pagestartime
+     */
+    public function setPagestartime($pagestartime)
+    {
+        $this->pagestartime = $pagestartime;
+    }
     private $pageendtime;
     private $log;
     public $mc;
@@ -100,7 +114,6 @@ class BaseController extends Controller implements BaseInterface
         } else {
             $result = ['ErrCode' => '7057', 'Message' => '没有登录', 'Content' => 'homebridge'];
             die(json_encode($result));
-            return false;
         }
     }
     public function afterAction($action, $result)
