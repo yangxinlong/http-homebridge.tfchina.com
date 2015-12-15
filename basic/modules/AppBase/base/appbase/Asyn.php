@@ -43,9 +43,17 @@ class Asyn
     {
         $this->fs_post("index.php?r=Articles/articles/pushpass", $d);
     }
+    public function  note_push_pass($d)
+    {
+        $this->fs_post("index.php?r=Notes/notes/pushpass", $d);
+    }
     public function  pushAuditByArid($d)
     {
         $this->fs_post("index.php?r=Articles/articles/pushauditbyarid", $d);
+    }
+    public function  note_pushAuditById($d)
+    {
+        $this->fs_post("index.php?r=Notes/notes/pushauditbyid", $d);
     }
     public function  pushaddclub($d)
     {

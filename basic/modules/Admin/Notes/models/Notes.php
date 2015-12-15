@@ -4,7 +4,6 @@ namespace app\modules\Admin\Notes\models;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\Asyn;
 use app\modules\AppBase\base\appbase\base\BaseMain;
-use app\modules\AppBase\base\appbase\MultThread;
 use app\modules\AppBase\base\appbase\TransAct;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\CommonFun;
@@ -416,19 +415,7 @@ class Notes extends BaseMain
         $result = ['ErrCode' => '0', 'Message' => HintConst::$Success, 'Content' => HintConst::$NULLARRAY];
         return (json_encode($result));
     }
-    public function pushAuditById($id, $title)//used for audit
-    {
-        $school = [];
-        $class = [];
-        $user = [];
-        $d = [];
-        self::getSR($d, $id);
-        $this->getSchoolAndClassForNote($school, $class, $d);
-        $custom = new Customs();
-        $token = $custom->getToken($school, $class, $user);
-        (new MultThread())->push_note($token, $id, $title);
-    }
-    protected function getSR(&$d, $id)
+    public function getSR(&$d, $id)
     {
         $r = $this->findId($id);
         $d['a_p_id'] = $r->a_p_id;
@@ -438,10 +425,12 @@ class Notes extends BaseMain
     }
     public function push_pass($user_id, $type, $id, $reward, $con)
     {
-        $user = explode('-', $user_id);
-        (new Customs())->increaseF($user[0], 'points', $reward);
-        $custom = new Customs();
-        $token = $custom->getToken([], [], $user);
-        (new MultThread())->push_pass($token, $type, $id, $reward, $con);
+        $asyn = new Asyn();
+        $asyn->note_push_pass(['user_id' => $user_id, 'type' => $type, 'id' => $id, 'reward' => $reward, 'con' => $con]);
+    }
+    public function pushAuditById($id, $title)//used for audit
+    {
+        $asyn = new Asyn();
+        $asyn->note_pushAuditById(['id' => $id, 'title' => $title]);
     }
 }

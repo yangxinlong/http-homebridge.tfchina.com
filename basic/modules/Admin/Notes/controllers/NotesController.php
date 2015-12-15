@@ -212,4 +212,32 @@ class NotesController extends BaseController
         $token = $custom->getToken($school, $class, [], $_POST['obj_id']);
         (new MultThread())->push_note($token, $_POST['id'], $_POST['title']);
     }
+    public function  actionPushpass()
+    {
+        $user_id = isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : 0;
+        $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 0;
+        $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
+        $reward = isset($_REQUEST['reward']) ? $_REQUEST['reward'] : 0;
+        $con = isset($_REQUEST['con']) ? $_REQUEST['con'] : '';
+        $user = explode('-', $user_id);
+        (new Customs())->increaseF($user[0], 'points', $reward);
+        $custom = new Customs();
+        $token = $custom->getToken([], [], $user);
+        (new MultThread())->push_pass($token, $type, $id, $reward, $con);
+    }
+    public function  actionPushauditbyid()
+    {
+        $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
+        $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
+        $school = [];
+        $class = [];
+        $user = [];
+        $d = [];
+        $note = new Notes();
+        $note->getSR($d, $id);
+        $note->getSchoolAndClassForNote($school, $class, $d);
+        $custom = new Customs();
+        $token = $custom->getToken($school, $class, $user);
+        (new MultThread())->push_note($token, $id, $title);
+    }
 }
