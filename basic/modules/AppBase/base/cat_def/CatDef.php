@@ -11,7 +11,7 @@ class CatDef
     //type of act
     public static $act = ['create' => 1, 'reply' => 2, 'shared' => 3, 'share' => 4, 'cast_vote' => 5, 'share_img' => 6, 'custom_score' => 7, 'reset_score' => 8, 'edit_meal' => 9, 'adopt' => 10, 'addrf' => 11, 'club_reply' => 12, 'note_reply' => 13, 'adopted' => 14, 'passed' => 15];
     //type of model
-    public static $mod = ['custom' => 1, 'reply' => 65, 'gf' => 248, 'rf' => 249, 'club_arti' => 100, 'club_topic' => 101, 'club_help' => 102, 'club_teacher' => 103, 'club_parent' => 104, 'club_se' => 105, 'club_po' => 106, 'opt' => 200, 'msg' => 993, 'note' => 252, 'vote' => 250, 'pic' => 222, 'article' => 73, 'moneva' => 75, 'termeva' => 229];
+    public static $mod = ['custom' => 1, 'custom_score' => 7, 'reply' => 65, 'gf' => 248, 'rf' => 249, 'club_arti' => 100, 'club_topic' => 101, 'club_help' => 102, 'club_teacher' => 103, 'club_parent' => 104, 'club_se' => 105, 'club_po' => 106, 'opt' => 200, 'msg' => 993, 'note' => 252, 'vote' => 250, 'pic' => 222, 'article' => 73, 'moneva' => 75, 'termeva' => 229];
     //table name of db,but no use!
 //    public static $dbt=['admins','apkversion','article_attachment','article_replies','article_send_revieve','articles','cat_default','catalogue','catalogue_des','classes','classes_daily','classes_ext','cookbook_info','cus_focus','custom_score','customs','customs_daily','customs_ext','favorites','messages','admins','admins','admins','admins','admins',];
     //type for all or part

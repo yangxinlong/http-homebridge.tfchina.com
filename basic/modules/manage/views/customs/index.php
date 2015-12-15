@@ -19,6 +19,70 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::jsFile('@web/js/jstree.min.js') ?>
 <?= Html::jsFile('@web/js/listtable.js') ?>
 <?= Html::jsFile('@web/js/bootstrap.min.js') ?>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    积分修改
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="20%">当前积分: <span id="curpoints">1000</span></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td width="50%"><input id="pointssize" type="text" class="form-control" name="name_zh"
+                                                   size="10" min="1" max="100"
+                                                   placeholder="输入要变更的积分"></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td width="50%"><label class="radio">
+                                    <input type="radio" name="optionsRadios" id="radios1" value="1"
+                                        > 加分 </label></td>
+                            <td width="50%"><label class="radio">
+                                    <label class="radio">
+                                        <input type="radio" name="optionsRadios" id="radios2" value="2" checked>
+                                        减分 </label></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td width="20%">变更原因:</td>
+                            <td width="50%"><input id="pointscontents" type="text" class="form-control" name="name_zh"
+                                                   size="10"
+                                                   placeholder="(必填)30汉字以内"></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td width="20%"></td>
+                            <td width="50%"><input id="curcustom_id" type="text" name="curcustom_id" size="10" hidden>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="editpoints" type="button" class="btn btn-primary"> 确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
 
 <h1>教师管理</h1>
 <div class="">
@@ -40,6 +104,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td width="25%"><input type="text" class="form-control" name="phone" size="15"></td>
                 <td><input type="hidden" name="r" value="manage/class/index"/>
                     <input type="submit" class="btn btn-primary" value="添加老师"></td>
+            </tr>
+        </table>
+    </form>
+    <form action="" method="post">
+        <table width="40%" border="0" cellspacing="0" cellpadding="0" class="table">
+            <tr>
+                <td width="8%"><SELECT id=field_type
+                                       name=field_type
+                                       style="background:#fff; border:2px; color:#666666; font-size:16px; height:40px; line-height:40px;"
+                                       type="text">
+                    </SELECT></td>
+                <td width="15%"><input id="field" type="text" class="form-control" name="field" size="10"></td>
+                <td width="15%"><input type="hidden" name="r" value="manage/class/index"/>
+                    <input type="submit" class="btn btn-primary" value="查找"></td>
+                <td>&nbsp;</td>
             </tr>
         </table>
     </form>
@@ -71,6 +150,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><?= $vv['points'] ?></td>
             <td>
                 <a href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id'] ?>';}">删除</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:void(0)" onclick="update(this,<?= $vv['id'] ?>);">变更积分</a>
+
             </td>
         </tr>
     <?php } ?>
@@ -80,3 +162,43 @@ echo LinkPager::widget([
     'pagination' => $pages,
 ]);
 ?>
+<script language="javascript">
+    var field_type = 'field_type';
+    function update(obj, custom_id) {
+        var tds = $(obj).parent().parent().find('td');
+        $('#curpoints').html(tds.eq(7).text());
+        $('#curcustom_id').val(custom_id);
+        $('#myModal').modal('show');
+    }
+    $(document).ready(function () {
+        $("#" + field_type + " option").remove();
+        $("#" + field_type + "").append('<option value=0>请选择</option>');
+        $("#" + field_type + "").append('<option value=1>姓名</option>');
+        $("#" + field_type + "").append('<option value=2>手机</option>');
+        $("#" + field_type + "").val("<?=$params['field_type']?>");
+        $("#field").val("<?=$params['field']?>");
+        $('#editpoints').click(function () {
+            var size = $('#pointssize').val();
+            var contents = $('#pointscontents').val();
+            if (!isNaN(size) && contents) {
+                var num = $('#pointssize').val();
+                var boolCheck = $('#radios2').is(":checked");
+                if (boolCheck) {
+                    num = 0 - num;
+                }
+                $.post('index.php?r=Score/score/editscorebyhead', {
+                    pri_type_id: 7,
+                    sub_type_id: 7,
+                    num: num,
+                    custom_id: $('#curcustom_id').val(),
+                    contents: $('#pointscontents').val()
+                }, function (data) {
+                    $('#myModal').modal('hide');
+                    history.go(0);
+                }, 'json');
+            } else {
+                alert("请输入相关内容!");
+            }
+        });
+    });
+</script>

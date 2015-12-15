@@ -2,6 +2,7 @@
 
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Custom\models\Customs;
+use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\HintConst;
 use app\modules\AppBase\base\otheraccess\OtherAccess;
@@ -35,6 +36,9 @@ class CustomsController extends BaseController
         $phone = Yii::$app->request->post('phone');
         $password = Yii::$app->request->post('password');
         $class_id = Yii::$app->request->get('class_id');
+        $field_type = Yii::$app->request->post('field_type')?Yii::$app->request->post('field_type'):1;
+        $field = Yii::$app->request->post('field')?Yii::$app->request->post('field'):"";
+        (new BaseAnalyze())->writeToAnal($field_type.$field);
         $type = Yii::$app->request->get('type') ? Yii::$app->request->get('type') : 1;
         if ($type == 1) {
             $tem_name = 'index';
@@ -82,11 +86,21 @@ class CustomsController extends BaseController
                 ->from('customs')
                 ->leftjoin('classes', 'classes.teacher_id = customs.id')
                 ->where(['customs.school_id' => Yii::$app->session['manage_user']['school_id'], 'customs.cat_default_id' => $type_id]);
+            if ($field_type == 1) {
+                $user_list = $query->andwhere(['like', 'name_zh', $field]);
+            } elseif($field_type == 2) {
+                $user_list = $query->andwhere(['like', 'phone', $field]);
+            }
         } else {
             $user_list = $query->select('customs.*,classes.name as class_name')
                 ->from('customs')
                 ->leftjoin('classes', 'classes.id = customs.class_id')
                 ->where(['customs.school_id' => Yii::$app->session['manage_user']['school_id'], 'customs.cat_default_id' => $type_id]);
+            if ($field_type == 1) {
+                $user_list = $query->andwhere(['like', 'name_zh', $field]);
+            } elseif($field_type == 2) {
+                $user_list = $query->andwhere(['like', 'phone', $field]);
+            }
         }
         if ($class_id) {
             $user_list = $query->andwhere(['customs.class_id' => $class_id]);
@@ -101,8 +115,10 @@ class CustomsController extends BaseController
             'models' => $user_list,
             'pages' => $pages,
             'message' => $message,
+            'params' => ['field_type'=>$field_type,'field'=>$field]
         ]);
     }
+
     public function actionDelete()
     {
         $id = Yii::$app->request->get('id');

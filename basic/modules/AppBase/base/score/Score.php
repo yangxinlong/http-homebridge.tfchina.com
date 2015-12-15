@@ -163,7 +163,7 @@ class Score extends Component
             $num = 0;
             if ($d['sub_type_id'] == CatDef::$mod['club_topic']) {
                 $num = self::CLUB_TOPIC_CREATE_N;
-            } elseif ($d['sub_type_id'] == CatDef::$mod['club_teacher'] ||$d['sub_type_id'] == CatDef::$mod['club_parent'] || $d['sub_type_id'] == CatDef::$mod['club_se'] || $d['sub_type_id'] == CatDef::$mod['club_po']) {
+            } elseif ($d['sub_type_id'] == CatDef::$mod['club_teacher'] || $d['sub_type_id'] == CatDef::$mod['club_parent'] || $d['sub_type_id'] == CatDef::$mod['club_se'] || $d['sub_type_id'] == CatDef::$mod['club_po']) {
                 $num = self::CLUB_ARTI_CREATE_N;
             }
             $d['coin'] = $num;
@@ -295,9 +295,14 @@ class Score extends Component
         if ($this->getCustomType() == HintConst::$ROLE_HEADMASTER) {
             $d['p_s_type_id'] = 1;
             $d['score'] = $num;
-            self::setCusP($d);//and add contents
+            if (!($d['pri_type_id'] == CatDef::$act['custom_score'] && $d['sub_type_id'] == CatDef::$mod['custom_score'])) {
+                self::setCusP($d);//and add contents ; headmast customs scores for medal,not to excute this.
+            }
             $this->addPointInCustom(self::CUSTOMSCORE_POINT, $num, $d['custom_id']);
             $this->addPointCustomScore($d);
+            return 0;
+        } else {
+            return HintConst::$Not_head;
         }
     }
     public function  Rankofhead()

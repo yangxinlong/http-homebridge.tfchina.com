@@ -297,4 +297,5 @@ class HintConst
     public static $No_teacherinfo = '7099';
     public static $No_notimage = '7100';
     public static $Not_addscore='7101';
+    public static $Not_head='7102';
 }

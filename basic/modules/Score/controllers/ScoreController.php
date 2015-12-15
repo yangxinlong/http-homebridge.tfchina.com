@@ -16,24 +16,25 @@ class ScoreController extends ScoreBC
         $ErrCode = HintConst::$Zero;
         $Message = HintConst::$Success;
         $Content = HintConst::$NULLARRAY;
-        $data['pri_type_id'] = isset($_REQUEST['pri_type_id']) ? trim($_REQUEST['pri_type_id']) : '';
-        $data['sub_type_id'] = isset($_REQUEST['sub_type_id']) ? trim($_REQUEST['sub_type_id']) : '';
-        $data['custom_id'] = isset($_REQUEST['custom_id']) ? trim($_REQUEST['custom_id']) : '';
-        $data['related_id'] = isset($_REQUEST['related_id']) ? trim($_REQUEST['related_id']) : '';
+        $data['pri_type_id'] = isset($_REQUEST['pri_type_id']) ? trim($_REQUEST['pri_type_id']) : '0';
+        $data['sub_type_id'] = isset($_REQUEST['sub_type_id']) ? trim($_REQUEST['sub_type_id']) : '0';
+        $data['custom_id'] = isset($_REQUEST['custom_id']) ? trim($_REQUEST['custom_id']) : $this->getCustomId();
+        $data['related_id'] = isset($_REQUEST['related_id']) ? trim($_REQUEST['related_id']) : '0';
+        $data['contents'] = isset($_REQUEST['contents']) ? trim($_REQUEST['contents']) : '';
         $num = isset($_REQUEST['num']) ? trim($_REQUEST['num']) : 0;
         if (empty($data['custom_id']) || !is_numeric($data['custom_id'])) {
             $ErrCode = HintConst::$NoCustomId;
-        } elseif (empty($num) || !is_numeric($num) || $num == 0) {
+        } elseif (!is_numeric($num) || $num == 0) {
             $ErrCode = HintConst::$No_num;
-        } elseif (empty($data['related_id']) || !is_numeric($data['related_id']) || $data['related_id'] == 0) {
+        } elseif (!is_numeric($data['related_id'])) {
             $ErrCode = HintConst::$No_related_id;
-        } elseif (empty($data['pri_type_id']) || !is_numeric($data['pri_type_id']) || $data['pri_type_id'] == 0) {
+        } elseif (!is_numeric($data['pri_type_id']) || $data['pri_type_id'] == 0) {
             $ErrCode = HintConst::$No_pri_type_id;
-        } elseif (empty($data['sub_type_id']) || !is_numeric($data['sub_type_id']) || $data['sub_type_id'] == 0) {
+        } elseif (!is_numeric($data['sub_type_id']) || $data['sub_type_id'] == 0) {
             $ErrCode = HintConst::$No_sub_type_id;
         } else {
             $score = new Score();
-            $score->EditScoreByHead($data, $num);
+            $ErrCode = $score->EditScoreByHead($data, $num);
         }
         $result = ['ErrCode' => $ErrCode, 'Message' => $Message, 'Content' => $Content];
         return json_encode($result);
