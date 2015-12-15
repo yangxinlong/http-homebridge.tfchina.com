@@ -292,7 +292,7 @@ class Score extends Component
     public function EditScoreByHead($d, $num)
     {
         //head can do this;  custom score
-        if ($this->getCustomType() == HintConst::$ROLE_HEADMASTER) {
+        if ($this->getCustomType() == HintConst::$ROLE_HEADMASTER || isset(Yii::$app->session['manage_user'])) {
             $d['p_s_type_id'] = 1;
             $d['score'] = $num;
             if (!($d['pri_type_id'] == CatDef::$act['custom_score'] && $d['sub_type_id'] == CatDef::$mod['custom_score'])) {
