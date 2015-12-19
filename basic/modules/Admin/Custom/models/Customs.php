@@ -233,7 +233,7 @@ class Customs extends BaseMain
             $ErrCode = HintConst::$Zero;
             $Message = HintConst::$Success;
             $Content = HintConst::$NULLARRAY;
-            $mc_name = $this->getMcName() . 'LoginA' . json_encode(func_get_args());
+            $mc_name = 'LoginA' . json_encode(func_get_args()) . $this->getMcName();
             if ($val = $this->mc->get($mc_name)) {
                 $Content = $val;
                 Yii::$app->session['custominfo'] = $Content;
@@ -1178,7 +1178,7 @@ class Customs extends BaseMain
         }
         return $mo;
     }
-    public function mydel($myid=0)
+    public function mydel($myid = 0)
     {
         $id = isset($_REQUEST['id']) ? trim($_REQUEST['id']) : $myid;
         if (empty($id) || !is_numeric($id)) {
