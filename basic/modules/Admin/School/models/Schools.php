@@ -393,7 +393,7 @@ class Schools extends BaseAR
                     $data = $data->leftJoin('customs as cc', 'cc.school_id=s.id')
                         ->where("cc.updatetime between '$startdate' and '$enddate'");
                     break;
-                case CatDef::$mod['pic']:
+                case CatDef::$mod['pic']://if send 222 but no img,here will display,but show zero for num in schinfo
                 case CatDef::$mod['article']:
                 case CatDef::$mod['moneva']:
                 case CatDef::$mod['termeva']:
