@@ -13,7 +13,7 @@ class LogToFile
     {
         if (strlen($something) > 0) {
             $ba = new BaseAnalyze();
-            $ba->writeToAnal('error: '.Yii::$app->request->getUrl() . '|' . $something);
+            $ba->writeToErr('error: '.Yii::$app->request->getUrl() . '|' . $something);
         }
     }
 }

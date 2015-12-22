@@ -13,6 +13,7 @@ class BaseAnalyze
     const LOG_WEB_FILE = "web.log";
     const LOG_ANAL_FILE = "anal.log";
     const LOG_WASTE_TIME = "wastetime.log";
+    const LOG_ERR = "err.log";
     public  function  writeToFile($content)
     {
         $content .= "\t" . CommonFun::getCurrentDateForFile();
@@ -28,6 +29,13 @@ class BaseAnalyze
     {
         $content .= " \r\n";
         $fh = fopen(self::LOG_ANAL_FILE, "a");//a追加
+        fwrite($fh, $content);    // 输出：6
+        fclose($fh);
+    }
+    public  function  writeToErr($content)
+    {
+        $content .= " \r\n";
+        $fh = fopen(self::LOG_ERR, "a");//a追加
         fwrite($fh, $content);    // 输出：6
         fclose($fh);
     }
