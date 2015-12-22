@@ -189,6 +189,7 @@ class HintConst
     public static $ZeroInt = 0;
     public static $NULL = null;
     public static $NULLARRAY = [];
+    public static $SERVER_ERR = "500";
     public static $NoSession = "9006";//没有相关的session,请重新登录或注册
     public static $NoSession_M = "未登录";//没有相关的session,请重新登录或注册
     public static $AlreadExist = '9002';//记录已经存在

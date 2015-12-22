@@ -43,6 +43,10 @@ class SiteController extends SiteBC
             ],
         ];
     }
+    public function actionMyerror()
+    {
+     echo  $this->myerror();
+    }
     public function actionIndex()
     {
         return $this->render('index');

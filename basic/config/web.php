@@ -93,7 +93,7 @@ $config = [
             'loginUrl' => './index.php'
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'site/myerror',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
