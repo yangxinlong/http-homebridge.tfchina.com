@@ -102,7 +102,7 @@ class BaseController extends Controller implements BaseInterface
         $this->pagestartime = microtime();
         $allow_arr = ['index', 'dl_xyh', 'dl_bbname', 'dl_ma',//phone
             'getconf', 'login', 'apkinfo', 'checkcode-a', 'login-a-h', 'user-share', 'addparent',
-            'provinceslist', 'citieslist', 'districtslist', 'apply', 'apply-a', 'audit', 'daily', 'updatelogo-a', 'uploadlog', 'initschool','initschoolmanual',
+            'provinceslist', 'citieslist', 'districtslist', 'apply', 'apply-a', 'audit', 'daily', 'updatelogo-a', 'uploadlog', 'initschool', 'initschoolmanual',
             'pushpass', 'pushauditbyarid', 'pushauditbyid', 'pushaddnote', 'pushaddahe', 'pushaddclub', 'pushaddrf', 'pushsendmsg'
         ];
         $this->mc_name = Yii::$app->request->getUrl();
@@ -496,6 +496,14 @@ class BaseController extends Controller implements BaseInterface
     {
         LogToFile::Log($err);
         die(json_encode(array("ErrCode" => HintConst::$No_notimage, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
+    }
+    public function  myerror()
+    {
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            LogToFile::Log($exception);
+        }
+        die(json_encode(array("ErrCode" => HintConst::$SERVER_ERR, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
     }
     public
     function getCustomId()
