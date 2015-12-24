@@ -65,7 +65,7 @@ class Schools extends BaseAR
             [['phone'], 'string', 'max' => 11],
             [['creater_name', 'name', 'nickname', 'tel'], 'string', 'max' => 45],
             [['code'], 'string', 'max' => 50],
-            [['logo'], 'string', 'max' => 255]
+            [['logo','address'], 'string', 'max' => 255]
         ];
     }
     /**
