@@ -129,6 +129,7 @@ class VoteReplies extends BaseReply
     }
     public function Getreply()
     {
+        $this->mc->flush();
         $ErrCode = HintConst::$Zero;
         $Content = HintConst::$NULLARRAY;
         $d['m_id'] = isset($_REQUEST['id']) ? $_REQUEST['id'] : '';
@@ -139,14 +140,14 @@ class VoteReplies extends BaseReply
         if (empty($d['m_id'])) {
             $ErrCode = HintConst::$No_vote_id;
         } else {
-            $Content = $this->get_reply_list($d['m_id'], $role, $start_line, $page_size);
+            $Content = $this->get_reply_list_one($d['m_id'], $role, $start_line, $page_size);
         }
         $result = ['ErrCode' => $ErrCode, 'Message' => HintConst::$WEB_JYQ, 'Content' => $Content];
         return $result;
     }
-    protected function get_reply_list($id, $type = 207, $start_line, $page_size)
+    protected function get_reply_list_one($id, $type = 207, $start_line, $page_size)
     {
-        $mc_name = $this->getMcName() . $this->tableName() . 'get_reply_list' . $id . $type . $start_line . $page_size;
+        $mc_name = 'get_reply_list' . json_encode(func_get_args()) . $this->tableName() . $this->getMcName();
         $reply_list = array();
         if ($val = $this->mc->get($mc_name)) {
             $reply_list = $val;
@@ -158,7 +159,7 @@ class VoteReplies extends BaseReply
                     ->from('vote_replies ')
                     ->leftjoin('customs as c1', 'c1.id = vote_replies.sender_id')
                     ->leftjoin('customs as c2', 'c2.id = vote_replies.receiver_id')
-                    ->where(['vote_replies.m_id' => $id]);
+                    ->where(['vote_replies.m_id' => $id, 'vote_replies.receiver_id' => 0]);
                 if ($type == HintConst::$ROLE_TEACHER) {
                     $class_id = $this->getCustomClass_id();
                     $reply_list = $reply_list->andWhere("c1.class_id=$class_id or (vote_replies.sender_id=$sender_id or vote_replies.receiver_id =$sender_id) ");
@@ -168,6 +169,46 @@ class VoteReplies extends BaseReply
                 $reply_list = $reply_list->orderby(['vote_replies.link_id' => SORT_ASC, 'vote_replies.id' => SORT_ASC])
                     ->offset($start_line)
                     ->limit($page_size)
+                    ->all();
+                $this->get_reply_list_two($reply_list);
+            }
+            $this->mc->add($mc_name, $reply_list);
+        }
+        return $reply_list;
+    }
+    protected function get_reply_list_two(&$reply_list)
+    {
+        $reply_list_two_list = [];
+        $tmp = [];
+        foreach ($reply_list as $k) {
+            $reply_list_two_list[] = $this->get_reply_list_two_list($k['id']);
+        }
+        foreach ($reply_list_two_list as $a) {
+            if (count($a) > 0) {
+                foreach ($a as $b) {
+                    $tmp[] = $b;
+                }
+            }
+        }
+        $this->merge_reply($reply_list, $tmp);
+    }
+    protected function get_reply_list_two_list($link_id)
+    {
+        $mc_name = 'get_reply_list_two_list' . json_encode(func_get_args()) . $this->tableName() . $this->getMcName();
+        $reply_list = array();
+        if ($val = $this->mc->get($mc_name)) {
+            $reply_list = $val;
+        } else {
+            if ($link_id > 0) {
+                $query = new Query();
+                $reply_list = $query->select($this->selforreply)
+                    ->from('vote_replies ')
+                    ->leftjoin('customs as c1', 'c1.id = vote_replies.sender_id')
+                    ->leftjoin('customs as c2', 'c2.id = vote_replies.receiver_id')
+                    ->where("vote_replies.link_id=$link_id AND vote_replies.receiver_id>0");
+                $reply_list = $reply_list->orderby(['vote_replies.id' => SORT_ASC])
+                    ->offset(0)
+                    ->limit(10)
                     ->all();
             }
             $this->mc->add($mc_name, $reply_list);
