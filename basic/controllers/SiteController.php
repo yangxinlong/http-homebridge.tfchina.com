@@ -45,7 +45,7 @@ class SiteController extends SiteBC
     }
     public function actionMyerror()
     {
-     echo  $this->myerror();
+        $this->myerror();
     }
     public function actionIndex()
     {
