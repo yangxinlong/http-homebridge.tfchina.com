@@ -3,7 +3,7 @@
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Notes\models\Notes;
 use app\modules\Admin\Vote\models\Vote;
-use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\ManageBC;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\data\Pagination;
@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 /**
  * SchoolsController implements the CRUD actions for Schools model.
  */
-class VoteController extends BaseController
+class VoteController extends ManageBC
 {
     public function actionIndex()
     {

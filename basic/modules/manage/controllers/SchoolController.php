@@ -3,14 +3,14 @@
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\Admin\School\models\Schools;
-use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\ManageBC;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 /**
  * SchoolsController implements the CRUD actions for Schools model.
  */
-class SchoolController extends BaseController
+class SchoolController extends ManageBC
 {
     public function behaviors()
     {

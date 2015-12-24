@@ -2,7 +2,7 @@
 
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Articles\models\ArticleAttachment;
-use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\ManageBC;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\data\Pagination;
@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 /**
  * SchoolsController implements the CRUD actions for Schools model.
  */
-class PicController extends BaseController
+class PicController extends ManageBC
 {
     public function actionIndex()
     {

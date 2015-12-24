@@ -3,7 +3,7 @@
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Articles\models\ArticleAttachment;
 use app\modules\Admin\Articles\models\Articles;
-use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\ManageBC;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\data\Pagination;
@@ -13,7 +13,7 @@ use yii\web\NotFoundHttpException;
 /**
  * ArticleController implements the CRUD actions for Articles model.
  */
-class ArticleController extends BaseController
+class ArticleController extends ManageBC
 {
     public function behaviors()
     {

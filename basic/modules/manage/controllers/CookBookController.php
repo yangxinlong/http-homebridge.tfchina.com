@@ -3,12 +3,12 @@
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Catalogue\models\Catalogue;
 use app\modules\Admin\CatDefalut\models\CatDefalut;
-use app\modules\AppBase\base\appbase\BaseController;
+use app\modules\AppBase\base\appbase\ManageBC;
 use Yii;
 /**
  * SchoolsController implements the CRUD actions for Schools model.
  */
-class CookBookController extends BaseController
+class CookBookController extends ManageBC
 {
     public function actionIndex()
     {
@@ -58,13 +58,12 @@ class CookBookController extends BaseController
                 $catalogue->createtime = date('Y-m-d H:i:s');
                 $catalogue->updatetime = date('Y-m-d H:i:s');
                 $catalogue->save();
-                
             }
             $result = ['error' => 0, 'message' => '更新成功', 'content' => $val . ' <span class="glyphicon glyphicon-pencil"></span></span>'];
-            return(json_encode($result));
+            return (json_encode($result));
         } else {
             $result = ['error' => 0, 'message' => '更新成功', 'content' => $val . ' <span class="glyphicon glyphicon-pencil"></span></span>'];
-            return(json_encode($result));
+            return (json_encode($result));
         }
     }
 }
