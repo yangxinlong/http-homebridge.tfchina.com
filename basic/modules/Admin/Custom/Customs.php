@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\Admin\Custom;
-class Customs extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Customs extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Admin\Custom\controllers';
     public function init()

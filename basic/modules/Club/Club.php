@@ -2,7 +2,8 @@
 
 namespace app\modules\Club;
 
-class Club extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Club extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Club\controllers';
 

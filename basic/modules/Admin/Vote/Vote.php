@@ -1,12 +1,13 @@
 <?php
 
 namespace app\modules\Admin\Vote;
-class Vote extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Vote extends BaseModule
 {
-public $controllerNamespace = 'app\modules\Admin\Vote\controllers';
-public function init()
-{
-parent::init();
+    public $controllerNamespace = 'app\modules\Admin\Vote\controllers';
+    public function init()
+    {
+        parent::init();
 // custom initialization code goes here
-}
+    }
 }

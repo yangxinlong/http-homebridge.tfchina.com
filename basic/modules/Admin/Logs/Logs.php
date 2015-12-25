@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\Admin\Logs;
-class Logs extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Logs extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Admin\Logs\controllers';
     public function init()

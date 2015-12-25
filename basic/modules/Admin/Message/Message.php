@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\Admin\Message;
-class Message extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Message extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Admin\Message\controllers';
     public function init()

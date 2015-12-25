@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\Admin\Classes;
-class Classes extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Classes extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Admin\Classes\controllers';
     public function init()

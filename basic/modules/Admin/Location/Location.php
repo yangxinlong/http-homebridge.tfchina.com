@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\Admin\Location;
-class Location extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Location extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Admin\Location\controllers';
     public function init()

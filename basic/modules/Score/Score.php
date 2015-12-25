@@ -2,7 +2,8 @@
 
 namespace app\modules\Score;
 
-class Score extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Score extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Score\controllers';
 

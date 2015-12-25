@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\Admin\Catalogue;
-class Catalogue extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Catalogue extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Admin\Catalogue\controllers';
     public function init()

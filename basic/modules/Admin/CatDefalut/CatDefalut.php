@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\Admin\CatDefalut;
-class CatDefalut extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class CatDefalut extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Admin\CatDefalut\controllers';
     public function init()

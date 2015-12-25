@@ -2,7 +2,8 @@
 
 namespace app\modules\Admin\Articles;
 
-class Articles extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Articles extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Admin\Articles\controllers';
 
