@@ -215,7 +215,7 @@ class Vote extends BaseMain
             if ($d['filt'] == CatDef::$filt['latest']) {
                 $Content = $Content->orderBy('v.id desc');
             } else {
-                $Content = $Content->orderBy(['v.view_times' => SORT_ASC, 'v.praise_times' => SORT_ASC]);
+                $Content = $Content->orderBy(['v.view_times' => SORT_DESC, 'v.praise_times' => SORT_DESC]);
             }
             $Content = $Content->offset($d['start_line'])
                 ->limit($d['page_size'])
