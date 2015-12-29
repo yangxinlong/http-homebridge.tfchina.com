@@ -24,7 +24,7 @@ class AdminBC extends BaseController
     public function beforeAction($action)
     {
         $this->pagestartime = microtime();
-        $allow_arr = ['login'];
+        $allow_arr = ['login'.'phpinfo'];
         $this->mc_name = Yii::$app->request->getUrl();
         $this->mc_name_common = $this->mc_name;
         $this->mc_name_act = $this->mc_name;
