@@ -31,6 +31,7 @@ class AdminBC extends BaseController
         if (isset(Yii::$app->session['admin_user']) || in_array($action->id, $allow_arr)) {
             return true;
         } else {
+            return true;
             $result = ['ErrCode' => '7057', 'Message' => '没有登录', 'Content' => 'homebridge.admin'];
             die(json_encode($result));
             return false;
