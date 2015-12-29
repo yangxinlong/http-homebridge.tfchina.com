@@ -172,5 +172,9 @@ class AdminsController extends AdminBC
         $admin = new Admins();
         $admin->Myflush();
     }
+    public function actionPhpinfo()
+    {
+        phpinfo();
+    }
 
 }
