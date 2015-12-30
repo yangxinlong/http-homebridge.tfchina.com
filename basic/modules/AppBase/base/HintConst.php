@@ -7,8 +7,8 @@
 namespace app\modules\AppBase\base;
 class HintConst
 {
-    public static $WEB_USER = "http://user.tfchina.com/";
-    public static $WEB_JYQ = "http://homebridge.tfchina.com/";
+    public static $WEB_USER = "http://user.jyq365.com/";
+    public static $WEB_JYQ = "http://www.jyq365.com/";
     //-------json format
     public static $JSON_E = 'ErrCode';
     public static $JSON_M = 'Message';
