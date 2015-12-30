@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\AppBase\base\HintConst;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 $this->title = '图片列表';
@@ -36,8 +37,8 @@ var edit_url = 'index.php?r=manage/pic/edit-pic';
 <?php foreach($pic_list as $kk => $vv){?>
 <tr>
 <td>
-<a href="http://homebrisge.tfchina.com/<?= $vv['url']?>" class="thumbnail" target="_blank">
-<?= Html::img('http://homebridge.tfchina.com/'.$vv['url_thumb'])?>
+<a href="<?= HintConst::$WEB_JYQ.$vv['url']?>" class="thumbnail" target="_blank">
+<?= Html::img(HintConst::$WEB_JYQ.$vv['url_thumb'])?>
 </td>
 </td>
 <td><?= $vv['author_name']?></td>
