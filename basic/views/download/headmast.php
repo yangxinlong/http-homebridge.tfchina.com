@@ -268,7 +268,7 @@
     <div class="footerdiv1 clearfix">
         <div class="butten">
             <a href="<?php if($if_wx){?>javascript:display_tips()<?php }else{ ?>/download/hbm.apk<?php }?>"><img src="images/img/btn_mast_a.png" /> </a>
-            <a href="<?php if($if_wx){?>javascript:display_tips()<?php }else{ ?>/download/hbm.apk<?php }?>"><img src="images/img/btn_mast_i.png" /> </a>    
+            <a href="<?php if($if_wx){?>javascript:display_tips()<?php }else{ ?>https://itunes.apple.com/us/app/jia-yuan-qiao-yuan-zhang-duan/id1065724413?l=zh&ls=1&mt=8<?php }?>"><img src="images/img/btn_mast_i.png" /> </a>    
         </div>
     </div>
 </footer>
