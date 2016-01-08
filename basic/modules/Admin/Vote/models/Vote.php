@@ -563,9 +563,10 @@ class Vote extends BaseMain
                 $con['contents'] = $r['contents'];
             } else {
                 $con['contents'] = '很抱歉,文章已经被作者删除了!';
+                $con['author_id'] = '0';
             }
         } else {
-            $con['author_id'] = '';
+            $con['author_id'] = '0';
             $con['author_name'] = '';
             $con['title'] = $con['contents'] = '很抱歉,文章已经被作者删除了!';
             $con['thumb'] = '';
