@@ -12,28 +12,30 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', CatDef::getName($pri_
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<h1><?= Html::encode($model['title']) ?></h1>
-<form action="" method="post">
-    <table width="100%" class="table">
-        <tr>
-            <th>标题</th>
-            <td><?= $model['title'] ?></td>
-        </tr>
-        <tr>
-            <th>内容</th>
-            <td><?php echo htmlspecialchars($model['contents']); ?></td>
-        </tr>
-        <tr>
-            <th>配图</th>
-            <td>
-                <?php foreach ($model['att'] as $v) { ?>
-                    <img width="20%" src="http://www.jyq365.com/<?= $v['url_thumb'] ?>">
-                <?php } ?>
-            </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td></td>
-        </tr>
-    </table>
-</form>
+<div class="container" style="padding-right:3.7em;">
+    <h5><strong><?= Html::encode($model['title']) ?></strong></h5>
+    <form action="" method="post">
+        <table class="table table-striped table-hover table-bordered">
+            <tr>
+                <th>标题</th>
+                <td><?= $model['title'] ?></td>
+            </tr>
+            <tr>
+                <th>内容</th>
+                <td><?php echo htmlspecialchars($model['contents']); ?></td>
+            </tr>
+            <tr>
+                <th>配图</th>
+                <td>
+                    <?php foreach ($model['att'] as $v) { ?>
+                        <img width="20%" src="http://www.jyq365.com/<?= $v['url_thumb'] ?>">
+                    <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</div>

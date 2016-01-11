@@ -24,64 +24,34 @@ var edit_url = 'index.php?r=manage/customs/edit-custom';
 <?= Html::jsFile('@web/js/listtable.js') ?>
 <?= Html::jsFile('@web/js/bootstrap.min.js') ?>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close"
-                        data-dismiss="modal" aria-hidden="true">
+                        data-dismiss="modal" aria-hidden="true" style="color:#fff;">
                     &times;
                 </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    积分修改
-                </h4>
+                <h5 class="modal-title text-canter" id="myModalLabel">
+                    当前积分：<span id="curpoints">1000</span>
+                </h5>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
-                    <table border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td width="20%">当前积分: <span id="curpoints">1000</span></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td width="50%"><input id="pointssize" type="text" class="form-control" name="name_zh"
-                                                   size="10" min="1" max="100"
-                                                   placeholder="输入要变更的积分"></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td width="50%"><label class="radio">
-                                    <input type="radio" name="optionsRadios" id="radios1" value="1"
-                                        > 加分 </label></td>
-                            <td width="50%"><label class="radio">
-                                    <label class="radio">
-                                        <input type="radio" name="optionsRadios" id="radios2" value="2" checked>
-                                        减分 </label></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td width="20%">变更原因:</td>
-                            <td width="50%"><input id="pointscontents" type="text" class="form-control" name="name_zh"
-                                                   size="10"
-                                                   placeholder="(必填)30汉字以内"></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td width="20%"></td>
-                            <td width="50%"><input id="curcustom_id" type="text" name="curcustom_id" size="10" hidden>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </table>
+                 <form action="" method="post">
+                    <div class="form-group">
+                         <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios" id="radios1" value="1" checked>加分</div>
+                        <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios" id="radios1" value="2">减分</div>
+                        <input type="text" id="pointssize" class="form-control input-sm" size="10" min="1" max="100" placeholder="输入要变更的积分">
+                    </div>
+                     <div class="form-group">
+                        <textarea class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button id="editpoints" type="button" class="btn btn-primary"> 确定</button>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">取消</button>
+                <button id="editpoints" type="button" class="btn btn-sm btn-info">保存</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -89,74 +59,61 @@ var edit_url = 'index.php?r=manage/customs/edit-custom';
     <!-- /.modal -->
 </div>
 
+<div class="wrapper">
+    <div class="col-sm-12">
+        <section class="panel panel-warning">
+            <header class="panel-heading">
+                <span>学生管理</span>
+            </header>
+            <div class="panel-body">
+                <form class="form-inline" action="" method="post" style="margin-bottom:10px;">
+                    <div class="pull-right" style="margin-bottom:20px;">
+                        <div class="form-group">
+                            <select id="field_type" name="field_type" class="form-control" style="font-size:13px;"></select>
+                            <input type="text" class="form-control" name="field" id="field" placeholder="查找..">
+                            <input type="hidden" name="r" value="manage/class/index">
+                            <button type="submit" class="btn btn-success">查找</button>
+                        </div>
+                    </div>
+                </form>
 
-<h1>学生管理</h1>
-<!--<div class="">
-  <?php if($message <> ''){?>
-  <div class="alert alert-success" role="alert" id="add_alert">
-    <button type="button" class="close" data-dismiss="alert" onclick="$('#add_alert').hide();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <?= $message?>
-  </div>
-  <?php }?>
-  <form action="" method="post">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
-      <tr>
-        <td width="10%"><label for="class_name" class="control-label">学生名称</label></td>
-        <td width="25%"><input type="text" class="form-control" name="name" size="10"></td>
-        <td width="10%"><label for="class_name" class="control-label">密码</label></td>
-        <td width="25%"><input type="text" class="form-control" name="password" size="15"></td>
-		<td width="10%"><label for="class_name" class="control-label">手机号</label></td>
-        <td width="25%"><input type="text" class="form-control" name="phone" size="15"></td>
-        <td><input type="hidden" name="r" value="manage/class/index" />
-          <input type="submit" class="btn btn-primary" value="添加班级"></td>
-      </tr>
-    </table>
-  </form>
-</div>
--->
-<div>
-    <form action="" method="post">
-        <table width="40%" border="0" cellspacing="0" cellpadding="0" class="table">
-            <tr>
-                <td width="8%"><SELECT id=field_type
-                                       name=field_type
-                                       style="background:#fff; border:2px; color:#666666; font-size:16px; height:40px; line-height:40px;"
-                                       type="text">
-                    </SELECT></td>
-                <td width="15%"><input id="field" type="text" class="form-control" name="field" size="10"></td>
-                <td width="15%"><input type="hidden" name="r" value="manage/class/index"/>
-                    <input type="submit" class="btn btn-primary" value="查找"></td>
-                <td>&nbsp;</td>
-            </tr>
-        </table>
-    </form>
-</div>
-<table class="table table-striped">
-  <tr>
-    <th>学生名称</th>
-    <th>修改密码</th>
-    <th>电话号码</th>
-    <th>所属班级</th>
-	<th>是否有效</th>
-    <th>创建时间</th>
-    <th>积分</th>
-    <th>操作</th>
-  </tr>
-  <?php foreach($models as $kk => $vv){?>
-  <tr>
-    <td><span onclick="listTable.edit(this, 'name', <?= $vv['id']?>)"><?= $vv['name_zh']?> <span class="glyphicon glyphicon-pencil"></span></span></td>
-    <td><span onclick="listTable.edit(this, 'password', <?= $vv['id']?>)">点击修改密码 <span class="glyphicon glyphicon-pencil"></span></span></td>
-    <td><span onclick="listTable.edit(this, 'phone', <?= $vv['id']?>)"><?= $vv['phone']?> <span class="glyphicon glyphicon-pencil"></span></span></td>
-    <td><?= $vv['class_name']?></td>
-	<td><?= Html::img('@web/images/'.$vv['ispassed'].'.png',['onclick'=>"listTable.toggle(this, 'ispassed',".$vv['id'].")"])?></td>
-    <td><?= $vv['createtime']?></td>
-    <td><?= $vv['points']?></td>
-    <td><a href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id']?>';}">删除</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="javascript:void(0)" onclick="update(this,<?= $vv['id'] ?>);">变更积分</a></td>
-  </tr>
-  <?php }?>
-</table>
+                <span><mark style="color:#900;">注意：表格内部分数据点击即可编辑。</mark></span>
+                <div class="adv-table editable-table">
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample" style="margin-top:15px;">
+                        <tr style="background:#5bc0de;color:#fff;">
+                            <th class="text-center">学生名称</th>
+                            <th class="text-center">修改密码</th>
+                            <th class="text-center">电话号码</th>
+                            <th class="text-center">所属班级</th>
+                            <th class="text-center">是否有效</th>
+                            <th class="text-center">创建时间</th>
+                            <th class="text-center">积分</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                        <?php foreach($models as $kk => $vv){?>
+                        <tr class="text-center">
+                            <td><span title="编辑" onclick="listTable.edit(this, 'name', <?= $vv['id']?>)"><?= $vv['name_zh']?></span></td>
+                            <td><span title="编辑" onclick="listTable.edit(this, 'password', <?= $vv['id']?>)">点击修改密码</span></td>
+                            <td><span title="编辑" onclick="listTable.edit(this, 'phone', <?= $vv['id']?>)"><?= $vv['phone']?></span></td>
+                            <td><?= $vv['class_name']?></td>
+                            <td><?= Html::img('@web/images/'.$vv['ispassed'].'.png',['onclick'=>"listTable.toggle(this, 'ispassed',".$vv['id'].")"])?></td>
+                            <td><?= $vv['createtime']?></td>
+                            <td><?= $vv['points']?></td>
+                            <td><a style="color:#fff;" class="btn btn-xs btn-danger" href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id']?>';}">删除</a>
+                                <a style="color:#fff;" class="btn btn-xs btn-info" href="javascript:void(0)" onclick="update(this,<?= $vv['id'] ?>);">变更积分</a>
+                            </td>
+                        </tr>
+                        <?php }?>
+                    </table>
+                </div><!-- adv-table结束 -->
+                
+                <span class="pull-right">总数：<span style="color:#428bca;font-size:15px;"><?= $pages->totalCount?></span>&nbsp;条记录</span>
+            </div><!-- panel-body结束 -->
+        </section>
+    </div><!-- col-*结束 -->
+</div><!-- wrapper结束 -->
+
+
 <?php
 echo LinkPager::widget([
     'pagination' => $pages,

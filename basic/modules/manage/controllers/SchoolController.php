@@ -3,14 +3,14 @@
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\Admin\School\models\Schools;
-use app\modules\AppBase\base\appbase\ManageBC;
+use app\modules\AppBase\base\appbase\BaseController;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 /**
  * SchoolsController implements the CRUD actions for Schools model.
  */
-class SchoolController extends ManageBC
+class SchoolController extends BaseController
 {
     public function behaviors()
     {
@@ -91,7 +91,7 @@ class SchoolController extends ManageBC
                 default:
                     break;
             }
-            $result = ['error' => 0, 'message' => '更新成功', 'content' => $val . ' <span class="glyphicon glyphicon-pencil"></span></span>'];
+            $result = ['error' => 0, 'message' => '更新成功', 'content' => $val . ' </span>'];
             return (json_encode($result));
         } else {
             $result = ['error' => 1, 'message' => '失败', 'content' => ''];
@@ -125,13 +125,13 @@ class SchoolController extends ManageBC
                     $_REQUEST['id'] = $id;
                     $_REQUEST['password'] = md5($val);
                     json_decode($custom->UpdatepasswordA());
-                    $result = ['error' => 0, 'message' => '更新成功', 'content' => '点击修改密码 <span class="glyphicon glyphicon-pencil"></span></span>'];
+                    $result = ['error' => 0, 'message' => '更新成功', 'content' => '点击修改密码 </span>'];
                     return (json_encode($result));
                     break;
                 default:
                     break;
             }
-            $result = ['error' => 0, 'message' => '更新成功', 'content' => $val . ' <span class="glyphicon glyphicon-pencil"></span></span>'];
+            $result = ['error' => 0, 'message' => '更新成功', 'content' => $val . ' </span>'];
             return (json_encode($result));
         } else {
             $result = ['error' => 1, 'message' => '失败', 'content' => ''];

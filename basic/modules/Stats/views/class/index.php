@@ -11,31 +11,32 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '后退'), 'url' => Y
 $this->params['breadcrumbs'][] = $item;
 ?>
 <div class="container" style="padding-right:3em;">
-    <div class="row">
-        <div class="col-md-1"><?= $item ?></div>
-        <div class="col-md-3"><?= $pathinfo['name']; ?></div>
-    </div>
-    <table class="table table-striped table-hover">
-        <tr>
-            <th>ID</th>
-            <th>班级名称</th>
-            <th>创建时间</th>
-            <th>操作</th>
-        </tr>
-
-        <?php foreach ($status['data'] as $k => $v) { ?>
-            <tr>
-                <td><?= $v['id'] ?></td>
-                <td><?= $v['name'] ?></td>
-                <td><?= $v['createtime'] ?></td>
-                <td></td>
+    <h5><strong><?= $item ?>：<?= $pathinfo['name']; ?></strong></h5>
+    <div style="padding-right:0.7em;">
+        <table class="table table-striped table-hover table-bordered">
+            <tr style="background:#5bc0de;color:#fff;">
+                <th>ID</th>
+                <th>班级名称</th>
+                <th>创建时间</th>
+                <th>操作</th>
             </tr>
-        <?php } ?>
-    </table>
-    <?= LinkPager::widget([
-        'pagination' => $status['pages'],
-    ]);
-    ?>
+
+            <?php foreach ($status['data'] as $k => $v) { ?>
+                <tr>
+                    <td><?= $v['id'] ?></td>
+                    <td><?= $v['name'] ?></td>
+                    <td><?= $v['createtime'] ?></td>
+                    <td></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+    <span class="pull-right">
+        <?= LinkPager::widget([
+            'pagination' => $status['pages'],
+        ]);
+        ?>
+    </span>
 </div>
 <script language="javascript">
     var s = "<?=$pathinfo['s'];?>"

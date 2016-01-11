@@ -2,14 +2,14 @@
 
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Catalogue\models\Catalogue;
-use app\modules\AppBase\base\appbase\ManageBC;
+use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\db\Query;
 /**
  * SchoolsController implements the CRUD actions for Schools model.
  */
-class TagController extends ManageBC
+class TagController extends BaseController
 {
     public function actionIndex()
     {
@@ -50,7 +50,7 @@ class TagController extends ManageBC
         $tag_arr['227']['tag_name'] = '课程';
         $tag_arr['227']['arr'] = [];
         $query = new Query();
-        $date_arr = $query->select('*')->from('catalogue')->where(['school_id' => $school_id, 'parent_id' => $need_arr, 'isdeleted' => HintConst::$YesOrNo_NO])->all();
+        $date_arr = $query->select('*')->from('catalogue')->where(['school_id' => $school_id, 'parent_id' => $need_arr,'isdeleted'=>HintConst::$YesOrNo_NO])->all();
         if (count($date_arr) > 0) {
             foreach ($date_arr as $kk => $vv) {
                 $tag_arr[$vv['parent_id']]['arr'][] = $vv;

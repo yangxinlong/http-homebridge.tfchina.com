@@ -12,21 +12,21 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '俱乐部审核'), '
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container" style="padding-right:3em;">
-    <table class="table table-striped table-hover">
-        <tr>
-            <th style="width: 5%">ID</th>
-            <th style="width: 8%">作者</th>
-            <th style="width: 10%">缩略图</th>
-            <th style="width: 10%">标题</th>
-            <th style="width: 40%">内容</th>
-            <th style="width: 9%">创建时间</th>
-            <th>操作</th>
+    <table class="table table-striped table-hover table-bordered" style="margin-top:10px;">
+        <tr style="background:#f0ad4e;color:#fff;">
+            <th class="text-center">ID</th>
+            <th class="text-center">作者</th>
+            <th class="text-center">缩略图</th>
+            <th class="text-center">标题</th>
+            <th class="text-center">内容</th>
+            <th class="text-center">创建时间</th>
+            <th class="text-center">操作</th>
         </tr>
 
         <?php foreach ($status['data'] as $k => $v) { ?>
-            <tr>
-                <td><?= $v['id'] ?></td>
-                <td><?= $v['name_zh'] ?></td>
+            <tr class="text-center">
+                <td style="width:5%;"><?= $v['id'] ?></td>
+                <td style="width:6%;"><?= $v['name_zh'] ?></td>
                 <td>
                     <?php if (!is_null($v['url_thumb'])) { ?>
                         <img width="80%" src="http://www.jyq365.com/<?= $v['url_thumb'] ?>">
@@ -35,19 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td><?= mb_substr($v['title'], 0, 20) ?></td>
                 <td><?= mb_substr($v['contents'], 0, 100) ?>...</td>
                 <td><?= $v['createtime'] ?></td>
-                <td>
-                    <a href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=Stats/club/delete&pri_type_id=<?= $pri_type_id ?>&id=<?= $v['id'] ?>';}"><span
-                            class="glyphicon glyphicon-trash"></span> 删除</a>
-                    <a href="index.php?r=Stats/club/view&pri_type_id=<?= $pri_type_id ?>&id=<?= $v['id'] ?>"><span
-                            class="glyphicon glyphicon-eye-open"></span> 详情</a>
-
+                <td style="width:10%;">
+                    <a class="btn btn-xs btn-danger" href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=Stats/club/delete&pri_type_id=<?= $pri_type_id ?>&id=<?= $v['id'] ?>';}">删除</a>
+                    <a class="btn btn-xs btn-info" href="index.php?r=Stats/club/view&pri_type_id=<?= $pri_type_id ?>&id=<?= $v['id'] ?>">详情</a>
             </tr>
         <?php } ?>
     </table>
-    <?= LinkPager::widget([
-        'pagination' => $status['pages'],
-    ]);
-    ?>
+    <span class="pull-right">
+        <?= LinkPager::widget([
+            'pagination' => $status['pages'],
+        ]);
+        ?>
+    </span>
 </div>
 
 

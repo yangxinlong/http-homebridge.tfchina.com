@@ -8,49 +8,50 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '统计'), 'url' =>Yi
 $this->params['breadcrumbs'][] = "注册省市";
 ?>
 
-<div class="container" style="padding-right:3em;">
-    <SELECT id=pro
-            name=pro
-            style="background:#fff; border:2px; color:#666666; font-size:16px; width:18%; height:40px; line-height:40px;"
-            type="text">
-        <OPTION value="" selected>所在省</OPTION>
-    </SELECT>
-</div>
-<div class="container" style="padding-right:3em;">
-    <table class="table table-striped table-hover">
-        <tr>
-            <th>ID</th>
-            <th>学校名称</th>
-            <th>省</th>
-            <th>市</th>
-            <th>地区</th>
-            <th>创建时间</th>
-            <th>操作</th>
-        </tr>
+<div class="container" style="margin-top: 10px;">
+    <div class="row">
+        <div class="col-sm-2">
+            <SELECT id="pro" name="pro" class="form-control" type="text">
+                <OPTION value="" selected>所在省</OPTION>
+            </SELECT>
+        </div>
+    </div>
 
-        <?php foreach ($status['data'] as $k => $v) { ?>
-            <tr>
-                <td><?= $v['id'] ?></td>
-                <td><?= $v['name'] ?></td>
-                <td><?= $v['province'] ?></td>
-                <td><?= $v['city'] ?></td>
-                <td><?= $v['district'] ?></td>
-                <td><?= $v['createtime'] ?></td>
-                <td>
-                    <a href="index.php?r=Stats/class/index&school_id=<?= $v['id'] ?>"><span
-                            class="glyphicon glyphicon-eye-open"></span> 查看班级</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="index.php?r=Stats/custom/index&school_id=<?= $v['id'] ?>"><span
-                            class="glyphicon glyphicon-eye-open"></span> 查看用户</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="index.php?r=Stats/info/index&name=<?= $v['name'] ?>&school_id=<?= $v['id'] ?>"><span
-                            class="glyphicon glyphicon-eye-open"></span> 使用情况</a>
-                </td>
+    <div style="padding-right:2.7em;">
+        <table class="table table-striped table-hover table-bordered" style="margin-top:10px;">
+            <tr style="background:#5bc0de;color:#ffffff;"> 
+                <th class="text-center">ID</th>
+                <th class="text-center">学校名称</th>
+                <th class="text-center">省</th>
+                <th class="text-center">市</th>
+                <th class="text-center">地区</th>
+                <th class="text-center">创建时间</th>
+                <th class="text-center">操作</th>
             </tr>
-        <?php } ?>
-    </table>
-    <?= LinkPager::widget([
-        'pagination' => $status['pages'],
-    ]);
-    ?>
+
+            <?php foreach ($status['data'] as $k => $v) { ?>
+                <tr class="text-center">
+                    <td><?= $v['id'] ?></td>
+                    <td><?= $v['name'] ?></td>
+                    <td><?= $v['province'] ?></td>
+                    <td><?= $v['city'] ?></td>
+                    <td><?= $v['district'] ?></td>
+                    <td><?= $v['createtime'] ?></td>
+                    <td>
+                        <a class="btn btn-xs btn-success" href="index.php?r=Stats/class/index&school_id=<?= $v['id'] ?>">班级</a>
+                        <a class="btn btn-xs btn-warning" href="index.php?r=Stats/custom/index&school_id=<?= $v['id'] ?>">用户</a>
+                        <a class="btn btn-xs btn-info" href="index.php?r=Stats/info/index&name=<?= $v['name'] ?>&school_id=<?= $v['id'] ?>">详情</a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+        <span class="pull-right">
+            <?= LinkPager::widget([
+                'pagination' => $status['pages'],
+            ]);
+            ?>
+        </span>
+    </div>
 </div>
 <script language="javascript">
     var provines_name = 'pro';

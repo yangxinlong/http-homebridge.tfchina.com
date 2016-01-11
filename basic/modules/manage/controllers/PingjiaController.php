@@ -2,7 +2,7 @@
 
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Articles\models\Articles;
-use app\modules\AppBase\base\appbase\ManageBC;
+use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\data\Pagination;
@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 /**
  * SchoolsController implements the CRUD actions for Schools model.
  */
-class PingjiaController extends ManageBC
+class PingjiaController extends BaseController
 {
     public function actionIndex()
     {

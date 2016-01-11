@@ -11,52 +11,28 @@ use yii\helpers\Html;
 $this->title = 'Admin';
 
 ?>
-<div class="admins-index">
+<?= Html::cssFile('@web/css/bootstrap.css') ?>
+<?= Html::cssFile('@web/css/main.css') ?>
+<body class="admin-body">
+    <div class="container">
+        <?php if (isset($message)) { ?>
+            <div class="alert alert-warning"><?= $message ?></div>
+        <?php } else { ?>
 
-    <div class="container" style="margin-top:15em;">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-5">
-                <?php if (isset($message)) { ?>
-                    <div class="alert alert-warning"><?= $message ?></div>
-                <?php } else { ?>
+        <?php } ?>
+        <form class="form-signin" action="index.php?r=Admin/admins/login" method="post">
+            <div class="form-signin-heading text-center">
 
-                <?php } ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?= $this->title ?>  登录</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form action="index.php?r=Admin/admins/login" method="post">
-                            <div class="row">
-                                <div class="col-md-3" style="padding-top:0.2em;">
-                                    <label for="user_name" class="control-label">用户名</label>
-                                </div>
-                                <div class="col-md-9" style="padding-top:0.2em;">
-                                    <input type="text" name="user_name" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3" style="padding-top:0.2em;">
-                                    <label for="user_name" class="control-label">密码</label>
-                                </div>
-                                <div class="col-md-9" style="padding-top:0.2em;">
-                                    <input type="password" name="password" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3" style="padding-top:0.2em;"></div>
-                                <div class="col-md-9" style="padding-top:0.2em;">
-                                    <input type="hidden" name="r" value="Articles/articles/daily"/>
-                                    <input type="submit" class="btn btn-default" value="登录"/>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <h1 class="sign-title">管&nbsp;理&nbsp;员&nbsp;登&nbsp;录</h1>
+                <h3 style="color:#6bc5a4;"><span class="glyphicon glyphicon-user" style="color:#888;"></span>&nbsp;&nbsp;<?= $this->title ?>&nbsp;<span style="color:#15afce;">Login</span></h3>
             </div>
-            <div class="col-md-4"></div>
-        </div>
-    </div>
+            <div class="login-wrap">
+                <input name="user_name" type="text" class="form-control" placeholder="请输入手机号" autofocus>
+                <input name="password" type="password" class="form-control" placeholder="请输入密码">
 
-</div>
+                <input type="hidden" name="r" value="Articles/articles/daily"/>
+                <button class="btn btn-lg btn-login2 btn-block" type="submit" style="margin-top:40px;">登&nbsp;录</button>
+            </div>
+        </form>
+    </div>
+</body>

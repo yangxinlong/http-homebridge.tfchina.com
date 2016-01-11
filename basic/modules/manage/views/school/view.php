@@ -11,57 +11,79 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::jsFile('@web/js/jquery.js') ?>
 <?= Html::jsFile('@web/js/listtable.js') ?>
 <?= Html::jsFile('@web/js/bootstrap.js') ?>
-<h1>学校信息</h1>
-<!--<th><span onclick="listTable.edit(this, 'edit_goods_price', 12)" onmousemove="listTable.change_bg('edit_1')" id="edit_1">asdasdasdasdasda</span></th>-->
-<table class="table">
-    <tr>
-        <td width="40%">学校名称</td>
-        <td><span onclick="listTable.edit(this, 'name', 12,edit_url)"><?= $school['name'] ?> <span
-                    class="glyphicon glyphicon-pencil"></span></span></td>
-    </tr>
-    <tr>
-        <td>学校码</td>
-        <td><?= $school['code'] ?></td>
-    </tr>
-    <tr>
-        <td>联系电话</td>
-        <td><span onclick="listTable.edit(this, 'tel', 12,edit_url)"><?= $school['tel'] ?> <span
-                    class="glyphicon glyphicon-pencil"></span></span></td>
-    </tr>
-    <tr>
-        <td>QQ</td>
-        <td><span onclick="listTable.edit(this, 'qq', 12,edit_url)"><?= $school['qq'] ?> <span
-                    class="glyphicon glyphicon-pencil"></span></span></td>
-    </tr>
-    <tr>
-        <td>邮箱</td>
-        <td><span onclick="listTable.edit(this, 'email', 12,edit_url)"><?= $school['email'] ?> <span
-                    class="glyphicon glyphicon-pencil"></span></span></td>
-    </tr>
-    <tr>
-        <td>地址</td>
-        <td><span onclick="listTable.edit(this, 'address', 12,edit_url)"><?= $school['address'] ?> <span
-                    class="glyphicon glyphicon-pencil"></span></span></td>
-    </tr>
-    <tr>
-        <td>创建时间</td>
-        <td><?= $school['createtime'] ?></td>
-    </tr>
-</table>
-<h1>园长信息</h1>
-<table class="table">
-    <tr>
-        <td width="40%">园长姓名</td>
-        <td><span onclick="listTable.edit(this, 'name_zh', 12,edit_url2)"><?= $master['name_zh'] ?> <span
-                    class="glyphicon glyphicon-pencil"></span></span></td>
-    </tr>
-    <tr>
-        <td>园长电话</td>
-        <td><span onclick="listTable.edit(this, 'phone', 12,edit_url2)"><?= $master['phone'] ?> <span
-                    class="glyphicon glyphicon-pencil"></span></span></td>
-    </tr>
-    <tr>
-        <td>修改密码</td>
-        <td><span onclick="listTable.edit(this, 'password', 12,edit_url2)">点击修改密码 <span
-                    class="glyphicon glyphicon-pencil"></span></span></td>
-</table>
+<div class="wrapper">
+    <div class="col-sm-12">
+        <section class="panel panel-info">
+            <header class="panel-heading">
+                <span>学校信息</span>
+                <!-- <span class="btn btn-info pull-right">
+                    <a href="#">编辑</a>
+                </span> -->
+            </header>
+            <div class="panel-body">
+                <div class="adv-table editable-table">
+                    <!-- <div class="space15"></div> -->
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample" style="margin-top:20px;">
+                            <tr>
+                            	<th width="20%;">学校名称</th>
+                            	<td><span title="编辑" onclick="listTable.edit(this, 'name', 12,edit_url)"><?= $school['name'] ?></span></td>
+                            </tr>
+                            <tr>
+                            	<th width="20%;">学校码</th>
+                            	<td><?= $school['code'] ?></td>
+                            </tr>
+                            <tr>
+                            	<th width="20%;">联系电话</th>
+                            	<td><span title="编辑" onclick="listTable.edit(this, 'tel', 12,edit_url)"><?= $school['tel'] ?></span></td>
+                            </tr>
+                            <tr>
+                            	<th width="20%;">QQ</th>
+                            	<td><span title="编辑" onclick="listTable.edit(this, 'qq', 12,edit_url)"><?= $school['qq'] ?></span></td>
+                            </tr>
+                            <tr>
+                            	<th width="20%;">邮箱</th>
+                            	<td><span title="编辑" onclick="listTable.edit(this, 'email', 12,edit_url)"><?= $school['email'] ?></span></td>
+                            </tr>
+                            <tr>
+                            	<th width="20%;">地址</th>
+                            	<td><span title="编辑" onclick="listTable.edit(this, 'address', 12,edit_url)"><?= $school['address'] ?></span></td>
+                            </tr>
+                            <tr>
+                            	<th width="20%;">创建时间</th>
+                            	<td><?= $school['createtime'] ?></td>
+                            </tr>
+                    </table>
+                </div><!-- adv-table结束 -->
+                <span><mark style="color:#900;">注意：表格内部分数据点击即可编辑。</mark></span>
+            </div><!-- panel-body结束 -->
+        </section>
+
+         <section class="panel panel-warning">
+            <header class="panel-heading">
+                <span>园长信息</span>
+            </header>
+            <div class="panel-body">
+                <div class="adv-table editable-table">
+                    <div class="space15"></div>
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample" style="margin-top:20px;">
+                            <tr>
+                            	<th width="20%;">园长姓名</th>
+                            	<td><span title="编辑" onclick="listTable.edit(this, 'name_zh', 12,edit_url2)"><?= $master['name_zh'] ?>
+                            		<!-- <span class="glyphicon glyphicon-edit"></span> -->
+                            		</span></td>
+                            </tr>
+                            <tr>
+                            	<th width="20%;">园长电话</th>
+                            	<td><span title="编辑" onclick="listTable.edit(this, 'phone', 12,edit_url2)"><?= $master['phone'] ?></span></td>
+                            </tr>
+                            <tr>
+                            	<th width="20%;">修改密码</th>
+                            	<td><span title="编辑" onclick="listTable.edit(this, 'password', 12,edit_url2)">点击修改密码</span></td>
+                            </tr>
+                    </table>
+                </div><!-- adv-table结束 -->
+                <span><mark style="color:#900;">注意：表格内数据点击即可编辑。</mark></span>
+            </div><!-- panel-body结束 -->
+        </section>
+    </div><!-- col-*结束 -->
+</div><!-- wrapper结束 -->

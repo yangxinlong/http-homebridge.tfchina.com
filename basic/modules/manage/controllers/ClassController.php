@@ -3,7 +3,7 @@
 namespace app\modules\manage\controllers;
 use app\modules\Admin\Classes\models\Classes;
 use app\modules\Admin\Custom\models\Customs;
-use app\modules\AppBase\base\appbase\ManageBC;
+use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\data\Pagination;
@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 /**
  * ClassController implements the CRUD actions for Classes model.
  */
-class ClassController extends ManageBC
+class ClassController extends BaseController
 {
     public function behaviors()
     {
@@ -147,7 +147,7 @@ class ClassController extends ManageBC
                 default:
                     break;
             }
-            $result = ['error' => 0, 'message' => '更新成功', 'content' => $val . ' <span class="glyphicon glyphicon-pencil"></span></span>'];
+            $result = ['error' => 0, 'message' => '更新成功', 'content' => $val . ' </span>'];
             return (json_encode($result));
         } else {
             $result = ['error' => 1, 'message' => '失败', 'content' => ''];

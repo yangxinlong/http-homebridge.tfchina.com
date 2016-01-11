@@ -13,35 +13,62 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::jsFile('@web/js/jquery.js') ?>
 <?= Html::jsFile('@web/js/listtable.js') ?>
 <?= Html::jsFile('@web/js/bootstrap.min.js') ?>
-<h1>标签管理</h1>
 
-<?php foreach ($tag_arr as $kk => $vv) { ?>
-    <div class="" style="border-bottom:1px #bbb solid;"><h3><?= $vv['tag_name'] ?></h3></div>
-    <div class="" style="border-top:1px #ddd solid;"></div>
-    <div class="form_padding">
-        <?php foreach ($vv['arr'] as $k => $v) { ?>
-            <span class="tag_value"><?= $v['name_zh'] ?> <span class="glyphicon glyphicon-remove delete_tag"
-                                                               style="visibility: hidden;" title="删除"
-                                                               date="<?= $v['id'] ?>"></span></span>
-        <?php } ?>
+<div class="wrapper">
+    <div class="col-sm-12">
+        <section class="panel panel-info">
+            <header class="panel-heading">
+                <span>标签管理</span>
+            </header>
+
+            <?php foreach ($tag_arr as $kk => $vv) { ?>
+            <div class="panel-body">
+                <div class="form-group"  style="border: 1px sold #eee;">
+                    <h5 class="col-sm-1 text-center tag-title"><?= $vv['tag_name'] ?>：</h5>
+                    <div class="col-sm-3">
+                        <form action="" method="post">
+                            <div class="input-group">
+                                <input type="text" name="tag_value" class="form-control" placeholder="add new tags..">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning" type="submit">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        <input type="hidden" name="parent_id" value="<?= $kk ?>"/>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+
+                </div><br>
+                <div class="form-group form_padding">
+                    <?php foreach ($vv['arr'] as $k => $v) { ?>
+                        <span class="tag_value"><?= $v['name_zh'] ?>
+                            <span class="glyphicon glyphicon-remove delete_tag" style="visibility: visible;" title="删除"
+                                date="<?= $v['id'] ?>">
+                            </span>
+
+                            <!-- <button type="button" class="close"
+                                data-dismiss="modal" aria-hidden="true" style="color:#fff;">
+                                &times;
+                            </button> -->
+                        </span>
+                    <?php } ?>
+                </div><hr>
+            </div>
+            <?php } ?>
+        </section>
     </div>
-    <div class="form_padding">
-        <form action="" method="post">
-            <input type="text" class="" name="tag_value" size="15" maxlength="15" style="width:15em;"/><input
-                type="submit" class="button" value="添加"/>
-            <input type="hidden" name="parent_id" value="<?= $kk ?>"/>
-        </form>
-    </div>
-<?php } ?>
+</div>
+
 
 <script language="javascript">
     $(".tag_value").mousemove(function () {
         $(this).attr('class', 'edit_tag');
-        $(this).children(".glyphicon").css({visibility: 'visible'});
+        // $(this).children(".glyphicon").css({visibility: 'visible'});
     });
     $(".tag_value").mouseout(function () {
         $(this).attr('class', 'tag_value');
-        $(this).children(".glyphicon").css({visibility: 'hidden'});
+        // $(this).children(".glyphicon").css({visibility: 'hidden'});
     });
     $(".delete_tag").click(function () {
         if (confirm('确定删除该标签')) {

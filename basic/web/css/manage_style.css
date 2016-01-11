@@ -56,17 +56,29 @@
     outline: 0
 }
 .tag_value {
+    margin-left: 15px;
     line-height: 2em;
     padding: 0.5em;
+    background-color: #1caf9a;
+    border-radius: 0.5em;
+    text-align: center;
+    color: #FFFFFF;
+}
+.tag-title{
+    letter-spacing: 2px;
+    font-weight: bold;
 }
 .form_padding {
-    padding: 0.5em;
+    padding-top: 1em;
 }
 .edit_tag {
+    margin-left: 15px;
     line-height: 2em;
     padding: 0.5em;
-    background-color: #eee;
-    border-radius: 0.3em;
+    background-color: #189b88;
+    border-radius: 0.5em;
+    text-align: center;
+    color: #FFFFFF;
 }
 .bread_li a {
     color: #777;
