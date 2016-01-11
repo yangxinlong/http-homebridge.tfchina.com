@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::jsFile('@web/js/jquery.js') ?>
 <?= Html::jsFile('@web/js/jquery.tokeninput.js') ?>
 <?= Html::jsFile('@web/js/jstree.min.js') ?>
-<?= Html::jsFile('@web/js/listtable.js') ?>
 <?= Html::jsFile('@web/js/bootstrap.min.js') ?>
 
 <div class="wrapper">

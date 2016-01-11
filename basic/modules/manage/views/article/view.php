@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= Html::jsFile('@web/js/jquery.js') ?>
 <?= Html::jsFile('@web/js/jquery.tokeninput.js') ?>
 <?= Html::jsFile('@web/js/jstree.min.js') ?>
-<?= Html::jsFile('@web/js/listtable.js') ?>
+
 <?= Html::jsFile('@web/js/bootstrap.min.js') ?>
 
 <div class="wrapper">
@@ -37,17 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
               <td><?php echo $model->contents; ?></td>
               <td>
                   <?php foreach($pic_list as $kk => $vv){?>
-                  <?php if($kk%3 == 0){?>
                   <div class="row">
-                      <div class="col-md-3">
-                        <?php }?>  
+                      <div class="col-md-8">
                         <a href="http://homebrisge.tfchina.com/<?= $vv['url']?>" class="thumbnail" target="_blank">
-                          <img src="http://homebrisge.tfchina.com/<?= $vv['url_thumb']?>" alt="" style="width:100%;">
+                          <img src="http://homebrisge.tfchina.com/<?= $vv['url']?>" alt="" style="width:100%;">
                         </a>
-                        <?php if($kk%3 == 0){?>   
                       </div>
                   </div>
-                  <?php }?>
                   <?php }?>
               </td>
             </tr>
