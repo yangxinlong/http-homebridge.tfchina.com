@@ -73,8 +73,8 @@ use yii\helpers\Html;
               </label>
             </div>
              <div class="text-right">
-               <a href="#">忘记密码？</a>|
-               <a href="#">注册</a>
+               <a href="index.php?r=site/lxwm" title="请联系管理员">忘记密码？</a>|
+               <a href="index.php?r=site/sqhz" title="申请合作">注册</a>
              </div>
            <button class="btn btn-block btn-lg btn-login1" type="submit">
               登&nbsp;录
