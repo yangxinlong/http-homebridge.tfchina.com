@@ -30,8 +30,8 @@ class ArticleSendRevieve extends BaseAR
     public function rules()
     {
         return [
-            [['article_id', 'sender_id', 'reciever_id', 'isread'], 'integer'],
-            [['createtime', 'updatetime'], 'safe']
+            [['article_id', 'sender_id', 'reciever_id', 'isread', 'type'], 'integer'],
+            [['createtime'], 'safe']
         ];
     }
     /**
@@ -46,7 +46,7 @@ class ArticleSendRevieve extends BaseAR
             'reciever_id' => 'Reciever ID',
             'isread' => 'Isread',
             'createtime' => 'Createtime',
-            'updatetime' => 'Updatetime',
+            'type' => 'Type',
         ];
     }
     public function updateIsRead($article_id, $yesorno)
@@ -58,13 +58,14 @@ class ArticleSendRevieve extends BaseAR
             ArticleSendRevieve::updateAll(['isread' => HintConst::$YesOrNo_YES], 'id=' . $mode['id']);
         }
     }
-    public function  addArsr($dsr, $role, $school, $class, $user)
+    public function  addArsr($dsr, $role, $school, $class, $user,$type)
     {
         if (isset(Yii::$app->session['custominfo'])) {
             $dsr['sender_id'] = Yii::$app->session['custominfo']->custom->id;
         } else {
             $dsr['sender_id'] = 0;
         }
+        $dsr['type'] = $type;
         $dsr['role'] = $role;
         $dsr['createtime'] = CommonFun::getCurrentDateTime();
         $dsr['isread'] = HintConst::$YesOrNo_NO;

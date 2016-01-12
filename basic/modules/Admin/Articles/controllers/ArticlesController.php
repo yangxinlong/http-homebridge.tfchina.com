@@ -13,6 +13,7 @@ use app\modules\Admin\Articles\models\CustomsDaily;
 use app\modules\Admin\Custom\models\Customs;
 use app\modules\AppBase\base\appbase\BaseController;
 use app\modules\AppBase\base\appbase\MultThread;
+use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\HintConst;
 use Yii;
 use yii\db\Query;
@@ -225,7 +226,16 @@ class ArticlesController extends BaseController
 //================================================================================================================================================================
 //===========================文章操作==========================================================================================================================
 //================================================================================================================================================================    /**
-    //发表精彩瞬间
+    //add praise
+    public function actionAddpraise()
+    {
+        return  (new Articles())->AddAHE(CatDef::$mod['praise']);
+    }
+    //add letter
+    public function actionAddletter()
+    {
+        return  (new Articles())->AddAHE(CatDef::$mod['letter']);
+    }
     public function actionAddhigh()
     {
         $article = new Articles();

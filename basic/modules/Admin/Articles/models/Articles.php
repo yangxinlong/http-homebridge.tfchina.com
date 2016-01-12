@@ -819,13 +819,13 @@ class Articles extends BaseMain
         $result = ['ErrCode' => $ErrCode, 'Message' => $Message, 'Content' => $Content];
         return json_encode($result);
     }
-    public function AddAHE($type)
+    public function AddAHE($article_type_id)
     {
         try {
             $ErrCode = HintConst::$Zero;
             $Message = HintConst::$WEB_JYQ;
             $Content = HintConst::$NULLARRAY;
-            $d['article_type_id'] = $type;
+            $d['article_type_id'] = $article_type_id;
             $d['o_link_id'] = isset($_REQUEST['o_link_id']) ? $_REQUEST['o_link_id'] : 0;
             $d['sub_type_id'] = isset($_REQUEST['sub_type_id']) ? $_REQUEST['sub_type_id'] : 0;
             $d['title'] = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
@@ -834,6 +834,7 @@ class Articles extends BaseMain
             $school = isset($_REQUEST['school']) ? $_REQUEST['school'] : 0;
             $class = isset($_REQUEST['class']) ? $_REQUEST['class'] : 0;
             $user = isset($_REQUEST['user']) ? $_REQUEST['user'] : 0;
+            $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 0;
             if (empty($d['title'])) {
                 $ErrCode = HintConst::$No_title;
             } elseif (empty($d['contents'])) {
@@ -843,8 +844,8 @@ class Articles extends BaseMain
                     (new Vote())->increaseShareTimes($d['o_link_id']);
                     (new Score())->ClubShare($d['o_link_id']);
                 }
-                $Content = $this->addArticle($d, $role, $school, $class, $user);
-                $this->push($role, $school, $class, $user, $type, $Content, $d['title']);
+                $Content = $this->addArticle($d, $role, $school, $class, $user,$type);
+                $this->push($role, $school, $class, $user, $article_type_id, $Content, $d['title']);
             }
             return json_encode(['ErrCode' => $ErrCode, 'Message' => $Message, 'Content' => $Content]);
         } catch (Exception $e) {
@@ -853,7 +854,7 @@ class Articles extends BaseMain
             return json_encode(['ErrCode' => HintConst::$No_success, 'Message' => HintConst::$NULL, 'Content' => HintConst::$NULLARRAY]);
         }
     }
-    public function  addArticle($d, $role, $school, $class, $user)
+    public function  addArticle($d, $role, $school, $class, $user,$type)
     {
         $ar = new Articles();
         $d['sys_p'] = Score::getSysP('create', $d['article_type_id']);
@@ -902,7 +903,7 @@ class Articles extends BaseMain
         }
         $arsr = new ArticleSendRevieve();
         $dsr['article_id'] = $id;
-        $arsr->addArsr($dsr, $role, $school, $class, $user);
+        $arsr->addArsr($dsr, $role, $school, $class, $user,$type);
         return $id;
     }
     public function addNew($d)
