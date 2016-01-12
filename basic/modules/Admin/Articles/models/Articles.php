@@ -831,7 +831,7 @@ class Articles extends BaseMain
             $d['title'] = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
             $d['contents'] = isset($_REQUEST['contents']) ? $_REQUEST['contents'] : '';
             $role = isset($_REQUEST['role']) ? $_REQUEST['role'] : 0;
-            $school = isset($_REQUEST['school']) ? $_REQUEST['school'] : 0;
+            $school = isset($_REQUEST['school']) ? $_REQUEST['school'] : $this->getCustomSchool_id();
             $class = isset($_REQUEST['class']) ? $_REQUEST['class'] : 0;
             $user = isset($_REQUEST['user']) ? $_REQUEST['user'] : 0;
             $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : 0;
@@ -903,7 +903,8 @@ class Articles extends BaseMain
         }
         $arsr = new ArticleSendRevieve();
         $dsr['article_id'] = $id;
-        $arsr->addArsr($dsr, $role, $school, $class, $user,$type);
+        $dsr['type'] = $type;
+        $arsr->addArsr($dsr, $role, $school, $class, $user);
         return $id;
     }
     public function addNew($d)

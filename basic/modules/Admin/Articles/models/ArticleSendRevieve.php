@@ -13,7 +13,7 @@ use Yii;
  * @property integer $reciever_id
  * @property integer $isread
  * @property string $createtime
- * @property string $updatetime
+ * @property integer $type
  */
 class ArticleSendRevieve extends BaseAR
 {
@@ -31,7 +31,7 @@ class ArticleSendRevieve extends BaseAR
     {
         return [
             [['article_id', 'sender_id', 'reciever_id', 'isread', 'type'], 'integer'],
-            [['createtime'], 'safe']
+            [['createtime', 'type'], 'safe']
         ];
     }
     /**
@@ -58,14 +58,13 @@ class ArticleSendRevieve extends BaseAR
             ArticleSendRevieve::updateAll(['isread' => HintConst::$YesOrNo_YES], 'id=' . $mode['id']);
         }
     }
-    public function  addArsr($dsr, $role, $school, $class, $user,$type)
+    public function  addArsr($dsr, $role, $school, $class, $user)
     {
         if (isset(Yii::$app->session['custominfo'])) {
             $dsr['sender_id'] = Yii::$app->session['custominfo']->custom->id;
         } else {
             $dsr['sender_id'] = 0;
         }
-        $dsr['type'] = $type;
         $dsr['role'] = $role;
         $dsr['createtime'] = CommonFun::getCurrentDateTime();
         $dsr['isread'] = HintConst::$YesOrNo_NO;
@@ -131,7 +130,7 @@ class ArticleSendRevieve extends BaseAR
     }
     public function addNew($d)
     {
-        $arsr = new ArticleSendRevieve();
+        $arsr = new self();
         foreach ($d as $k => $v) {
             $arsr->$k = $v;
         }
