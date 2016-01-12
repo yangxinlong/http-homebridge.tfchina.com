@@ -13,17 +13,12 @@ $this->params['breadcrumbs'][] = '班级管理';
 <script language="javascript">
 var edit_url = 'index.php?r=manage/class/edit-class';
 </script>
-
 <?= Html::cssFile('@web/css/token-input.css') ?>
-<?= Html::cssFile('@web/css/js_tree/default/style.min.css') ?>
-
-
 <?= Html::jsFile('@web/js/jquery.js') ?>
 <?= Html::jsFile('@web/js/jquery.tokeninput.js') ?>
 <?= Html::jsFile('@web/js/jstree.min.js') ?>
 <?= Html::jsFile('@web/js/listtable.js') ?>
 <?= Html::jsFile('@web/js/bootstrap.min.js') ?>
-
 <?php if($message <> ''){?>
 <div class="alert alert-success" role="alert" id="add_alert">
 	<button type="button" class="close" data-dismiss="alert" onclick="$('#add_alert').hide();"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>

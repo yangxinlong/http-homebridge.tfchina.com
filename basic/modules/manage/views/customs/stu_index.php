@@ -16,8 +16,6 @@ var edit_url = 'index.php?r=manage/customs/edit-custom';
 </script>
 <?= Html::cssFile('@web/css/token-input.css') ?>
 <?= Html::cssFile('@web/css/js_tree/default/style.min.css') ?>
-<?= Html::cssFile('@web/css/style.min.css') ?>
-
 <?= Html::jsFile('@web/js/jquery.js') ?>
 <?= Html::jsFile('@web/js/jquery.tokeninput.js') ?>
 <?= Html::jsFile('@web/js/jstree.min.js') ?>
