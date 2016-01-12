@@ -16,6 +16,9 @@ $config = [
 //    ),
     'modules' => [
         'gii' => 'yii\gii\Module',
+        'Shop' => [
+            'class' => 'app\modules\Shop\Shop',
+        ],
         'Redfl' => [
             'class' => 'app\modules\Admin\Redfl\Redfl',
         ],
