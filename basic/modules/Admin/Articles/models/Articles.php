@@ -844,7 +844,7 @@ class Articles extends BaseMain
                     (new Vote())->increaseShareTimes($d['o_link_id']);
                     (new Score())->ClubShare($d['o_link_id']);
                 }
-                $Content = $this->addArticle($d, $role, $school, $class, $user,$type);
+                $Content = $this->addArticle($d, $role, $school, $class, $user, $type);
                 $this->push($role, $school, $class, $user, $article_type_id, $Content, $d['title']);
             }
             return json_encode(['ErrCode' => $ErrCode, 'Message' => $Message, 'Content' => $Content]);
@@ -854,7 +854,7 @@ class Articles extends BaseMain
             return json_encode(['ErrCode' => HintConst::$No_success, 'Message' => HintConst::$NULL, 'Content' => HintConst::$NULLARRAY]);
         }
     }
-    public function  addArticle($d, $role, $school, $class, $user,$type)
+    public function  addArticle($d, $role, $school, $class, $user, $type)
     {
         $ar = new Articles();
         $d['sys_p'] = Score::getSysP('create', $d['article_type_id']);
