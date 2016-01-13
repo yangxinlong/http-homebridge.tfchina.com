@@ -2,10 +2,11 @@
 
 namespace app\modules\Shop;
 
-class Shop extends \yii\base\Module
+use app\modules\AppBase\base\appbase\BaseModule;
+class Shop extends BaseModule
 {
     public $controllerNamespace = 'app\modules\Shop\controllers';
-
+    public $layout = 'main';
     public function init()
     {
         parent::init();
