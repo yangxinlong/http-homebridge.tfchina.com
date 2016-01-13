@@ -630,6 +630,14 @@ class ArticlesController extends BaseController
     {
         return (new Articles())->Artidetail();
     }
+    public function actionPraisedetail()
+    {
+        return (new Articles())->Artidetail();
+    }
+    public function actionLetterdetail()
+    {
+        return (new Articles())->Artidetail();
+    }
     public function actionHighdetail()
     {
         return (new ArticleAttachment())->HighDetail();
@@ -989,6 +997,14 @@ class ArticlesController extends BaseController
         $article = new Articles();
         $result = $article->AEList(HintConst::$ARTICLE_PATH);
         return ($result);
+    }
+    public function actionPraise()
+    {
+        return  (new Articles())->AEList(CatDef::$mod['praise']);
+    }
+    public function actionLetter()
+    {
+        return  (new Articles())->AEList(CatDef::$mod['letter']);
     }
     //新 学期评价列表-分页
     public function actionTermeva()
