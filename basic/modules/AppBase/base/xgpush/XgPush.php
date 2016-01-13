@@ -250,6 +250,12 @@ class XgPush extends XingeApp
             case CatDef::$mod['article']:
                 $head = '您收到一篇新的文章：';
                 break;
+            case CatDef::$mod['praise']:
+                $head = '您收到一篇新的点赞：';
+                break;
+            case CatDef::$mod['letter']:
+                $head = '您收到一篇新的感谢信：';
+                break;
             case CatDef::$mod['moneva']:
             case CatDef::$mod['termeva']:
                 $head = '您收到' . self::getCustomNamezh() . '老师对' . $cusinfo['name_zh'] . '小朋友新评价：';
