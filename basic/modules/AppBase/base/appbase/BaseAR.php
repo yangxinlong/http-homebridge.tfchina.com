@@ -460,13 +460,13 @@ class BaseAR extends ActiveRecord implements BaseInterface
             $thumb = UploadedFile::getInstanceByName($images_lable);
             if ($thumb) {
                 $img_path = 'uploads/';
+                $img_path .= date('Y-m-d') . '/';
                 if ($school_id) {
                     $img_path .= $school_id . '/';
                 }
                 if ($class_id) {
                     $img_path .= $class_id . '/';
                 }
-                $img_path .= date('Y-m-d') . '/';
                 if (!is_dir($img_path)) {
                     if (BaseFileHelper::createDirectory($img_path)) {
                     } else {
