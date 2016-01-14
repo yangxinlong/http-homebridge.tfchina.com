@@ -67,6 +67,8 @@ use yii\widgets\Breadcrumbs;
                             <li><a href="index.php?r=manage/pingjia/index"><span class="glyphicon glyphicon-map-marker"></span>评价列表</a></li>
                             <li><a href="index.php?r=manage/note/index"><span class="glyphicon glyphicon-map-marker"></span>通知列表</a></li>
                             <li><a href="index.php?r=manage/vote/index"><span class="glyphicon glyphicon-map-marker"></span>调查列表</a></li>
+                            <li><a href="index.php?r=manage/praise/index"><span class="glyphicon glyphicon-map-marker"></span>点赞列表</a></li>
+                            <li><a href="index.php?r=manage/letter/index"><span class="glyphicon glyphicon-map-marker"></span>感谢信列表</a></li>
                         </ul>
                     </li>
                 </ul>

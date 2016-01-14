@@ -865,7 +865,11 @@ class Articles extends BaseMain
         $d['date'] = CommonFun::getCurrentDate();
         $d['term'] = CommonFun::getCurrentTerm();
         $d['month'] = CommonFun::getCurrentYm();
-        $d['ispassed'] = $this->getIsCanSend();
+        if ($d['article_type_id'] == CatDef::$mod['praise'] || $d['article_type_id'] == CatDef::$mod['letter']) {
+            $d['ispassed'] = HintConst::$YesOrNo_YES;
+        } else {
+            $d['ispassed'] = $this->getIsCanSend();
+        }
         $d['isdelete'] = HintConst::$YesOrNo_NO;
         $d['isview'] = HintConst::$YesOrNo_NO;
         $file_name = $this->create_img($d['school_id'], $d['class_id'], "images");  //上传图片 并记录文件名
