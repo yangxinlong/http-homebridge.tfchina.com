@@ -28,7 +28,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=127.0.0.1;dbname=home',
+    'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=home',
     'username' => 'home',
     'password' => 'dl2983252',
     'charset' => 'utf8',
