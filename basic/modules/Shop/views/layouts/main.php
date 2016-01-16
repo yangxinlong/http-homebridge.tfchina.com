@@ -20,14 +20,16 @@ AppAsset::register($this);
 <?php
 $this->beginBody()
 ?>
+
 <div class="container">
-    <div class="">
-        jjjj
-        <div style="border-style:outset;">
-            <?= $content ?>
-        </div>
+    <div class="banner">
+    	<img src="images/shop-img/banner.png">
     </div>
 </div>
+    <div>
+        <?= $content ?>
+    </div>
+
 <!-- container结束 -->
 <?php $this->endBody() ?>
 </body>
