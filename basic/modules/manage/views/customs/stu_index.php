@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <input type="text" name="class_id" hidden value="<?= $params['class_id'] ?>">
                         <button type="submit" class="btn btn-success">通过电子表格添加</button>
                         <a href="download/用户信息模板.rar">
-                            <button id="downexcel" type="button" class="btn btn-success">下载用户信息模板</button>
+                            <button id="downexcel" type="button" class="btn btn-danger">下载用户信息模板</button>
                         </a>
                     </div>
                 </form>
