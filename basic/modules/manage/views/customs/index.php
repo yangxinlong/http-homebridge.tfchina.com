@@ -93,13 +93,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
                 </form>
-<!--                <form class="form-inline" style="margin-bottom:15px;" action="index.php?r=manage/customs/uploadexcel"-->
-<!--                      method="post" enctype="multipart/form-data" onsubmit="return check()" >-->
-<!--                    <div class="form-group">-->
-<!--                        <input id="myname" type="file" name="myname" class="form-control" accept=".xlsx">-->
-<!--                        <button type="submit" class="btn btn-success">通过电子表格添加</button>-->
-<!--                    </div>-->
-<!--                </form>-->
+                <form class="form-inline" style="margin-bottom:15px;" action="index.php?r=manage/customs/uploadexcel"
+                      method="post" enctype="multipart/form-data" onsubmit="return check()">
+                    <div class="form-group">
+                        <input id="myname" type="file" name="myname" class="form-control" accept=".xlsx">
+                        <input type="text" name="role" hidden value="<?= $params['role'] ?>">
+                        <input type="text" name="class_id" hidden value="<?= $params['class_id'] ?>">
+                        <button type="submit" class="btn btn-success">通过电子表格添加</button>
+                        <a href="download/用户信息模板.rar">
+                            <button id="downexcel" type="button" class="btn btn-success">下载用户信息模板</button>
+                        </a>
+                    </div>
+                </form>
                 <span><mark style="color:#900;">注意：表格内部分数据点击即可编辑。</mark></span>
 
                 <div class="adv-table editable-table">
@@ -159,6 +164,7 @@ echo LinkPager::widget([
 ]);
 ?>
 <script language="javascript">
+
     function check() {
         if (!$('#myname').val()) {
             alert("请选择电子表格类文件!");

@@ -9,7 +9,7 @@ namespace app\modules\AppBase\base\appbase;
 use app\modules\Admin\Custom\models\Customs;
 class BaseExcel
 {
-    public function import($file)
+    public function import($file, $role,$class_id)
     {
         $fn = $file->tempName;
         $data = \moonland\phpexcel\Excel::import($fn, [
@@ -17,7 +17,6 @@ class BaseExcel
             'setIndexSheetByName' => true, // set this if your excel data with multiple worksheet, the index of array will be set with the sheet name. If this not set, the index will use numeric.
             'getOnlySheet' => 'sheet1', // you can set this property if you want to get the specified sheet from the excel data with multiple worksheet.
         ]);
-        (new Customs())->batchaddCustom($data);
+        return (new Customs())->batchaddCustom($data, $role,$class_id);
     }
-
 }

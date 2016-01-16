@@ -118,7 +118,7 @@ class DefaultController extends Controller
                         return $this->render('login', ['message' => '账号未通过审核，耐心等待管理员审核']);
                     }
                     //建立session  要跟其他地方的不同
-                    Yii::$app->session['manage_user'] = $user;;
+                    Yii::$app->session['manage_user'] = $user;
                     $url = Yii::$app->urlManager->createUrl(['manage/article']);
                     return Yii::$app->getResponse()->redirect($url);
                 } else {

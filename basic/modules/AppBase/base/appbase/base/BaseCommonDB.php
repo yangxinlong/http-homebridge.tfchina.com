@@ -54,7 +54,13 @@ class BaseCommonDB
     }
     public function  insert($sql)
     {
-        return $this->excute($sql);
+        try {
+            $this->getDb()->createCommand($sql)->execute();
+            return $this->getDb()->getLastInsertID();
+        } catch (Exception $e) {
+            $this->execpt_nosuccess($e->getMessage());
+            die();
+        }
     }
     public function  delete($sql)
     {
@@ -67,16 +73,8 @@ class BaseCommonDB
     private function  excute($sql)
     {
         try {
-            echo "<br>";
-//            $r = $this->getDb()->createCommand("select id,name_zh from customs WHERE phone=13837207027")->execute();
-            $r = Yii::$app->db->createCommand("select id,name_zh from customs WHERE id=2418")->queryAll();
-            var_dump($r);
-            echo "<br>";
-            echo "<br>";
-            $r = $this->getDb()->createCommand("select id,name_zh from customs WHERE id=2418")->queryAll();
-            var_dump($r);
-            echo "<br>";
-            exit;
+            $this->getDb()->createCommand($sql)->execute();
+            return;
         } catch (Exception $e) {
             $this->execpt_nosuccess($e->getMessage());
             die();

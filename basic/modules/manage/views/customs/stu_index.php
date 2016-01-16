@@ -1,6 +1,5 @@
 <?php
 
-use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
@@ -12,7 +11,7 @@ $this->title = '学生管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <script language="javascript">
-var edit_url = 'index.php?r=manage/customs/edit-custom';
+    var edit_url = 'index.php?r=manage/customs/edit-custom';
 </script>
 <?= Html::cssFile('@web/css/token-input.css') ?>
 <?= Html::cssFile('@web/css/js_tree/default/style.min.css') ?>
@@ -36,13 +35,18 @@ var edit_url = 'index.php?r=manage/customs/edit-custom';
                 </h5>
             </div>
             <div class="modal-body">
-                 <form action="" method="post">
+                <form action="" method="post">
                     <div class="form-group">
-                         <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios" id="radios1" value="1" checked>加分</div>
-                        <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios" id="radios1" value="2">减分</div>
-                        <input type="text" id="pointssize" class="form-control input-sm" size="10" min="1" max="100" placeholder="输入要变更的积分">
+                        <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios"
+                                                                                     id="radios1" value="1" checked>加分
+                        </div>
+                        <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios"
+                                                                                     id="radios1" value="2">减分
+                        </div>
+                        <input type="text" id="pointssize" class="form-control input-sm" size="10" min="1" max="100"
+                               placeholder="输入要变更的积分">
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <textarea class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
                     </div>
                 </form>
@@ -67,17 +71,32 @@ var edit_url = 'index.php?r=manage/customs/edit-custom';
                 <form class="form-inline" action="" method="post" style="margin-bottom:10px;">
                     <div class="pull-right" style="margin-bottom:20px;">
                         <div class="form-group">
-                            <select id="field_type" name="field_type" class="form-control" style="font-size:13px;"></select>
+                            <select id="field_type" name="field_type" class="form-control"
+                                    style="font-size:13px;"></select>
                             <input type="text" class="form-control" name="field" id="field" placeholder="查找..">
                             <input type="hidden" name="r" value="manage/class/index">
                             <button type="submit" class="btn btn-success">查找</button>
                         </div>
                     </div>
                 </form>
-
+                <form id="students" class="form-inline" style="margin-bottom:15px;"
+                      action="index.php?r=manage/customs/uploadexcel"
+                      method="post" enctype="multipart/form-data" onsubmit="return check()" hidden>
+                    <div class="form-group">
+                        <input id="myname" type="file" name="myname" class="form-control" accept=".xlsx">
+                        <input type="text" name="role" hidden value="<?= $params['role'] ?>">
+                        <input type="text" name="class_id" hidden value="<?= $params['class_id'] ?>">
+                        <button type="submit" class="btn btn-success">通过电子表格添加</button>
+                        <a href="download/用户信息模板.rar">
+                            <button id="downexcel" type="button" class="btn btn-success">下载用户信息模板</button>
+                        </a>
+                    </div>
+                </form>
                 <span><mark style="color:#900;">注意：表格内部分数据点击即可编辑。</mark></span>
+
                 <div class="adv-table editable-table">
-                    <table class="table table-striped table-hover table-bordered" id="editable-sample" style="margin-top:15px;">
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample"
+                           style="margin-top:15px;">
                         <tr style="background:#5bc0de;color:#fff;">
                             <th class="text-center">学生名称</th>
                             <th class="text-center">修改密码</th>
@@ -88,36 +107,56 @@ var edit_url = 'index.php?r=manage/customs/edit-custom';
                             <th class="text-center">积分</th>
                             <th class="text-center">操作</th>
                         </tr>
-                        <?php foreach($models as $kk => $vv){?>
-                        <tr class="text-center">
-                            <td><span title="编辑" onclick="listTable.edit(this, 'name', <?= $vv['id']?>)"><?= $vv['name_zh']?></span></td>
-                            <td><span title="编辑" onclick="listTable.edit(this, 'password', <?= $vv['id']?>)">点击修改密码</span></td>
-                            <td><span title="编辑" onclick="listTable.edit(this, 'phone', <?= $vv['id']?>)"><?= $vv['phone']?></span></td>
-                            <td><?= $vv['class_name']?></td>
-                            <td><?= Html::img('@web/images/'.$vv['ispassed'].'.png',['onclick'=>"listTable.toggle(this, 'ispassed',".$vv['id'].")"])?></td>
-                            <td><?= $vv['createtime']?></td>
-                            <td><?= $vv['points']?></td>
-                            <td><a style="color:#fff;" class="btn btn-xs btn-danger" href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id']?>';}">删除</a>
-                                <a style="color:#fff;" class="btn btn-xs btn-info" href="javascript:void(0)" onclick="update(this,<?= $vv['id'] ?>);">变更积分</a>
-                            </td>
-                        </tr>
-                        <?php }?>
+                        <?php foreach ($models as $kk => $vv) { ?>
+                            <tr class="text-center">
+                                <td><span title="编辑"
+                                          onclick="listTable.edit(this, 'name', <?= $vv['id'] ?>)"><?= $vv['name_zh'] ?></span>
+                                </td>
+                                <td><span title="编辑"
+                                          onclick="listTable.edit(this, 'password', <?= $vv['id'] ?>)">点击修改密码</span>
+                                </td>
+                                <td><span title="编辑"
+                                          onclick="listTable.edit(this, 'phone', <?= $vv['id'] ?>)"><?= $vv['phone'] ?></span>
+                                </td>
+                                <td><?= $vv['class_name'] ?></td>
+                                <td><?= Html::img('@web/images/' . $vv['ispassed'] . '.png', ['onclick' => "listTable.toggle(this, 'ispassed'," . $vv['id'] . ")"]) ?></td>
+                                <td><?= $vv['createtime'] ?></td>
+                                <td><?= $vv['points'] ?></td>
+                                <td><a style="color:#fff;" class="btn btn-xs btn-danger"
+                                       href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id'] ?>';}">删除</a>
+                                    <a style="color:#fff;" class="btn btn-xs btn-info" href="javascript:void(0)"
+                                       onclick="update(this,<?= $vv['id'] ?>);">变更积分</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </table>
-                </div><!-- adv-table结束 -->
-                
-                <span class="pull-right">总数：<span style="color:#428bca;font-size:15px;"><?= $pages->totalCount?></span>&nbsp;条记录</span>
-            </div><!-- panel-body结束 -->
+                </div>
+                <!-- adv-table结束 -->
+
+                <span class="pull-right">总数：<span style="color:#428bca;font-size:15px;"><?= $pages->totalCount ?></span>&nbsp;条记录</span>
+            </div>
+            <!-- panel-body结束 -->
         </section>
-    </div><!-- col-*结束 -->
+    </div>
+    <!-- col-*结束 -->
 </div><!-- wrapper结束 -->
-
-
 <?php
 echo LinkPager::widget([
     'pagination' => $pages,
 ]);
 ?>
 <script language="javascript">
+    var class_id = "<?=$params['class_id']?>";
+    if (class_id) {
+        $('#students').show();
+    }
+    function check() {
+        if (!$('#myname').val()) {
+            alert("请选择电子表格类文件!");
+            return false;
+        }
+        return true;
+    }
     var field_type = 'field_type';
     function update(obj, custom_id) {
         var tds = $(obj).parent().parent().find('td');
