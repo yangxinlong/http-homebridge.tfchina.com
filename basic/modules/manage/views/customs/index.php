@@ -93,8 +93,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
                 </form>
-                <form class="form-inline" style="margin-bottom:15px;" action="index.php?r=manage/customs/uploadexcel"
-                      method="post" enctype="multipart/form-data" onsubmit="return check()">
+                <form id="teacher" class="form-inline" style="margin-bottom:15px;"
+                      action="index.php?r=manage/customs/uploadexcel"
+                      method="post" enctype="multipart/form-data" onsubmit="return check()" hidden>
                     <div class="form-group">
                         <input id="myname" type="file" name="myname" class="form-control" accept=".xlsx">
                         <input type="text" name="role" hidden value="<?= $params['role'] ?>">
@@ -164,7 +165,10 @@ echo LinkPager::widget([
 ]);
 ?>
 <script language="javascript">
-
+    var isadmin = "<?=$params['isadmin']?>";
+    if (isadmin) {
+        $('#teacher').show();
+    }
     function check() {
         if (!$('#myname').val()) {
             alert("请选择电子表格类文件!");

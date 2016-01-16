@@ -147,7 +147,8 @@ echo LinkPager::widget([
 ?>
 <script language="javascript">
     var class_id = "<?=$params['class_id']?>";
-    if (class_id) {
+    var isadmin = "<?=$params['isadmin']?>";
+    if (class_id && isadmin) {
         $('#students').show();
     }
     function check() {

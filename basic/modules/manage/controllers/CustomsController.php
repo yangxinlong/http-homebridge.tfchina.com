@@ -84,7 +84,7 @@ class CustomsController extends BaseController
         }
         $query = new Query();
         if ($type == 1) {
-            $role=HintConst::$ROLE_TEACHER;
+            $role = HintConst::$ROLE_TEACHER;
             $user_list = $query->select('customs.*,classes.name as class_name')
                 ->from('customs')
                 ->leftjoin('classes', 'classes.teacher_id = customs.id')
@@ -95,7 +95,7 @@ class CustomsController extends BaseController
                 $user_list = $query->andwhere(['like', 'phone', $field]);
             }
         } else {
-            $role=HintConst::$ROLE_PARENT;
+            $role = HintConst::$ROLE_PARENT;
             $user_list = $query->select('customs.*,classes.name as class_name')
                 ->from('customs')
                 ->leftjoin('classes', 'classes.id = customs.class_id')
@@ -119,7 +119,7 @@ class CustomsController extends BaseController
             'models' => $user_list,
             'pages' => $pages,
             'message' => $message,
-            'params' => ['field_type' => $field_type, 'field' => $field, 'role' => $role, 'class_id' => $class_id]
+            'params' => ['field_type' => $field_type, 'field' => $field, 'role' => $role, 'class_id' => $class_id, 'isadmin' => isset(Yii::$app->session['admin_user'])]
         ]);
     }
     public function  actionUploadexcel()

@@ -452,25 +452,29 @@ class Customs extends BaseMain
     }
     public function batchaddCustom($data, $role = 208, $class_id = 0)
     {
-        if (empty($class_id)) {
-            $class_id = 0;
-        }
-        $result = [];
-        $db1 = new BaseDb1();
-        $db2 = new BaseDb2();
-        foreach ($data as $key) {
-            $sql = "select id from customs WHERE phone=" . $key['手机'];
-            $re = $db2->selcetOne($sql);
-            if (empty($re)) {
-                $insert1 = "insert into customs (name_zh,phone,password)VALUE ('" . $key['姓名'] . "','" . $key['手机'] . "','" . CommonFun::encrypt(HintConst::$DefPD) . "')";
-                $newid = $db2->insert($insert1);
-                $insert2 = "insert into customs (name_zh,phone,password,cat_default_id,ispassed,school_id,class_id,id)VALUE ('" . $key['姓名'] . "','" . $key['手机'] . "','" . CommonFun::encrypt(HintConst::$DefPD) . "'," . $role . "," . HintConst::$YesOrNo_YES . "," . Yii::$app->session['manage_user']['school_id'] . "," . $class_id . ",$newid)";
-                $db1->insert($insert2);
-            } else {
-                $result[] = $key;
+        if (isset(Yii::$app->session['admin_user'])) {
+            if (empty($class_id)) {
+                $class_id = 0;
             }
+            $result = [];
+            $db1 = new BaseDb1();
+            $db2 = new BaseDb2();
+            foreach ($data as $key) {
+                $sql = "select id from customs WHERE phone=" . $key['手机'];
+                $re = $db2->selcetOne($sql);
+                if (empty($re)) {
+                    $insert1 = "insert into customs (name_zh,phone,password)VALUE ('" . $key['姓名'] . "','" . $key['手机'] . "','" . CommonFun::encrypt(HintConst::$DefPD) . "')";
+                    $newid = $db2->insert($insert1);
+                    $insert2 = "insert into customs (name_zh,phone,password,cat_default_id,ispassed,school_id,class_id,id)VALUE ('" . $key['姓名'] . "','" . $key['手机'] . "','" . CommonFun::encrypt(HintConst::$DefPD) . "'," . $role . "," . HintConst::$YesOrNo_YES . "," . Yii::$app->session['manage_user']['school_id'] . "," . $class_id . ",$newid)";
+                    $db1->insert($insert2);
+                } else {
+                    $result[] = $key;
+                }
+            }
+            return $result;
+        } else {
+            die("Not BelongTo Admin");
         }
-        return $result;
     }
     /*
      * //获得登录者的相关信息,在返回的group中也有,
