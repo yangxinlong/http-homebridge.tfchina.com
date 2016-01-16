@@ -9,6 +9,7 @@ namespace app\modules\AppBase\base\appbase\base;
 use app\modules\AppBase\base\appbase\LogToFile;
 use app\modules\AppBase\base\HintConst;
 use Exception;
+use Yii;
 class BaseCommonDB
 {
     private $db;
@@ -33,9 +34,23 @@ class BaseCommonDB
             die();
         }
     }
-    public function  selcet($sql)
+    public function  selcetOne($sql)
     {
-        return $this->excute($sql);
+        try {
+            return $this->getDb()->createCommand($sql)->queryOne();
+        } catch (Exception $e) {
+            $this->execpt_nosuccess($e->getMessage());
+            die();
+        }
+    }
+    public function  selcetAll($sql)
+    {
+        try {
+            return $this->getDb()->createCommand($sql)->queryAll();
+        } catch (Exception $e) {
+            $this->execpt_nosuccess($e->getMessage());
+            die();
+        }
     }
     public function  insert($sql)
     {
@@ -54,8 +69,13 @@ class BaseCommonDB
         try {
             echo "<br>";
 //            $r = $this->getDb()->createCommand("select id,name_zh from customs WHERE phone=13837207027")->execute();
-            $r = \Yii::$app->db->createCommand("select id,name_zh from customs WHERE id=2418");
+            $r = Yii::$app->db->createCommand("select id,name_zh from customs WHERE id=2418")->queryAll();
             var_dump($r);
+            echo "<br>";
+            echo "<br>";
+            $r = $this->getDb()->createCommand("select id,name_zh from customs WHERE id=2418")->queryAll();
+            var_dump($r);
+            echo "<br>";
             exit;
         } catch (Exception $e) {
             $this->execpt_nosuccess($e->getMessage());

@@ -93,13 +93,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
                 </form>
-                <form class="form-inline" style="margin-bottom:15px;" action="index.php?r=manage/customs/uploadexcel"
-                      method="post" enctype="multipart/form-data" onsubmit="return check()" >
-                    <div class="form-group">
-                        <input id="myname" type="file" name="myname" class="form-control" accept=".xlsx">
-                        <button type="submit" class="btn btn-success">通过电子表格添加</button>
-                    </div>
-                </form>
+<!--                <form class="form-inline" style="margin-bottom:15px;" action="index.php?r=manage/customs/uploadexcel"-->
+<!--                      method="post" enctype="multipart/form-data" onsubmit="return check()" >-->
+<!--                    <div class="form-group">-->
+<!--                        <input id="myname" type="file" name="myname" class="form-control" accept=".xlsx">-->
+<!--                        <button type="submit" class="btn btn-success">通过电子表格添加</button>-->
+<!--                    </div>-->
+<!--                </form>-->
                 <span><mark style="color:#900;">注意：表格内部分数据点击即可编辑。</mark></span>
 
                 <div class="adv-table editable-table">
