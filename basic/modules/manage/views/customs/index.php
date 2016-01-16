@@ -34,14 +34,19 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="modal-body">
                 <form action="" method="post">
-                   <div class="form-group">
-                        <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios" id="radios1" value="1" checked>加分</div>
-                        <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios" id="radios1" value="2">减分</div>
-                        <input type="text" id="pointssize" class="form-control input-sm" size="10" min="1" max="100" placeholder="输入要变更的积分">
-                   </div>
-                   <div class="form-group">
-                       <textarea class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
-                   </div>
+                    <div class="form-group">
+                        <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios"
+                                                                                     id="radios1" value="1" checked>加分
+                        </div>
+                        <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios"
+                                                                                     id="radios1" value="2">减分
+                        </div>
+                        <input type="text" id="pointssize" class="form-control input-sm" size="10" min="1" max="100"
+                               placeholder="输入要变更的积分">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -57,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="wrapper">
     <div class="col-sm-12">
         <section class="panel panel-danger">
-            <header class="panel-heading">      
+            <header class="panel-heading">
                 <span>教师管理</span>
             </header>
             <div class="panel-body">
@@ -77,20 +82,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     <input type="hidden" name="r" value="manage/class/index"/>
                     <button type="submit" class="btn btn-info">添加老师</button>
                     <button type="reset" class="btn btn-warning">重&nbsp;置</button>
-                <div class="pull-right">
-                    <div class="form-group">
-                        <select id="field_type" name="field_type" class="form-control" style="font-size:13px;">
-                        </select>
-                        <input type="text" class="form-control" name="field" id="field" placeholder="查找..">
-                        <input type="hidden" name="r" value="manage/class/index">
-                        <button type="submit" class="btn btn-success">查找</button>
+                    <div class="pull-right">
+                        <div class="form-group">
+                            <select id="field_type" name="field_type" class="form-control" style="font-size:13px;">
+                            </select>
+                            <input type="text" class="form-control" name="field" id="field" placeholder="查找..">
+                            <input type="hidden" name="r" value="manage/class/index">
+                            <button type="submit" class="btn btn-success">查找</button>
+                        </div>
                     </div>
-                </div>
-                </form>
 
+                </form>
+                <form class="form-inline" style="margin-bottom:15px;" action="index.php?r=manage/customs/uploadexcel"
+                      method="post" enctype="multipart/form-data" onsubmit="return check()" >
+                    <div class="form-group">
+                        <input id="myname" type="file" name="myname" class="form-control" accept=".xlsx">
+                        <button type="submit" class="btn btn-success">通过电子表格添加</button>
+                    </div>
+                </form>
                 <span><mark style="color:#900;">注意：表格内部分数据点击即可编辑。</mark></span>
+
                 <div class="adv-table editable-table">
-                    <table class="table table-striped table-hover table-bordered" id="editable-sample" style="margin-top:15px;">
+                    <table class="table table-striped table-hover table-bordered" id="editable-sample"
+                           style="margin-top:15px;">
                         <tr style="background:#1caf9a;color:#fff;">
                             <th class="text-center">教师名称</th>
                             <th class="text-center">修改密码</th>
@@ -103,28 +117,39 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th class="text-center">操作</th>
                         </tr>
                         <?php foreach ($models as $kk => $vv) { ?>
-                        <tr class="text-center">
-                            <td><span title="编辑" onclick="listTable.edit(this, 'name', <?= $vv['id'] ?>)"><?= $vv['name_zh'] ?></span></td>
-                            <td><span title="编辑" onclick="listTable.edit(this, 'password', <?= $vv['id'] ?>)">点击修改密码</span></td>
-                            <td><span title="编辑" onclick="listTable.edit(this, 'phone', <?= $vv['id'] ?>)"><?= $vv['phone'] ?></span></td>
-                            <td><?= $vv['class_name'] ?></td>
-                            <td><?= Html::img('@web/images/' . $vv['ispassed'] . '.png', ['onclick' => "listTable.toggle(this, 'ispassed'," . $vv['id'] . ")"]) ?></td>
-                            <td><?= Html::img('@web/images/' . $vv['iscansend'] . '.png', ['onclick' => "listTable.toggle(this, 'iscansend'," . $vv['id'] . ")"]) ?></td>
-                            <td><?= $vv['createtime'] ?></td>
-                            <td><?= $vv['points'] ?></td>
-                            <td>
-                                <a style="color:#fff;" class="btn btn-xs btn-danger" href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id'] ?>';}">删除</a>
-                                <a style="color:#fff;" class="btn btn-xs btn-info" href="javascript:void(0)" onclick="update(this,<?= $vv['id'] ?>);">变更积分</a>
-                            </td>
-                        </tr>
-                        <?php }?>
+                            <tr class="text-center">
+                                <td><span title="编辑"
+                                          onclick="listTable.edit(this, 'name', <?= $vv['id'] ?>)"><?= $vv['name_zh'] ?></span>
+                                </td>
+                                <td><span title="编辑"
+                                          onclick="listTable.edit(this, 'password', <?= $vv['id'] ?>)">点击修改密码</span>
+                                </td>
+                                <td><span title="编辑"
+                                          onclick="listTable.edit(this, 'phone', <?= $vv['id'] ?>)"><?= $vv['phone'] ?></span>
+                                </td>
+                                <td><?= $vv['class_name'] ?></td>
+                                <td><?= Html::img('@web/images/' . $vv['ispassed'] . '.png', ['onclick' => "listTable.toggle(this, 'ispassed'," . $vv['id'] . ")"]) ?></td>
+                                <td><?= Html::img('@web/images/' . $vv['iscansend'] . '.png', ['onclick' => "listTable.toggle(this, 'iscansend'," . $vv['id'] . ")"]) ?></td>
+                                <td><?= $vv['createtime'] ?></td>
+                                <td><?= $vv['points'] ?></td>
+                                <td>
+                                    <a style="color:#fff;" class="btn btn-xs btn-danger"
+                                       href="javascript:if(confirm('确定删除')){window.location.href='index.php?r=manage/customs/delete&id=<?= $vv['id'] ?>';}">删除</a>
+                                    <a style="color:#fff;" class="btn btn-xs btn-info" href="javascript:void(0)"
+                                       onclick="update(this,<?= $vv['id'] ?>);">变更积分</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </table>
-                </div><!-- adv-table结束 -->
-                
-                <span class="pull-right">总数：<span style="color:#428bca;font-size:15px;"><?= $pages->totalCount?></span>&nbsp;条记录</span>
-            </div><!-- panel-body结束 -->
+                </div>
+                <!-- adv-table结束 -->
+
+                <span class="pull-right">总数：<span style="color:#428bca;font-size:15px;"><?= $pages->totalCount ?></span>&nbsp;条记录</span>
+            </div>
+            <!-- panel-body结束 -->
         </section>
-    </div><!-- col-sm-12结束 -->
+    </div>
+    <!-- col-sm-12结束 -->
 </div><!-- wrapper结束 -->
 
 
@@ -134,6 +159,13 @@ echo LinkPager::widget([
 ]);
 ?>
 <script language="javascript">
+    function check() {
+        if (!$('#myname').val()) {
+            alert("请选择电子表格类文件!");
+            return false;
+        }
+        return true;
+    }
     var field_type = 'field_type';
     function update(obj, custom_id) {
         var tds = $(obj).parent().parent().find('td');

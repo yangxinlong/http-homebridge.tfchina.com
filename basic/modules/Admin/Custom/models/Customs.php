@@ -4,6 +4,8 @@ use app\modules\Admin\Articles\models\ClassesDaily;
 use app\modules\Admin\Articles\models\CustomsDaily;
 use app\modules\Admin\Classes\models\Classes;
 use app\modules\Admin\School\models\Schools;
+use app\modules\AppBase\base\appbase\base\BaseDb1;
+use app\modules\AppBase\base\appbase\base\BaseDb2;
 use app\modules\AppBase\base\appbase\base\BaseEdit;
 use app\modules\AppBase\base\appbase\base\BaseMain;
 use app\modules\AppBase\base\appbase\BaseAnalyze;
@@ -447,6 +449,25 @@ class Customs extends BaseMain
             $this->LoginA($data[HintConst::$Field_phone], CommonFun::encrypt($data[HintConst::$Field_password]), HintConst::$ROLE_PARENT);
         }
         return array("ErrCode" => $ErrCode, "Message" => $Message, "Content" => $Content);
+    }
+    public function batchaddCustom($data)
+    {
+        $db1 = new BaseDb1();
+        $db2 = new BaseDb2();
+        foreach ($data as $key) {
+            var_dump($key);
+            $d['name_zh'] = $key['姓名'];
+            $d['phone'] = $key['手机'];
+            $sql = "select id ,name_zh from customs WHERE id=2418";
+            echo "<br>";
+            echo "<br>";
+            var_dump($sql);
+            echo "<br>";
+            echo "<br>";
+            $re = $db2->selcet($sql);
+            var_dump($re);
+            exit;
+        }
     }
     /*
      * //获得登录者的相关信息,在返回的group中也有,

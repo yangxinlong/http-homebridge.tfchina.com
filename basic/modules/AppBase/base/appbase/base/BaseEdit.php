@@ -10,7 +10,7 @@ class BaseEdit
 {
     public function edit($table_name, $id, $field, $val)
     {
-        $mo = (new BaseDB())->getDBClass($table_name);
+        $mo = (new BaseFactory())->getDBClass($table_name);
         if ($mo !== null) {
             if ($mo->hasAttribute($field)) {
                 $r = json_decode($mo->updateF($id, $field, $val));
@@ -27,7 +27,7 @@ class BaseEdit
     public  function getProp($table_name, $id, $field)
     {
         $Content = HintConst::$NULLARRAY;
-        $mo = (new BaseDB())->getDBClass($table_name);
+        $mo = (new BaseFactory())->getDBClass($table_name);
         if ($mo !== null) {
             if ($mo->hasAttribute($field)) {
                 $r = json_decode($mo->getF($id, $field));

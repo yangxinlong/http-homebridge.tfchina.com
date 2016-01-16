@@ -3,7 +3,8 @@
 namespace app\modules\manage;
 use app\modules\AppBase\base\appbase\BaseModule;
 use Yii;
-class manage extends BaseModule
+use yii\base\Module;
+class manage extends Module
 {
     public $controllerNamespace = 'app\modules\manage\controllers';
     public $layout = 'main';

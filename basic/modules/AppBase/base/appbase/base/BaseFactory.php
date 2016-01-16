@@ -18,7 +18,7 @@ use app\modules\Admin\Vote\models\VoteCon;
 use app\modules\Admin\Vote\models\VoteReplies;
 use app\modules\AppBase\base\BaseConst;
 use Yii;
-class BaseDB
+class BaseFactory
 {
     public function getDBClass($table_name)
     {

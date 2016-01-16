@@ -90,6 +90,7 @@ $config = [
             'enableCsrfValidation' => false,
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'db2' => require(__DIR__ . '/db2.php'),
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
