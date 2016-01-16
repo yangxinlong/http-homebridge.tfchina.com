@@ -458,13 +458,8 @@ class Customs extends BaseMain
             var_dump($key);
             $d['name_zh'] = $key['姓名'];
             $d['phone'] = $key['手机'];
-            $sql = "select id ,name_zh from customs WHERE id=2418";
-            echo "<br>";
-            echo "<br>";
-            var_dump($sql);
-            echo "<br>";
-            echo "<br>";
-            $re = $db2->selcet($sql);
+            $sql = "select id ,name_zh from customs WHERE phone=" . $d['phone'];
+            $re = $db2->selcetOne($sql);
             var_dump($re);
             exit;
         }
