@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\AppBase\base\HintConst;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -38,8 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
                   <?php foreach($pic_list as $kk => $vv){?>
                   <div class="row">
                       <div class="col-md-8">
-                        <a href="http://homebrisge.tfchina.com/<?= $vv['url']?>" class="thumbnail" target="_blank">
-                          <img src="http://homebrisge.tfchina.com/<?= $vv['url']?>" alt="" style="width:100%;">
+                        <a href="<?= HintConst::$WEB_JYQ .$vv['url']?>" class="thumbnail" target="_blank">
+                          <img src="<?= HintConst::$WEB_JYQ .$vv['url']?>" alt="" style="width:100%;">
                         </a>
                       </div>
                   </div>

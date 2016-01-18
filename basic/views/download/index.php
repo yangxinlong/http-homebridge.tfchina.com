@@ -1,4 +1,4 @@
-﻿ 
+﻿<?php  use app\modules\AppBase\base\HintConst;?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -78,7 +78,7 @@ body{font-family:"微软雅黑";}
 </Div>
  <Div class="alpha_bg" id="download_tips2" onclick="this.style.display='none';document.getElementById('download_tips').style.display= 'none';"></Div>
 
-<div style="height:70px; line-height:70px; background:#28cacc; width:100%; text-align:center;><span class="logo_left"><a href="http://homebridge.tfchina.com/"><img src="images/logo1.png"  style="  margin-top:5px; line-height:80px;"  /></a></span></div>
+<div style="height:70px; line-height:70px; background:#28cacc; width:100%; text-align:center;><span class="logo_left"><a href="<?=HintConst::$WEB_JYQ ?>"><img src="images/logo1.png"  style="  margin-top:5px; line-height:80px;"  /></a></span></div>
 <div style="background:#7fcdec; text-align:center;" >
 
 <a href="<?php if($if_wx){?>javascript:display_tips();<?php }else{ ?>index.php?r=download/parent<?php }?>"><img class="width_load" src="images/jz_zj.png"   /></a>
@@ -89,7 +89,7 @@ body{font-family:"微软雅黑";}
  
 </div>
 <div><img src="images/jyq_zj.jpg" width="100%"  /></div>
-<div style="text-align:center; background:#e73462;"><a href="http://homebridge.tfchina.com/index.php?r=site/sqhz"><img src="images/jrwm_zj.jpg"  width="65%" style=" max-width:807px;  margin-top:35px; margin-bottom:35px;"  /></a></div>
+<div style="text-align:center; background:#e73462;"><a href="<?=HintConst::$WEB_JYQ?>index.php?r=site/sqhz"><img src="images/jrwm_zj.jpg"  width="65%" style=" max-width:807px;  margin-top:35px; margin-bottom:35px;"  /></a></div>
 <div class="a_jia" style="text-align:center; background:#e73462; border-top:#FFF 2px dotted; color:#FFF; font-size:14px;">
   <table class="b_lianjie" width="0" border="0" cellspacing="0" cellpadding="0">
     <tr>

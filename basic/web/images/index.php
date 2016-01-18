@@ -151,23 +151,23 @@
         如果没有跳转到下载页面，您可能使用了新版本的微信.<p>
             点击右上角的跳转按钮，选择在浏览器中打开，然后即可下载
     </div>
-    <div class="" style="float:right;"><img src="images/zhishi_xiazai.png"/></div>
-    <div class="" style="float:right;"><img src="images/open_in_web.png"/></div>
+    <div class="" style="float:right;"><img src="zhishi_xiazai.png"/></div>
+    <div class="" style="float:right;"><img src="open_in_web.png"/></div>
 </Div>
 <div style="height:70px; line-height:70px; background:#28cacc; width:100%; text-align:center;><span class=" logo_left
-"><a href="http://homebridge.tfchina.com/"><img src="images/logo1.png"
+"><a href="http://www.jyq365.com/"><img src="logo1.png"
                                                 style="  margin-top:5px; line-height:80px;"/></a></span></div>
 <div style="background:#7fcdec; text-align:center;">
     <a href="<?php if ($if_wx) { ?>javascript:display_tips();<?php } else { ?>/download/hbj.apk<?php } ?>"><img
-            class="width_load" src="images/jz_zj.jpg"/></a>
+            class="width_load" src="jz_zj.jpg"/></a>
     <a href="<?php if ($if_wx) { ?>javascript:display_tips()<?php } else { ?>/download/hbm.apk<?php } ?>"><img
-            class="width_load" src="images/yz_zj.jpg"/></a>
+            class="width_load" src="yz_zj.jpg"/></a>
     <a href="<?php if ($if_wx) { ?>javascript:display_tips()<?php } else { ?>/download/hbt.apk<?php } ?>"><img
-            class="width_load" src="images/js_zj.jpg" style="margin-bottom:30px;"/></a>
+            class="width_load" src="js_zj.jpg" style="margin-bottom:30px;"/></a>
 </div>
-<div><img src="images/jyq_zj.jpg" width="100%"/></div>
-<div style="text-align:center; background:#e73462;"><a href="http://homebridge.tfchina.com/index.php?r=site/sqhz"><img
-            src="images/jrwm_zj.jpg" width="65%" style=" max-width:807px;  margin-top:35px; margin-bottom:35px;"/></a>
+<div><img src="jyq_zj.jpg" width="100%"/></div>
+<div style="text-align:center; background:#e73462;"><a href="http://www.jyq365.com/index.php?r=site/sqhz"><img
+            src="jrwm_zj.jpg" width="65%" style=" max-width:807px;  margin-top:35px; margin-bottom:35px;"/></a>
 </div>
 <div class="a_jia"
      style="text-align:center; background:#e73462; border-top:#FFF 2px dotted; color:#FFF; font-size:14px;">

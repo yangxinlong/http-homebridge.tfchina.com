@@ -1,5 +1,6 @@
 ﻿<?php
 use app\modules\AppBase\base\SiteCom;
+use app\modules\AppBase\base\HintConst;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -184,7 +185,7 @@ p{ margin-top:15px; margin-bottom:15px;}
       <p id="001"><b>·  家园桥是什么？</b></p>
       <p>·  家园桥是国内领先的幼教互动云平台， 致力于提升幼儿园信息化水平，为幼儿园和家长搭建沟通互动新桥梁。 一部手机管理一个幼儿园，联系家长和幼儿园两端，这是提升幼儿园教育信息化水平的必然趋势，也是家园共育的全新方式。家园桥正式在这样的背景下应运而生，它不仅仅是一款让家长了解孩子在幼儿园生活的软件，更是一个能使家长与幼儿园彼此信任、家长与孩子心灵贴近的沟通成长平台。</p>
       <p id="002"><b>· 家园桥怎么下载安装？</b></p>
-      <p>·  登录家园桥官网 homebridge.tfchina.com，选择相应的客户端下载，下载完成后，执行安装操作即可。</p>
+      <p>·  登录家园桥官网 <a href="<?=HintConst::$WEB_JYQ?>">jyq365.com</a>，选择相应的客户端下载，下载完成后，执行安装操作即可。</p>
       <p id="003"><b>· 家园桥支持哪些手机？</b></p>
       <p>·  iPhone和Android常见智能机型。</p>
       <p id="004"><b>· 如何获取帐号及密码？</b></p>

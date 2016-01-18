@@ -8,8 +8,8 @@ namespace app\modules\AppBase\base\otheraccess;
 use app\modules\AppBase\base\CommonFun;
 class OtherAccess
 {
-    private $WEB_HOMEBRIDGE = "http://homebridge.tfchina.com/index.php?r=";
-    private $WEB_USER = "http://user.tfchina.com/index.php?r=";
+    private $WEB_HOMEBRIDGE = "http://www.jyq365.com/index.php?r=";
+    private $WEB_USER = "http://user.jyq365.com/index.php?r=";
     private $WEB_UPLOADSERVER = "http://upload.jyq365.com/index.php?r=";
     private $WEB_USER_ADD = "Customs/customs/add-custom";
     private $WEB_LOGINA = "Customs/customs/login-a";

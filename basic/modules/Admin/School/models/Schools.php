@@ -10,6 +10,7 @@ use app\modules\Admin\Custom\models\Customs;
 use app\modules\Admin\Message\models\Messages;
 use app\modules\Admin\Notes\models\Notes;
 use app\modules\Admin\Vote\models\Vote;
+use app\modules\AppBase\base\appbase\base\BaseExcept;
 use app\modules\AppBase\base\appbase\BaseAR;
 use app\modules\AppBase\base\BaseConst;
 use app\modules\AppBase\base\cat_def\CatDef;
@@ -285,7 +286,7 @@ class Schools extends BaseAR
                 $result['MealList'] = $catlogue->getMealList();
                 Yii::$app->session['phone'] = $result['TeacherInfo'][0][HintConst::$Field_phone];
             } catch (Exception $e) {
-                $this->execpt_noteacherinfo();
+                (new BaseExcept())->execpt_noteacherinfo($e->getMessage());
             }
             $this->mc->add($mc_name, $result);
         }

@@ -1,3 +1,6 @@
+<?php
+use app\modules\AppBase\base\HintConst;
+?>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -244,7 +247,7 @@
         <div class="head">
             <div class="info clearfix">
                 <div class="icon">
-                    <a href="http://homebridge.tfchina.com/"> <img src="images/img/icon.png"></a>
+                    <a href="<?=HintConst::$WEB_JYQ?>"> <img src="images/img/icon.png"></a>
                 </div>
             </div>
         </div><!-- head结束 -->

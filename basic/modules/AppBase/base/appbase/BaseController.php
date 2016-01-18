@@ -13,6 +13,7 @@ use app\modules\Admin\Custom\models\Customs;
 use app\modules\Admin\Logs\models\LogsClasses;
 use app\modules\Admin\Message\models\Messages;
 use app\modules\Admin\Message\models\Msgsendrecieve;
+use app\modules\AppBase\base\appbase\base\BaseExcept;
 use app\modules\AppBase\base\appbase\base\BaseInterface;
 use app\modules\AppBase\base\BaseConst;
 use app\modules\AppBase\base\CommonFun;
@@ -461,7 +462,7 @@ class BaseController extends Controller implements BaseInterface
                 echo(CommonFun::json($ErrCode, $Message, $Content));
             }
         } catch (Exception $e) {
-            $this->execpt_nosuccess();
+            (new BaseExcept())->execpt_nosuccess($e->getMessage());
         }
     }
 //根据id或code等field返回json:content中是一维数组,对应于actionGetrecordbyid,只有一个,因为条件只有一个
@@ -478,24 +479,6 @@ class BaseController extends Controller implements BaseInterface
         $mo = $this->returnModel();
         $result = $mo->getRecordList($where);
         $this->myjsonencode($result);
-    }
-    public
-    function execpt_nosuccess($err = '')
-    {
-        LogToFile::Log($err);
-        die(json_encode(array("ErrCode" => HintConst::$No_success, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
-    }
-    public
-    function execpt_noteacherinfo($err = '')
-    {
-        LogToFile::Log($err);
-        die(json_encode(array("ErrCode" => HintConst::$No_teacherinfo, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
-    }
-    public
-    function execpt_notimage($err = '')
-    {
-        LogToFile::Log($err);
-        die(json_encode(array("ErrCode" => HintConst::$No_notimage, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
     }
     public function  myerror()
     {

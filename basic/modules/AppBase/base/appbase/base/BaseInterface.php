@@ -10,8 +10,4 @@ namespace app\modules\AppBase\base\appbase\base;
 
 
 interface BaseInterface {
-public function execpt_nosuccess($err);
-public function execpt_noteacherinfo($err);
-public function execpt_notimage($err);
-
 }

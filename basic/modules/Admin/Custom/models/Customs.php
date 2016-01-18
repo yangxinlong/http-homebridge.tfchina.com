@@ -7,6 +7,7 @@ use app\modules\Admin\School\models\Schools;
 use app\modules\AppBase\base\appbase\base\BaseDb1;
 use app\modules\AppBase\base\appbase\base\BaseDb2;
 use app\modules\AppBase\base\appbase\base\BaseEdit;
+use app\modules\AppBase\base\appbase\base\BaseExcept;
 use app\modules\AppBase\base\appbase\base\BaseMain;
 use app\modules\AppBase\base\appbase\BaseAnalyze;
 use app\modules\AppBase\base\appbase\TransAct;
@@ -459,19 +460,25 @@ class Customs extends BaseMain
             $result = [];
             $db1 = new BaseDb1();
             $db2 = new BaseDb2();
-            foreach ($data as $key) {
-                $sql = "select id from customs WHERE phone=" . $key['手机'];
-                $re = $db2->selcetOne($sql);
-                if (empty($re)) {
-                    $insert1 = "insert into customs (name_zh,phone,password)VALUE ('" . $key['姓名'] . "','" . $key['手机'] . "','" . CommonFun::encrypt(HintConst::$DefPD) . "')";
-                    $newid = $db2->insert($insert1);
-                    $insert2 = "insert into customs (name_zh,phone,password,cat_default_id,ispassed,school_id,class_id,id)VALUE ('" . $key['姓名'] . "','" . $key['手机'] . "','" . CommonFun::encrypt(HintConst::$DefPD) . "'," . $role . "," . HintConst::$YesOrNo_YES . "," . Yii::$app->session['manage_user']['school_id'] . "," . $class_id . ",$newid)";
-                    $db1->insert($insert2);
-                } else {
-                    $result[] = $key;
+            if (count($data) < 200) {
+                foreach ($data as $key) {
+                    if (isset($key['姓名']) && isset($key['手机'])) {
+                        $sql = "select id from customs WHERE phone='" . $key['手机']."'";
+                        $re = $db2->selcetOne($sql);
+                        if (empty($re)) {
+                            $insert1 = "insert into customs (name_zh,phone,password,createtime)VALUE ('" . $key['姓名'] . "','" . $key['手机'] . "','" . CommonFun::encrypt(HintConst::$DefPD) . "','" . CommonFun::getCurrentDateTime() . "')";
+                            $newid = $db2->insert($insert1);
+                            $insert2 = "insert into customs (name_zh,phone,password,createtime,cat_default_id,ispassed,school_id,class_id,id)VALUE ('" . $key['姓名'] . "','" . $key['手机'] . "','" . CommonFun::encrypt(HintConst::$DefPD) . "','" . CommonFun::getCurrentDateTime() . "'," . $role . "," . HintConst::$YesOrNo_YES . "," . Yii::$app->session['manage_user']['school_id'] . "," . $class_id . ",$newid)";
+                            $db1->insert($insert2);
+                        } else {
+                            $result[] = $key;
+                        }
+                    }
                 }
+                return ['msg' => '', 'result' => $result];
+            } else {
+                return ['msg' => "数据太多了,一次不允许添加超过200.", 'result' => $result];
             }
-            return $result;
         } else {
             die("Not BelongTo Admin");
         }
@@ -708,7 +715,7 @@ class Customs extends BaseMain
                 return $re;
             }
         } catch (Exception $e) {
-            $this->execpt_nosuccess();
+            (new BaseExcept())->execpt_nosuccess($e->getMessage());
         }
     }
     public function UpdatepasswordA()

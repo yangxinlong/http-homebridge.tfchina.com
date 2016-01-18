@@ -7,6 +7,7 @@
  */
 namespace app\modules\AppBase\base\appbase;
 use app\modules\Admin\Logs\models\Logs;
+use app\modules\AppBase\base\appbase\base\BaseExcept;
 use app\modules\AppBase\base\appbase\base\BaseInterface;
 use app\modules\AppBase\base\cat_def\CatDef;
 use app\modules\AppBase\base\HintConst;
@@ -481,7 +482,7 @@ class BaseAR extends ActiveRecord implements BaseInterface
                 $query = new Query();
                 $school = $query->select('name')->from('schools')->where(['id' => $this->getCustomSchool_id()])->one();//得到用户的学校名称
                 if (false === ($image_size = getimagesize($pic_url))) {
-                    $this->execpt_notimage();
+                    (new BaseExcept())->execpt_notimage("error for image_size");
                 }
                 if ($school['name']) {
                     $font_long = strlen($school['name']) * 5 + 20;
@@ -504,7 +505,7 @@ class BaseAR extends ActiveRecord implements BaseInterface
                 return '';
             }
         } catch (Exception $e) {
-            $this->execpt_nosuccess($e->getMessage());
+            (new BaseExcept())->execpt_nosuccess($e->getMessage());
         }
     }
     public function getSchoolOrClassArrByString(&$school, $d)
@@ -618,20 +619,5 @@ class BaseAR extends ActiveRecord implements BaseInterface
             $aim[] = $key[$feild];
         }
         return $aim;
-    }
-    public function execpt_nosuccess($err = '')
-    {
-        LogToFile::Log($err);
-        die(json_encode(array("ErrCode" => HintConst::$No_success, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
-    }
-    public function execpt_noteacherinfo($err = '')
-    {
-        LogToFile::Log($err);
-        die(json_encode(array("ErrCode" => HintConst::$No_teacherinfo, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
-    }
-    public function execpt_notimage($err = '')
-    {
-        LogToFile::Log($err);
-        die(json_encode(array("ErrCode" => HintConst::$No_notimage, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
     }
 }
