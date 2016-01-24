@@ -13,15 +13,16 @@
 .col-pad{
 	padding-left: 15px;
 	padding-right: 15px;
+	margin-top: 10px;
 }
 .col-pad > [class *=col-xs-]{
 	padding: 0;
 }
 
-.col-pad a{
+.col-pad > .col-xs-3 > a{
 	font-size: 1em;
 }
-.col-pad a:link,.col-pad a:visited{
+.col-pad > .col-xs-3 > a:link,.col-pad > .col-xs-3 > a:visited{
 	display: block;
 	padding: 10px;
 	color: #555;
@@ -29,7 +30,7 @@
 	text-decoration: none;
 	background-color: #eaeaec;
 }
-.col-pad a:hover,{
+.col-pad > .col-xs-3 > a:hover,{
 	display: block;
 	padding: 10px;
 	color: #FFFFFF;
@@ -71,16 +72,44 @@
 	color: #444;
 }
 
-@media (min-width: 375px) and (max-width: 413px) {
+
+
+/*-----------------------------------------
+            	RES-CSS
+-----------------------------------------*/
+.res_img{
+	width: 142px;/*142*/
+	height: 189px;/*80*/
+}
+.video-name{
+	margin: 5px 0px;
+	font-weight: bold;
+	font-size: 0.9em;
+	color:#444;
+}
+.video-name > a{
+	color: #444;
+	text-decoration: none;
+}
+
+/*@media (min-width: 375px) and (max-width: 413px) {
 	.goods_img{
 		width: 95px;
 		height: 95px;
+	}
+	.res_img{
+		width: 168px;
+		height: 94px;
 	}
 }
 @media (min-width: 414px) and (max-width: 599px) {
 	.goods_img{
 		width: 108px;
 		height: 108px;
+	}
+	.res_img{
+		width: 191px;
+		height: 107px;
 	}
 }
 @media (min-width: 600px) and (max-width: 749px) {
@@ -97,6 +126,10 @@
 	.name-box > a{
 		font-size: 1.1em;
 	}
+	.res_img{
+		width: 282px;
+		height: 159px;
+	}
 }
 @media (min-width: 750px) and (max-width: 970px) {
 	.goods_img{
@@ -112,6 +145,8 @@
 	.name-box > a{
 		font-size: 1.3em;
 	}
-}
-
-
+	.res_img{
+		width: 355px;
+		height: 200px;
+	}
+}*/
