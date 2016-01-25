@@ -20,7 +20,7 @@ AppAsset::register($this);
 <?php
 $this->beginBody()
 ?>
-<div class="container">
+<!-- <div class="container">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     	<ol class="carousel-indicators">
     		<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -48,7 +48,6 @@ $this->beginBody()
     		</div>
     	</div>
 
-    	<!-- Controls -->
     	<a href="#carousel-example-generic" class="left carousel-control" role="button" data-slide="prev">
     		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     		<span class="sr-only">Previous</span>
@@ -59,7 +58,7 @@ $this->beginBody()
     	</a>
     </div>
 </div>
-<br>
+<br> -->
 	<div>
 	    <?= $content ?>
 	</div>

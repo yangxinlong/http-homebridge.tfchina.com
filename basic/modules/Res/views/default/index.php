@@ -3,144 +3,186 @@ use yii\helpers\Html;
 
 ?>
 <head>
-<?= Html::cssFile('@web/css/shop.css') ?>
+    <?= Html::cssFile('@web/css/shop.css') ?>
+    <?= Html::cssFile('@web/css/flexslider.css') ?>
+
     <title>资源库</title>
 </head>
 
 <body>
+<div class="banner">
     <div class="container">
-        <div class="row col-pad">
-            <div class="col-xs-6">
-                <a href="http://v.qq.com/cover/1/1nawx3148rx2apm.html?vid=f0016jg4hor">
-                    <img src="images/res-img/rs1.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://v.qq.com/cover/1/1nawx3148rx2apm.html?vid=f0016jg4hor">熊出没之雪岭熊风</a>
-                </div>
+         <div class="banner-bottom">
+        <section>
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <div class="col-md-4 banner-left">
+                            <h3>麦兜<span class="bann-sli-text">&nbsp;我和妈妈</span></h3>
+                        </div>
+                        <div class="col-md-8 banner-right">
+                            <a href="http://v.youku.com/v_show/id_XODE1NDk3MzIw.html?from=y1.3-comic-gridtest-135-10061.100888.3-1">
+                                <img  class="img-responsive" src="images/res-img/md.png" alt="">
+                            </a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </li>
+                    <li>
+                        <div class="col-md-4 banner-left">
+                            <h3>哆啦A梦<span class="bann-sli-text">&nbsp;三态丸</span></h3>
+                        </div>
+                        <div class="col-md-8 banner-right">
+                            <a href="http://v.youku.com/v_show/id_XOTE1MjQ5MjA0.html?from=y1.3-child-index-10814-21764.212914-212912.4-1">
+                                <img  class="img-responsive" src="images/res-img/big-a.png" alt="">
+                            </a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </li>
+                    <li>
+                        <div class="col-md-4 banner-left">
+                            <h3>樱桃<span class="bann-sli-text">&nbsp;小丸子</span></h3>
+                        </div>
+                        <div class="col-md-8 banner-right">
+                            <a href="http://v.youku.com/v_show/id_XNTU3NTUzODQw.html">
+                                <img  class="img-responsive" src="images/res-img/big-xwz.png" alt="">
+                            </a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </li>
+                </ul>
             </div>
-            <div class="col-xs-6">
-                <a href="http://v.qq.com/cover/a/affydym8sd9l5cv.html">
-                    <img src="images/res-img/rs2.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://v.qq.com/cover/a/affydym8sd9l5cv.html">小羊肖恩大电影</a>
-                </div>
-            </div>
+        </section>
+              <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
+              <!--FlexSlider-->
+              <script defer src="js/jquery.flexslider.js"></script>
+              <script type="text/javascript">
+                $(function(){
+                 
+                });
+                $(window).load(function(){
+                  $('.flexslider').flexslider({
+                    animation: "slide",
+                    start: function(slider){
+                      $('body').removeClass('loading');
+                    }
+                  });
+                });
+              </script>
+         </div>
+         <span class="mover"> </span>
+  </div>
+</div>
+<!--header end here-->
+<!--banner-strip start here-->
+<div class="bann-strip">
+    <div class="container">
+        <div class="bann-strip-main">
+              <div class="col-md-3 bann-grid">
+                 <a href="http://v.youku.com/v_show/id_XMTM4OTUyMDM4NA==.html?from=y1.3-child-index-10814-21764.212905-212900.4-1"><img src="images/res-img/7zai.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XMTM4OTUyMDM4NA==.html?from=y1.3-child-index-10814-21764.212905-212900.4-1">长江7号之七仔爱地球</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                  <a href="http://v.youku.com/v_show/id_XMjg3MTM4OTA4.html?from=y1.2-2-100.3.3-1.1-3-1-2-0"><img src="images/res-img/dtutu.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XMjg3MTM4OTA4.html?from=y1.2-2-100.3.3-1.1-3-1-2-0">大耳朵图图</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                 <a href="http://v.youku.com/v_show/id_XMjgzMDI3NjIw.html?from=y1.2-2-100.3.14-1.1-3-1-13-0"> <img src="images/res-img/big-head.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XMjgzMDI3NjIw.html?from=y1.2-2-100.3.14-1.1-3-1-13-0">大头儿子小头爸爸2</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                  <a href="http://v.qq.com/cover/w/wbrvedar7aclm89.html?ptag=2345.movie"><img src="images/res-img/pig-2.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                  <h4><a href="http://v.qq.com/cover/w/wbrvedar7aclm89.html?ptag=2345.movie">猪猪侠之囧囧危机</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+            <div class="clearfix"> </div>
         </div>
 
-        <div class="row col-pad">
-            <div class="col-xs-6">
-                <a href="http://v.qq.com/cover/2/2m5o0keoin4vv7l.html">
-                    <img src="images/res-img/rs3.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://v.qq.com/cover/2/2m5o0keoin4vv7l.html">恐龙当家</a>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <a href="http://v.qq.com/cover/n/ndvahl88ql5yowm.html?vid=i0015tymeti">
-                    <img src="images/res-img/rs4.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://v.qq.com/cover/n/ndvahl88ql5yowm.html?vid=i0015tymeti">马达加斯加的企鹅</a>
-                </div>
-            </div>
+        <div class="bann-strip-main">
+              <div class="col-md-3 bann-grid">
+                 <a href="http://v.youku.com/v_show/id_XODI5NTQ5NTAw.html?from=y1.6-100.1.1.fb675d9461ad11e0bea1"><img src="images/res-img/amduola.jpg" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XODI5NTQ5NTAw.html?from=y1.6-100.1.1.fb675d9461ad11e0bea1">爱探险的朵拉</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                  <a href="http://v.youku.com/v_show/id_XMjkwNTg0ODIw.html?from=y1.6-100.1.1.7cff704ebca811e0a046http://v.youku.com/v_show/id_XNTcwMTk4NDQ4.html?from=y1.6-100.1.1.a74cbf5a4f9811e0a046http://v.youku.com/v_show/id_XNzkxOTM1MDI0.html?from=y1.6-100.1.1.a1b4108813c711e4b8b7"><img src="images/res-img/pingu.jpg" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XMjkwNTg0ODIw.html?from=y1.6-100.1.1.7cff704ebca811e0a046http://v.youku.com/v_show/id_XNTcwMTk4NDQ4.html?from=y1.6-100.1.1.a74cbf5a4f9811e0a046http://v.youku.com/v_show/id_XNzkxOTM1MDI0.html?from=y1.6-100.1.1.a1b4108813c711e4b8b7">淘气的PINGU</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                 <a href="http://v.youku.com/v_show/id_XOTE1MjQ5MjA0.html?from=y1.3-child-index-10814-21764.212914-212912.4-1"> <img src="images/res-img/adl.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XOTE1MjQ5MjA0.html?from=y1.3-child-index-10814-21764.212914-212912.4-1">哆啦A梦</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                  <a href="http://v.youku.com/v_show/id_XOTQ0Mjg4NjE2.html?from=y1.3-child-index-10814-21764.213268.4-1"><img src="images/res-img/elephant.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                  <h4><a href="http://v.youku.com/v_show/id_XOTQ0Mjg4NjE2.html?from=y1.3-child-index-10814-21764.213268.4-1">大象国王巴巴</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+            <div class="clearfix"> </div>
         </div>
 
-        <div class="row col-pad">
-            <div class="col-xs-6">
-                <a href="http://v.qq.com/cover/w/wbrvedar7aclm89.html?ptag=2345.movie">
-                    <img src="images/res-img/rs5.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://v.qq.com/cover/w/wbrvedar7aclm89.html?ptag=2345.movie">猪猪侠之囧囧危机</a>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <a href="http://v.qq.com/cover/3/38uyds1h60wr7b5.html?vid=o0016m3ajom">
-                    <img src="images/res-img/rs6.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://v.qq.com/cover/3/38uyds1h60wr7b5.html?vid=o0016m3ajom">爸爸去哪儿&nbsp;2</a>
-                </div>
-            </div>
+        <div class="bann-strip-main">
+              <div class="col-md-3 bann-grid">
+                 <a href="http://v.youku.com/v_show/id_XMTM2NDM5MTA2OA==.html"><img src="images/res-img/blackcat.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XMTM2NDM5MTA2OA==.html">黑猫警长之翡翠之星</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                  <a href="http://v.youku.com/v_show/id_XMjQwOTM4NDQ4.html?from=s1.8-3-1.1"><img src="images/res-img/atm.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XMjQwOTM4NDQ4.html?from=s1.8-3-1.1">迪迦奥特曼</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                 <a href="http://v.youku.com/v_show/id_XODE1NDk3MzIw.html?from=y1.3-comic-gridtest-135-10061.100888.3-1"> <img src="images/res-img/smd.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                    <h4><a href="http://v.youku.com/v_show/id_XODE1NDk3MzIw.html?from=y1.3-comic-gridtest-135-10061.100888.3-1">麦兜 我和我妈妈</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+              <div class="col-md-3 bann-grid">
+                  <a href="http://v.youku.com/v_show/id_XNTU3NTUzODQw.html"><img src="images/res-img/sxwz.png" alt="" class="img-responsive"></a>
+                 <div class="details">
+                  <h4><a href="http://v.youku.com/v_show/id_XNTU3NTUzODQw.html">樱桃小丸子</a></h4>
+                    <!-- <p>centuries, but also the leap into.</p> -->
+                    <!-- <a class="bannn-btn" href="#">Read More</a> -->
+                 </div>
+              </div>
+            <div class="clearfix"> </div>
         </div>
-
-        <div class="row col-pad">
-            <div class="col-xs-6">
-                <a href="http://tv.sohu.com/20150304/n409340986.shtml?txid=1946be12ca182ba8107a42119010c9b0">
-                    <img src="images/res-img/rs7.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://tv.sohu.com/20150304/n409340986.shtml?txid=1946be12ca182ba8107a42119010c9b0">喜羊羊与灰太狼</a>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <a href="http://v.qq.com/cover/8/8rhm1xj9jys8vg0.html?ptag=2345.movie">
-                    <img src="images/res-img/rs8.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://v.qq.com/cover/8/8rhm1xj9jys8vg0.html?ptag=2345.movie">赛尔号2:雷伊与迈尔斯</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="row col-pad">
-            <div class="col-xs-6">
-                <a href="http://www.iqiyi.com/v_19rrnb2z9k.html?vfm=2002_2345f">
-                    <img src="images/res-img/rs9.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://www.iqiyi.com/v_19rrnb2z9k.html?vfm=2002_2345f">白雪公主之矮人力量</a>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <a href="http://www.iqiyi.com/v_19rrkngon8.html?vfm=2002_2345f">
-                    <img src="images/res-img/rs10.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://www.iqiyi.com/v_19rrkngon8.html?vfm=2002_2345f">黑猫警长之翡翠之星</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="row col-pad">
-            <div class="col-xs-6">
-                <a href="http://www.letv.com/ptv/vplay/23832104.html?ch=2345_dh">
-                    <img src="images/res-img/rs11.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://www.letv.com/ptv/vplay/23832104.html?ch=2345_dh">蜡笔总动员</a>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <a href="http://vod.kankan.com/v/84/84516.shtml?id=731015">
-                    <img src="images/res-img/rs12.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://vod.kankan.com/v/84/84516.shtml?id=731015">麦兜我和我妈妈</a>
-                </div>
-            </div>
-        </div>
-
-<!--         <div class="row col-pad">
-            <div class="col-xs-6">
-                <a href="http://dianying.2345.com/detail/128178.html">
-                    <img src="images/res-img/r13.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://dianying.2345.com/detail/128178.html">神秘世界历险记&nbsp;2</a>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <a href="http://www.iqiyi.com/v_19rrhkqqqo.html?vfm=2002_2345f">
-                    <img src="images/res-img/r14.png" class="res_img">
-                </a>
-                <div class="video-name">
-                    <a href="http://www.iqiyi.com/v_19rrhkqqqo.html?vfm=2002_2345f">潜艇总动员4:章鱼奇遇记</a>
-                </div>
-            </div>
-        </div> -->
-
     </div>
+</div>
 </body>
