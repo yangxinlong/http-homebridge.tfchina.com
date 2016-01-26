@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                placeholder="输入要变更的积分">
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
+                        <textarea id="pointscontents" class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
                     </div>
                 </form>
             </div>
