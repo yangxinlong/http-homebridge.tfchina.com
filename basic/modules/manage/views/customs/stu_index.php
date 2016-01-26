@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         data-dismiss="modal" aria-hidden="true" style="color:#fff;">
                     &times;
                 </button>
-                <h5 class="modal-title text-canter" id="myModalLabel">
-                    当前积分：<span id="curpoints">1000</span>
+                <h5 class="modal-title text-center" id="myModalLabel">
+                    当前积分:<span id="curpoints">1000</span>
                 </h5>
             </div>
             <div class="modal-body">
@@ -41,13 +41,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                                      id="radios1" value="1" checked>加分
                         </div>
                         <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios"
-                                                                                     id="radios1" value="2">减分
+                                                                                     id="radios2" value="2">减分
                         </div>
                         <input type="text" id="pointssize" class="form-control input-sm" size="10" min="1" max="100"
                                placeholder="输入要变更的积分">
+                        <input type="text" id="curcustom_id" hidden>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
+                        <textarea id="pointscontents" class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
                     </div>
                 </form>
             </div>
@@ -60,7 +61,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <!-- /.modal -->
 </div>
-
 <div class="wrapper">
     <div class="col-sm-12">
         <section class="panel panel-warning">
