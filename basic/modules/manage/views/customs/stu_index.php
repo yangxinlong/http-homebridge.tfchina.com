@@ -38,10 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <form action="" method="post">
                     <div class="form-group">
                         <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios"
-                                                                                     id="radios1" value="1" checked>加分
+                                                                                     id="radios1" value="1">加分
                         </div>
                         <div class="radio-inline" style="margin-bottom:10px;"><input type="radio" name="optionsRadios"
-                                                                                     id="radios2" value="2">减分
+                                                                                     id="radios2" value="2" checked>减分
                         </div>
                         <input type="text" id="pointssize" class="form-control input-sm" size="10" min="1" max="100"
                                placeholder="输入要变更的积分">
