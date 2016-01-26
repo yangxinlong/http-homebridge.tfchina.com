@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <input type="text" id="pointssize" class="form-control input-sm" size="10" min="1" max="100"
                                placeholder="输入要变更的积分">
+                        <input type="text" id="curcustom_id" hidden>
                     </div>
                     <div class="form-group">
                         <textarea id="pointscontents" class="form-control input-sm" placeholder="变更原因(必填,不超过30字).."></textarea>
@@ -214,4 +215,4 @@ echo LinkPager::widget([
             }
         });
     });
-</script>
+ </script>
