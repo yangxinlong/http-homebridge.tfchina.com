@@ -16,10 +16,10 @@ class ScoreController extends ScoreBC
         $ErrCode = HintConst::$Zero;
         $Message = HintConst::$Success;
         $Content = HintConst::$NULLARRAY;
-        $data['pri_type_id'] = isset($_REQUEST['pri_type_id']) ? trim($_REQUEST['pri_type_id']) : '0';
-        $data['sub_type_id'] = isset($_REQUEST['sub_type_id']) ? trim($_REQUEST['sub_type_id']) : '0';
+        $data['pri_type_id'] = isset($_REQUEST['pri_type_id']) ? trim($_REQUEST['pri_type_id']) : 0;
+        $data['sub_type_id'] = isset($_REQUEST['sub_type_id']) ? trim($_REQUEST['sub_type_id']) : 0;
         $data['custom_id'] = isset($_REQUEST['custom_id']) ? trim($_REQUEST['custom_id']) : $this->getCustomId();
-        $data['related_id'] = isset($_REQUEST['related_id']) ? trim($_REQUEST['related_id']) : '0';
+        $data['related_id'] = isset($_REQUEST['related_id']) ? trim($_REQUEST['related_id']) : 0;
         $data['contents'] = isset($_REQUEST['contents']) ? trim($_REQUEST['contents']) : '';
         $num = isset($_REQUEST['num']) ? trim($_REQUEST['num']) : 0;
         if (empty($data['custom_id']) || !is_numeric($data['custom_id'])) {
