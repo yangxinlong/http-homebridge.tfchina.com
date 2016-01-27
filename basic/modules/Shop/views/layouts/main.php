@@ -16,7 +16,7 @@ AppAsset::register($this);
 
     <?php $this->head() ?>
 </head>
-<body class="horizontal-menu">
+<body>
 <?php
 $this->beginBody()
 ?>

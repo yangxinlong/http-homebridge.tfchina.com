@@ -63,7 +63,7 @@ $this->beginBody()
 	    <?= $content ?>
 	</div>
 
-<script src="js/bootstrap.min.js"></script>
+<!-- <script src="js/bootstrap.min.js"></script> -->
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -3,8 +3,6 @@ use yii\helpers\Html;
 
 ?>
 <head>
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"> -->
-
 <?= Html::cssFile('@web/css/shop.css') ?>
 	<title>商城</title>
 </head>
@@ -21,7 +19,6 @@ use yii\helpers\Html;
 	<div class="shop-box">
 		<div class="row goods-row">
 			<div class="col-xs-4">
-			<div class="goods-box">
 				<a href="http://shop.zhe800.com/products/ze160103090248040541?jump_source=1&qd_key=qyOwt6Jn"><img src="images/shop-img/pic1.png" class="goods_img" /></a>
 				<div class="name-box">
 					<span class="price">¥&nbsp;9.90</span>
@@ -29,7 +26,6 @@ use yii\helpers\Html;
 						<span class="name">JLD 无铅双头眉笔金款防水防汗不晕染持久自动一字眉粉带眉刷</span>
 					</a>
 				</div>
-			</div>
 			</div>
 			<div class="col-xs-4">
 				<a href="http://shop.zhe800.com/products/ze150926115425000228?jump_source=1&qd_key=qyOwt6Jn"><img src="images/shop-img/pic2.png" class="goods_img"/></a>
@@ -53,7 +49,6 @@ use yii\helpers\Html;
 
 		<div class="row goods-row">
 			<div class="col-xs-4">
-			<div class="goods-box">
 				<a href="https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.111.Tk8UNa&id=524217560651&skuId=3127271523622&areaId=410500&cat_id=50033500&rn=b3763e6df1a1e4aba73126821f6c5301&user_id=2217997152&is_b=1">
 					<img src="images/shop-img/idea1.png" class="goods_img" /></a>
 				<div class="name-box">
@@ -62,7 +57,6 @@ use yii\helpers\Html;
 						<span class="name">猴年吉祥物毛绒玩具猴子公仔生肖猴小挂件玩偶布娃娃创意新年礼物</span>
 					</a>
 				</div>
-			</div>
 			</div>
 			<div class="col-xs-4">
 				<a href="https://item.taobao.com/item.htm?id=525162651726&ali_trackid=2:mm_26632323_6762370_25910879:1452668847_254_923424741&spm=a21ap.7701290.2003.22.lf9Ddo&pvid=200_10.98.36.108_148_1452668814670">

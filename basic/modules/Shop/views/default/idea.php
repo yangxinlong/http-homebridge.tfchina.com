@@ -3,7 +3,6 @@ use yii\helpers\Html;
 
 ?>
 <head>
-<?= Html::cssFile('@web/css/bootstrap.css') ?>
 <?= Html::cssFile('@web/css/shop.css') ?>
 	<title>商城</title>
 </head>
@@ -30,7 +29,6 @@ use yii\helpers\Html;
 					</a>
 				</div>
 			</div>
-			
 			<div class="col-xs-4">
 				<a href="https://item.taobao.com/item.htm?id=525162651726&ali_trackid=2:mm_26632323_6762370_25910879:1452668847_254_923424741&spm=a21ap.7701290.2003.22.lf9Ddo&pvid=200_10.98.36.108_148_1452668814670">
 					<img src="images/shop-img/idea2.png" class="goods_img"/></a>
@@ -51,7 +49,7 @@ use yii\helpers\Html;
 					</a>
 				</div>
 			</div>
-		</div>
+		</div><!-- row-结束 -->
 
 		<div class="row goods-row">
 			<div class="col-xs-4">
@@ -84,7 +82,7 @@ use yii\helpers\Html;
 					</a>
 				</div>
 			</div>
-		</div>
+		</div><!-- row-结束 -->
 
 		<div class="row goods-row">
 			<div class="col-xs-4">
@@ -117,7 +115,7 @@ use yii\helpers\Html;
 					</a>
 				</div>
 			</div>
-		</div>
+		</div><!-- row-结束 -->
 
 		<div class="row goods-row">
 			<div class="col-xs-4">
@@ -150,8 +148,8 @@ use yii\helpers\Html;
 					</a>
 				</div>
 			</div>
-		</div>
+		</div><!-- row-结束 -->
 		
-	</div>
+	</div><!-- shop-box结束 -->
 </body>
 

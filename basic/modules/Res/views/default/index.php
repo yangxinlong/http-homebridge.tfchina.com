@@ -3,59 +3,60 @@ use yii\helpers\Html;
 
 ?>
 <head>
-    <?= Html::cssFile('@web/css/shop.css') ?>
+    <?= Html::cssFile('@web/css/res.css') ?>
     <?= Html::cssFile('@web/css/flexslider.css') ?>
 
     <title>资源库</title>
 </head>
 
 <body>
+
 <div class="banner">
     <div class="container">
-         <div class="banner-bottom">
-        <section>
-            <div class="flexslider">
-                <ul class="slides">
-                    <li>
-                        <div class="col-md-4 banner-left">
-                            <h3>麦兜<span class="bann-sli-text">&nbsp;我和妈妈</span></h3>
-                        </div>
-                        <div class="col-md-8 banner-right">
-                            <a href="http://v.youku.com/v_show/id_XODE1NDk3MzIw.html?from=y1.3-comic-gridtest-135-10061.100888.3-1">
-                                <img  class="img-responsive" src="images/res-img/md.png" alt="">
-                            </a>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </li>
-                    <li>
-                        <div class="col-md-4 banner-left">
-                            <h3>哆啦A梦<span class="bann-sli-text">&nbsp;三态丸</span></h3>
-                        </div>
-                        <div class="col-md-8 banner-right">
-                            <a href="http://v.youku.com/v_show/id_XOTE1MjQ5MjA0.html?from=y1.3-child-index-10814-21764.212914-212912.4-1">
-                                <img  class="img-responsive" src="images/res-img/big-a.png" alt="">
-                            </a>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </li>
-                    <li>
-                        <div class="col-md-4 banner-left">
-                            <h3>樱桃<span class="bann-sli-text">&nbsp;小丸子</span></h3>
-                        </div>
-                        <div class="col-md-8 banner-right">
-                            <a href="http://v.youku.com/v_show/id_XNTU3NTUzODQw.html">
-                                <img  class="img-responsive" src="images/res-img/big-xwz.png" alt="">
-                            </a>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-              <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
-              <!--FlexSlider-->
-              <script defer src="js/jquery.flexslider.js"></script>
-              <script type="text/javascript">
+        <div class="banner-bottom">
+            <section>
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <div class="col-md-4 banner-left">
+                                <h3>麦兜<span class="bann-sli-text">&nbsp;我和妈妈</span></h3>
+                            </div>
+                            <div class="col-md-8 banner-right">
+                                <a href="http://v.youku.com/v_show/id_XODE1NDk3MzIw.html?from=y1.3-comic-gridtest-135-10061.100888.3-1">
+                                    <img  class="img-responsive" src="images/res-img/md.png" alt="">
+                                </a>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </li>
+                        <li>
+                            <div class="col-md-4 banner-left">
+                                <h3>哆啦A梦<span class="bann-sli-text">&nbsp;三态丸</span></h3>
+                            </div>
+                            <div class="col-md-8 banner-right">
+                                <a href="http://v.youku.com/v_show/id_XOTE1MjQ5MjA0.html?from=y1.3-child-index-10814-21764.212914-212912.4-1">
+                                    <img  class="img-responsive" src="images/res-img/big-a.png" alt="">
+                                </a>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </li>
+                        <li>
+                            <div class="col-md-4 banner-left">
+                                <h3>樱桃<span class="bann-sli-text">&nbsp;小丸子</span></h3>
+                            </div>
+                            <div class="col-md-8 banner-right">
+                                <a href="http://v.youku.com/v_show/id_XNTU3NTUzODQw.html">
+                                    <img  class="img-responsive" src="images/res-img/big-xwz.png" alt="">
+                                </a>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
+            <!--FlexSlider-->
+            <script defer src="js/jquery.flexslider.js"></script>
+            <script type="text/javascript">
                 $(function(){
                  
                 });
@@ -67,10 +68,10 @@ use yii\helpers\Html;
                     }
                   });
                 });
-              </script>
-         </div>
-         <span class="mover"> </span>
-  </div>
+            </script>
+
+        </div>
+    </div>
 </div>
 <!--header end here-->
 <!--banner-strip start here-->
