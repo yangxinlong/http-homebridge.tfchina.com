@@ -10,4 +10,19 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+
+    public function actionBeauty()
+    {
+        return $this->render('beauty');
+    }
+
+    public function actionIdea()
+    {
+        return $this->render('idea');
+    }
+
+    public function actionInfant()
+    {
+        return $this->render('infant');
+    }
 }
