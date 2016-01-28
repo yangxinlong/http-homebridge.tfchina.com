@@ -16,6 +16,24 @@ $config = [
 //    ),
     'modules' => [
         'gii' => 'yii\gii\Module',
+        'Hshop' => [
+            'class' => 'app\modules\Hshop\Hshop',
+        ],
+        'Tshop' => [
+            'class' => 'app\modules\Tshop\Tshop',
+        ],
+        'Pshop' => [
+            'class' => 'app\modules\Pshop\Pshop',
+        ],
+        'Hres' => [
+            'class' => 'app\modules\Hres\Hres',
+        ],
+        'Tres' => [
+            'class' => 'app\modules\Tres\Tres',
+        ],
+        'Pres' => [
+            'class' => 'app\modules\Pres\Pres',
+        ],
         'Shop' => [
             'class' => 'app\modules\Shop\Shop',
         ],
