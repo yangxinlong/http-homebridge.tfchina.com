@@ -34,12 +34,6 @@ $config = [
         'Pres' => [
             'class' => 'app\modules\Pres\Pres',
         ],
-        'Shop' => [
-            'class' => 'app\modules\Shop\Shop',
-        ],
-        'Res' => [
-            'class' => 'app\modules\Res\Res',
-        ],
         'Redfl' => [
             'class' => 'app\modules\Admin\Redfl\Redfl',
         ],
