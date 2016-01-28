@@ -189,6 +189,8 @@ class XgPush extends XingeApp
                     $c1 = $type . self::getReceiver($cusinfo);
                 }
                 break;
+            case CatDef::$mod['praise']:
+            case CatDef::$mod['letter']:
             case CatDef::$mod['moneva']:
             case CatDef::$mod['termeva']:
                 $c1 = $type . '-' . (new ArticleSendRevieve())->getEvaReceiver($cat[1]);
