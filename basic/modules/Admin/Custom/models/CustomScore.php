@@ -149,18 +149,26 @@ class CustomScore extends BaseAR
         $r['id'] = $d['related_id'];
         if ($tn == BaseConst::$article_replies_T) {
             $article_id = json_decode((new BaseEdit())->getProp($tn, $d['related_id'], 'article_id'));
-            $r['id'] = $article_id->Content;
             $r['tn'] = BaseConst::$articles_T;
+            $r['id'] = self::getid($article_id);
         } elseif ($tn == BaseConst::$notes_replies_T) {
             $article_id = json_decode((new BaseEdit())->getProp($tn, $d['related_id'], 'note_id'));
-            $r['id'] = $article_id->Content;
             $r['tn'] = BaseConst::$notes_T;
+            $r['id'] = self::getid($article_id);
         } elseif ($tn == BaseConst::$vote_replies_T) {
             $article_id = json_decode((new BaseEdit())->getProp($tn, $d['related_id'], 'm_id'));
-            $r['id'] = $article_id->Content;
             $r['tn'] = BaseConst::$vote_T;
+            $r['id'] = self::getid($article_id);
         }
         return $r;
+    }
+    private function  getid($article_id)
+    {
+        if ($article_id->ErrCode == 0) {
+            return $article_id->Content;
+        } else {
+            return 0;
+        }
     }
     public function getTN($d)
     {
