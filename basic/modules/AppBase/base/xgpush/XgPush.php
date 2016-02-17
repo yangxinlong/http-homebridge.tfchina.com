@@ -142,7 +142,7 @@ class XgPush extends XingeApp
     {
         $cat = CommonFun::explodeString('-', $data['type']);
         $headtoken = (new Customs())->getHeadmastToken();
-        self::PushToHeadIncondith($cat[0], $data);   //push to head
+        self::PushToHeadIncondition($cat[0], $data, $headtoken[0][0]['id']);   //push to head
         foreach ($data['token'] as $kk) {
             foreach ($kk as $cusinfo) {
                 if ($cusinfo['id'] == $headtoken[0][0]['id'] || $cusinfo['id'] == self::getCustomId()) {   //not to push to head ;not to push to self
@@ -152,7 +152,7 @@ class XgPush extends XingeApp
             }
         }
     }
-    protected static function PushToHeadIncondith($flag, $data)//推送给园长
+    protected static function PushToHeadIncondition($flag, $data, $head_id)//推送给园长
     {
         switch ($flag) {
             case  CatDef::$mod['reply']:
@@ -160,6 +160,12 @@ class XgPush extends XingeApp
             case  CatDef::$mod['gf']:
             case  CatDef::$mod['moneva']:
             case  CatDef::$mod['termeva']:
+                break;
+            case  CatDef::$mod['msg']:
+                $reciever_id = $data['token'][0][0]['id'];
+                if ($head_id == $reciever_id) {
+                    self::PushHeadToken($data);
+                }
                 break;
             default:
                 self::PushHeadToken($data);

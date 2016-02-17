@@ -40,7 +40,7 @@ class SiteBC extends Controller
     {
         $exception = Yii::$app->errorHandler->exception;
         if ($exception !== null) {
-            LogToFile::Log($exception);
+            LogToFile::LogErr($exception);
         }
         die(json_encode(array("ErrCode" => HintConst::$SERVER_ERR, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
     }

@@ -156,6 +156,7 @@ class MessagesController extends BaseController
         $con = isset($_REQUEST['con']) ? $_REQUEST['con'] : '';
         $user = explode('-', $user_id);
         $custom = new Customs();
+//        $token = $custom->getToken([], [], $user);
         $token = $custom->getToken([], [], $user);
         (new MultThread())->push_msg($token, $con);
     }

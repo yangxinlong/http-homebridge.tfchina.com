@@ -27,6 +27,6 @@ class BaseExcept
     }
     public function log($err)
     {
-        LogToFile::Log($err);
+        LogToFile::LogErr($err);
     }
 }

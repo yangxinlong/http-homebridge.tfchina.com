@@ -82,7 +82,7 @@ class BaseCommonDB
     }
     protected function execpt_nosuccess($err = '')
     {
-        LogToFile::Log($err);
+        LogToFile::LogErr($err);
         die(json_encode(array("ErrCode" => HintConst::$Operate_fail, "Message" => HintConst::$NULL, "Content" => HintConst::$NULLARRAY)));
     }
     /**
